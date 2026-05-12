@@ -9,501 +9,453 @@
 <meta name="apple-mobile-web-app-title" content="Road to Boston">
 <meta name="theme-color" content="#ffffff">
 <title>Road to Boston</title>
-<link rel="apple-touch-icon" href="data:image/png;base64,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">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --yellow: #FFDE00;
-  --blue: #3A6EDB;
-  --navy: #162F77;
-  --white: #ffffff;
-  --off-white: #f7f6f2;
-  --light: #eef0f7;
-  --border: rgba(22,47,119,0.12);
-  --border-strong: rgba(22,47,119,0.22);
-  --text: #0e1628;
-  --muted: #7a85a0;
-  --dim: #b0bbd0;
-  --run: #c8380a;
-  --swim: #1a5fad;
-  --lift: #1a7a45;
-  --bike: #8a6a00;
-  --rest: #4a4090;
-}
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html, body { height:100%; overflow:hidden; }
-body { font-family:'DM Sans',sans-serif; background:var(--white); color:var(--text); max-width:430px; margin:0 auto; height:100%; display:flex; flex-direction:column; }
-button { font-family:'DM Sans',sans-serif; }
-input, textarea { font-family:'DM Sans',sans-serif; }
-.app-header { padding:18px 20px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid var(--navy); background:var(--white); flex-shrink:0; z-index:10; }
-.header-logo { font-family:'Libre Baskerville',serif; font-size:19px; font-weight:700; letter-spacing:-0.3px; color:var(--navy); }
-.header-logo span { color:var(--blue); }
-.header-sub { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-top:3px; }
-.bq-badge { display:flex; align-items:center; gap:6px; padding:6px 12px; background:var(--navy); border-radius:3px; }
-.bq-dot { width:7px; height:7px; border-radius:50%; background:var(--yellow); }
-.bq-text { font-family:'DM Mono',monospace; font-size:10px; color:var(--yellow); font-weight:500; letter-spacing:1px; }
-.main-scroll { flex:1; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:80px; background:var(--off-white); }
-.page { display:none; }
-.page.active { display:block; }
-.bottom-nav { display:flex; border-top:1px solid var(--border-strong); background:var(--white); flex-shrink:0; padding-bottom:env(safe-area-inset-bottom); }
-.nav-btn { flex:1; padding:12px 8px 14px; background:none; border:none; color:var(--dim); cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:4px; transition:color 0.15s; }
-.nav-btn.active { color:var(--navy); }
-.nav-icon { font-size:18px; line-height:1; }
-.nav-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; }
-.today-date-bar { background:var(--navy); padding:10px 20px; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.6); }
-.section-header { padding:20px 20px 12px; display:flex; justify-content:space-between; align-items:baseline; background:var(--off-white); }
-.section-title { font-family:'Libre Baskerville',serif; font-size:15px; font-weight:700; color:var(--navy); }
-.section-meta { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); letter-spacing:1px; }
-.hero-card { margin:16px 16px 0; background:var(--white); border:1px solid var(--border-strong); border-top:4px solid var(--navy); padding:20px; cursor:pointer; }
-.hero-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px; }
-.hero-title { font-family:'Libre Baskerville',serif; font-size:24px; font-weight:700; letter-spacing:-0.5px; line-height:1.1; margin-bottom:4px; color:var(--navy); }
-.hero-sub { font-size:13px; color:var(--muted); }
-.hero-arrow { width:34px; height:34px; border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; font-size:18px; color:var(--navy); flex-shrink:0; background:var(--light); }
-.hero-tags { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
-.hero-stats { display:flex; gap:8px; }
-.stat-pill { flex:1; padding:8px 10px; background:var(--light); border:1px solid var(--border); }
-.stat-pill-label { font-family:'DM Mono',monospace; font-size:7px; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:3px; }
-.stat-pill-val { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; color:var(--navy); }
-.tag { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; border-radius:2px; font-weight:500; }
-.tag-run { background:rgba(200,56,10,0.08); color:var(--run); border:1px solid rgba(200,56,10,0.2); }
-.tag-swim { background:rgba(26,95,173,0.08); color:var(--swim); border:1px solid rgba(26,95,173,0.2); }
-.tag-lift { background:rgba(26,122,69,0.08); color:var(--lift); border:1px solid rgba(26,122,69,0.2); }
-.tag-bike { background:rgba(138,106,0,0.08); color:var(--bike); border:1px solid rgba(138,106,0,0.2); }
-.tag-rest { background:rgba(74,64,144,0.08); color:var(--rest); border:1px solid rgba(74,64,144,0.2); }
-.week-list { padding:0 16px; display:flex; flex-direction:column; gap:5px; }
-.day-row { padding:12px 14px; background:var(--white); border:1px solid var(--border); border-left:3px solid transparent; cursor:pointer; }
-.day-row.today { border-left-color:var(--navy); }
-.day-row-main { display:flex; align-items:center; gap:12px; }
-.day-check { width:22px; height:22px; border-radius:50%; background:var(--light); border:1.5px solid var(--border-strong); display:flex; align-items:center; justify-content:center; font-size:10px; color:white; flex-shrink:0; }
-.day-check.full { background:var(--lift); border-color:var(--lift); }
-.day-check.partial { background:var(--yellow); border-color:#c8a800; color:#5a4400; font-weight:700; }
-.day-type-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-.day-info { flex:1; min-width:0; }
-.day-label-text { font-family:'DM Mono',monospace; font-size:8px; color:var(--dim); letter-spacing:2px; text-transform:uppercase; margin-bottom:2px; }
-.day-name-text { font-size:13px; font-weight:500; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.day-name-text.done { color:var(--muted); }
-.day-chevron { color:var(--dim); font-size:14px; }
-.day-log-badges { display:flex; gap:5px; margin-top:7px; margin-left:34px; }
-.log-badge { padding:2px 8px; font-family:'DM Mono',monospace; font-size:8px; border-radius:2px; }
-.log-badge-cardio { background:rgba(26,95,173,0.08); border:1px solid rgba(26,95,173,0.18); color:var(--swim); }
-.log-badge-strength { background:rgba(26,122,69,0.08); border:1px solid rgba(26,122,69,0.18); color:var(--lift); }
-.hero-log-row { display:flex; gap:6px; margin-top:12px; }
-.hero-log-badge { flex:1; padding:6px 10px; font-family:'DM Mono',monospace; font-size:9px; border-radius:2px; }
-.hero-log-badge-c { background:rgba(26,95,173,0.07); border:1px solid rgba(26,95,173,0.18); color:var(--swim); }
-.hero-log-badge-s { background:rgba(26,122,69,0.07); border:1px solid rgba(26,122,69,0.18); color:var(--lift); }
-.plan-page-header { background:var(--navy); padding:20px 20px 16px; }
-.plan-page-title { font-family:'Libre Baskerville',serif; font-size:20px; font-weight:700; color:var(--white); margin-bottom:3px; }
-.plan-page-sub { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; }
-.plan-week { margin:16px 16px 0; }
-.plan-week-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-.plan-week-name { font-family:'Libre Baskerville',serif; font-size:13px; font-weight:700; color:var(--navy); }
-.plan-badge { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--navy); padding:2px 8px; background:rgba(255,222,0,0.25); border:1px solid rgba(255,222,0,0.6); border-radius:2px; }
-.plan-list { background:var(--white); border:1px solid var(--border-strong); overflow:hidden; }
-.plan-row { display:flex; gap:14px; padding:12px 14px; border-bottom:1px solid var(--border); cursor:pointer; align-items:center; }
-.plan-row:last-child { border-bottom:none; }
-.plan-day-label { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); width:28px; flex-shrink:0; letter-spacing:1px; }
-.plan-content { flex:1; }
-.plan-workout-name { font-size:13px; font-weight:500; color:var(--text); margin-bottom:2px; }
-.plan-detail { font-size:11px; color:var(--muted); }
-.plan-chevron { color:var(--dim); font-size:14px; flex-shrink:0; }
-.progress-page-header { background:var(--navy); padding:20px 20px 16px; }
-.progress-page-title { font-family:'Libre Baskerville',serif; font-size:20px; font-weight:700; color:var(--white); margin-bottom:3px; }
-.progress-page-sub { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:rgba(255,255,255,0.4); text-transform:uppercase; }
-.stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:16px 16px 0; }
-.stat-card { background:var(--white); border:1px solid var(--border-strong); padding:14px; }
-.stat-card-label { font-family:'DM Mono',monospace; font-size:7px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:8px; }
-.stat-card-val { font-family:'Libre Baskerville',serif; font-weight:700; line-height:1; }
-.stat-card-unit { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); margin-top:3px; }
-.stat-card-note { font-family:'DM Mono',monospace; font-size:8px; margin-top:4px; }
-.info-card { margin:8px 16px 0; background:var(--white); border:1px solid var(--border-strong); padding:16px; }
-.info-card-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:14px; padding-bottom:8px; border-bottom:1px solid var(--border); }
-.phase-row { margin-bottom:13px; }
-.phase-row:last-child { margin-bottom:0; }
-.phase-row-header { display:flex; justify-content:space-between; margin-bottom:5px; }
-.phase-name { font-size:12px; color:var(--text); font-weight:500; }
-.phase-sub { font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); }
-.phase-track { height:3px; background:var(--light); border-radius:1px; overflow:hidden; }
-.phase-fill { height:100%; border-radius:1px; }
-.race-row { display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border); }
-.race-row:last-child { border-bottom:none; }
-.race-name { font-size:13px; color:var(--muted); }
-.race-name.hi { color:var(--navy); font-weight:600; font-family:'Libre Baskerville',serif; }
-.race-sub { font-family:'DM Mono',monospace; font-size:9px; margin-top:2px; }
-.race-time { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; color:var(--muted); }
-.race-time.hi { color:var(--navy); font-weight:700; }
-.bq-footnote { margin:8px 16px 20px; padding:10px 14px; background:var(--light); border-left:3px solid var(--navy); font-family:'DM Mono',monospace; font-size:9px; color:var(--muted); line-height:1.6; }
-.sheet-overlay { display:none; position:fixed; inset:0; z-index:300; background:rgba(14,22,40,0.5); backdrop-filter:blur(4px); flex-direction:column; justify-content:flex-end; }
-.sheet-overlay.open { display:flex; }
-.sheet { background:var(--white); border-top:3px solid var(--navy); max-height:92vh; overflow-y:auto; -webkit-overflow-scrolling:touch; padding-bottom:44px; }
-.sheet-handle { display:flex; justify-content:center; padding:12px 0 0; }
-.sheet-handle-bar { width:36px; height:4px; background:var(--border-strong); border-radius:2px; }
-.sheet-header { padding:14px 20px 16px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:flex-start; }
-.sheet-close { background:var(--light); border:1px solid var(--border-strong); color:var(--muted); width:30px; height:30px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-left:12px; }
-.sheet-body { padding:16px 20px 0; }
-.sheet-date { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:5px; }
-.sheet-title { font-family:'Libre Baskerville',serif; font-size:24px; font-weight:700; letter-spacing:-0.3px; margin-bottom:3px; color:var(--navy); }
-.sheet-subtitle { font-size:13px; color:var(--muted); margin-bottom:10px; }
-.bq-banner { padding:10px 14px; background:var(--light); border-left:3px solid var(--navy); margin-bottom:18px; display:flex; gap:10px; align-items:flex-start; }
-.bq-banner-icon { font-size:14px; flex-shrink:0; }
-.bq-banner-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--navy); text-transform:uppercase; margin-bottom:4px; opacity:0.7; }
-.bq-banner-text { font-size:12px; color:var(--text); line-height:1.6; }
-.part-divider { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
-.part-divider-bar { width:3px; height:18px; border-radius:1px; }
-.part-divider-label { font-family:'Libre Baskerville',serif; font-size:14px; font-weight:700; }
-.part-summary { font-size:12px; color:var(--muted); line-height:1.6; margin-bottom:10px; font-style:italic; }
-.sec-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--dim); margin-bottom:10px; padding-bottom:7px; border-bottom:1px solid var(--border); }
-.workout-section { margin-bottom:20px; }
-.swim-row { display:flex; justify-content:space-between; align-items:flex-start; padding:9px 0; gap:12px; border-bottom:1px solid var(--border); }
-.swim-row:last-child { border-bottom:none; }
-.swim-name { font-size:13px; font-weight:500; color:var(--text); margin-bottom:2px; }
-.swim-desc { font-size:11px; color:var(--muted); line-height:1.4; }
-.swim-lengths { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; color:var(--swim); }
-.swim-meters { font-family:'DM Mono',monospace; font-size:10px; color:var(--muted); }
-.swim-total { display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding:7px 12px; background:rgba(26,95,173,0.06); border:1px solid rgba(26,95,173,0.15); }
-.swim-total-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; text-transform:uppercase; color:var(--swim); }
-.swim-total-val { font-family:'DM Mono',monospace; font-size:12px; color:var(--swim); }
-.lift-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); }
-.lift-row:last-child { border-bottom:none; }
-.lift-name { font-size:13px; color:var(--muted); }
-.lift-name.key { color:var(--text); font-weight:500; }
-.lift-sets { font-family:'DM Mono',monospace; font-size:12px; color:var(--dim); }
-.lift-sets.key { color:var(--navy); font-weight:500; }
-.run-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid var(--border); }
-.run-row:last-child { border-bottom:none; }
-.run-label { font-size:13px; color:var(--muted); }
-.run-val { font-family:'DM Mono',monospace; font-size:12px; color:var(--dim); }
-.run-val.hi { color:var(--run); font-weight:500; }
-.coach-note { padding:10px 14px; background:var(--light); border-left:2px solid var(--border-strong); margin-bottom:20px; }
-.coach-note-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:2px; color:var(--muted); text-transform:uppercase; margin-bottom:4px; }
-.coach-note-text { font-size:12px; color:var(--muted); line-height:1.6; font-style:italic; }
-.log-section { border-top:1px solid var(--border); padding-top:18px; }
-.log-section-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:3px; color:var(--muted); text-transform:uppercase; margin-bottom:12px; }
-.part-log-card { border:1px solid var(--border-strong); padding:12px; margin-bottom:10px; }
-.part-log-card.cardio { border-left:3px solid var(--swim); }
-.part-log-card.strength { border-left:3px solid var(--lift); }
-.part-log-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; }
-.part-log-label.cardio { color:var(--swim); }
-.part-log-label.strength { color:var(--lift); }
-.effort-sublabel { font-family:'DM Mono',monospace; font-size:8px; color:var(--muted); margin-bottom:6px; letter-spacing:1px; }
-.effort-row { display:flex; gap:3px; margin-bottom:10px; }
-.effort-btn { flex:1; padding:8px 2px; background:var(--light); border:1px solid var(--border-strong); color:var(--muted); font-family:'DM Mono',monospace; font-size:10px; cursor:pointer; }
-.effort-btn.sel-cardio { background:var(--swim); border-color:var(--swim); color:white; font-weight:700; }
-.effort-btn.sel-strength { background:var(--lift); border-color:var(--lift); color:white; font-weight:700; }
-.fields-row { display:grid; gap:8px; margin-bottom:10px; }
-.fields-row.two { grid-template-columns:1fr 1fr; }
-.field-label { font-family:'DM Mono',monospace; font-size:8px; color:var(--muted); margin-bottom:5px; letter-spacing:1px; }
-.field-input { width:100%; padding:8px 10px; background:var(--light); border:1px solid var(--border-strong); color:var(--text); font-family:'DM Mono',monospace; font-size:11px; outline:none; }
-.log-btn { width:100%; padding:11px; border:1px solid var(--border-strong); font-family:'DM Sans',sans-serif; font-size:13px; font-weight:600; cursor:not-allowed; color:var(--dim); background:var(--light); }
-.log-btn.ready-cardio { background:var(--swim); color:white; cursor:pointer; border-color:var(--swim); }
-.log-btn.ready-strength { background:var(--lift); color:white; cursor:pointer; border-color:var(--lift); }
-.log-btn.saved { background:var(--navy) !important; color:white !important; border-color:var(--navy) !important; cursor:default; }
-.rest-display { text-align:center; padding:40px 0; }
-.rest-big { font-family:'Libre Baskerville',serif; font-size:72px; font-weight:700; color:var(--light); letter-spacing:4px; }
-.rest-sub { font-size:14px; color:var(--muted); margin-top:12px; line-height:1.7; }
+:root{--yellow:#FFDE00;--blue:#3A6EDB;--navy:#162F77;--white:#fff;--off:#f7f6f2;--light:#eef0f7;--border:rgba(22,47,119,0.12);--borderc:rgba(22,47,119,0.22);--text:#0e1628;--muted:#7a85a0;--dim:#b0bbd0;--run:#c8380a;--swim:#1a5fad;--lift:#1a7a45}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);max-width:430px;margin:0 auto;height:100%;display:flex;flex-direction:column}
+button{font-family:'DM Sans',sans-serif}
+/* HEADER */
+.hdr{padding:16px 20px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);background:var(--white);flex-shrink:0}
+.logo{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:var(--navy)}
+.logo span{color:var(--blue)}
+.sub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:2px}
+.badge{display:flex;align-items:center;gap:5px;padding:5px 10px;background:var(--navy);border-radius:3px}
+.bdot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+.btxt{font-family:'DM Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:1px}
+/* SCROLL */
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px;background:var(--off)}
+/* PAGES */
+.pg{display:none}.pg.on{display:block}
+/* NAV */
+.nav{display:flex;border-top:1px solid var(--borderc);background:var(--white);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom)}
+.nb{flex:1;padding:10px 8px 12px;background:none;border:none;color:var(--dim);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+.nb.on{color:var(--navy)}
+.ni{font-size:16px;line-height:1}
+.nl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase}
+/* DATE BAR */
+.dbar{background:var(--navy);padding:9px 20px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+/* HERO */
+.hero{margin:14px 14px 0;background:var(--white);border:1px solid var(--borderc);border-top:4px solid var(--navy);padding:18px;cursor:pointer}
+.htop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.htitle{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.hsub{font-size:12px;color:var(--muted)}
+.harr{width:32px;height:32px;border:1px solid var(--borderc);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--navy);background:var(--light);flex-shrink:0}
+.htags{display:flex;gap:5px;margin-bottom:14px}
+.tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-weight:500}
+.ts{background:rgba(26,95,173,0.08);color:var(--swim);border:1px solid rgba(26,95,173,0.2)}
+.tl{background:rgba(26,122,69,0.08);color:var(--lift);border:1px solid rgba(26,122,69,0.2)}
+.tr{background:rgba(200,56,10,0.08);color:var(--run);border:1px solid rgba(200,56,10,0.2)}
+.tx{background:rgba(74,64,144,0.08);color:#4a4090;border:1px solid rgba(74,64,144,0.2)}
+.hstats{display:flex;gap:8px}
+.sp{flex:1;padding:7px 9px;background:var(--light);border:1px solid var(--border)}
+.spl{font-family:'DM Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.spv{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--navy)}
+/* SECTION HDR */
+.shdr{padding:18px 16px 10px;display:flex;justify-content:space-between;align-items:baseline}
+.stitle{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;color:var(--navy)}
+.smeta{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)}
+/* WEEK LIST */
+.wl{padding:0 14px;display:flex;flex-direction:column;gap:5px}
+.dr{padding:11px 12px;background:var(--white);border:1px solid var(--border);border-left:3px solid transparent;cursor:pointer}
+.dr.tod{border-left-color:var(--navy)}
+.drm{display:flex;align-items:center;gap:10px}
+.dc{width:22px;height:22px;border-radius:50%;background:var(--light);border:1.5px solid var(--borderc);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;flex-shrink:0}
+.dc.full{background:var(--lift);border-color:var(--lift)}
+.dc.half{background:var(--yellow);border-color:#c8a800;color:#5a4400;font-weight:700}
+.dtd{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.di{flex:1;min-width:0}
+.dl{font-family:'DM Mono',monospace;font-size:7px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.dn{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dn.done{color:var(--muted)}
+.dch{color:var(--dim);font-size:14px}
+.dbs{display:flex;gap:4px;margin-top:6px;margin-left:32px}
+.lbc{padding:2px 7px;font-family:'DM Mono',monospace;font-size:7px;border-radius:2px;background:rgba(26,95,173,0.08);border:1px solid rgba(26,95,173,0.18);color:var(--swim)}
+.lbs{padding:2px 7px;font-family:'DM Mono',monospace;font-size:7px;border-radius:2px;background:rgba(26,122,69,0.08);border:1px solid rgba(26,122,69,0.18);color:var(--lift)}
+/* PLAN */
+.pphdr{background:var(--navy);padding:18px 18px 14px}
+.pptitle{font-family:'Libre Baskerville',serif;font-size:19px;font-weight:700;color:var(--white);margin-bottom:2px}
+.ppsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.pw{margin:14px 14px 0}
+.pwh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.pwn{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700;color:var(--navy)}
+.pwb{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--navy);padding:2px 7px;background:rgba(255,222,0,0.25);border:1px solid rgba(255,222,0,0.6);border-radius:2px}
+.pl{background:var(--white);border:1px solid var(--borderc);overflow:hidden}
+.pr{display:flex;gap:12px;padding:11px 13px;border-bottom:1px solid var(--border);cursor:pointer;align-items:center}
+.pr:last-child{border-bottom:none}
+.prd{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);width:26px;flex-shrink:0;letter-spacing:1px}
+.prc{flex:1}
+.prn{font-size:13px;font-weight:500;color:var(--text);margin-bottom:1px}
+.prdt{font-size:11px;color:var(--muted)}
+.pra{color:var(--dim);font-size:13px;flex-shrink:0}
+/* PROGRESS */
+.gphdr{background:var(--navy);padding:18px 18px 14px}
+.gptitle{font-family:'Libre Baskerville',serif;font-size:19px;font-weight:700;color:var(--white);margin-bottom:2px}
+.gpsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 14px 0}
+.sc{background:var(--white);border:1px solid var(--borderc);padding:13px}
+.scl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:7px}
+.scv{font-family:'Libre Baskerville',serif;font-weight:700;line-height:1}
+.scu{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px}
+.scn{font-family:'DM Mono',monospace;font-size:7px;margin-top:3px}
+.ic{margin:8px 14px 0;background:var(--white);border:1px solid var(--borderc);padding:14px}
+.icl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.phr{margin-bottom:12px}.phr:last-child{margin-bottom:0}
+.phrh{display:flex;justify-content:space-between;margin-bottom:4px}
+.phn{font-size:12px;color:var(--text);font-weight:500}
+.phs{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)}
+.pht{height:3px;background:var(--light);border-radius:1px;overflow:hidden}
+.phf{height:100%;border-radius:1px}
+.rr{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
+.rr:last-child{border-bottom:none}
+.rn{font-size:13px;color:var(--muted)}
+.rn.hi{color:var(--navy);font-weight:600;font-family:'Libre Baskerville',serif}
+.rs{font-family:'DM Mono',monospace;font-size:8px;margin-top:2px}
+.rt{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--muted)}
+.rt.hi{color:var(--navy);font-weight:700}
+.fn{margin:8px 14px 18px;padding:9px 12px;background:var(--light);border-left:3px solid var(--navy);font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);line-height:1.6}
+/* SHEET */
+.ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(14,22,40,0.5);backdrop-filter:blur(4px);flex-direction:column;justify-content:flex-end}
+.ov.on{display:flex}
+.sh{background:var(--white);border-top:3px solid var(--navy);max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:40px}
+.shhd{display:flex;justify-content:center;padding:11px 0 0}
+.shhdbar{width:36px;height:4px;background:var(--borderc);border-radius:2px}
+.shhdr{padding:13px 18px 14px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start}
+.shclose{background:var(--light);border:1px solid var(--borderc);color:var(--muted);width:28px;height:28px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:10px}
+.shbody{padding:14px 18px 0}
+.shdate{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.shtitle{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.shsub{font-size:12px;color:var(--muted);margin-bottom:9px}
+.bqb{padding:9px 12px;background:var(--light);border-left:3px solid var(--navy);margin-bottom:16px;display:flex;gap:9px;align-items:flex-start}
+.bqbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--navy);text-transform:uppercase;margin-bottom:3px;opacity:.7}
+.bqbt{font-size:12px;color:var(--text);line-height:1.6}
+.pdiv{display:flex;align-items:center;gap:7px;margin-bottom:11px}
+.pdivbar{width:3px;height:16px;border-radius:1px}
+.pdivlbl{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700}
+.psum{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px;font-style:italic}
+.slbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.ws{margin-bottom:18px}
+.swr{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;gap:10px;border-bottom:1px solid var(--border)}
+.swr:last-child{border-bottom:none}
+.swn{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px}
+.swd{font-size:10px;color:var(--muted);line-height:1.4}
+.swl{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--swim)}
+.swm{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)}
+.swt{display:flex;justify-content:space-between;align-items:center;margin-top:7px;padding:6px 10px;background:rgba(26,95,173,0.06);border:1px solid rgba(26,95,173,0.15)}
+.swtl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--swim)}
+.swtv{font-family:'DM Mono',monospace;font-size:11px;color:var(--swim)}
+.lr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.lr:last-child{border-bottom:none}
+.ln{font-size:13px;color:var(--muted)}
+.ln.k{color:var(--text);font-weight:500}
+.ls{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim)}
+.ls.k{color:var(--navy);font-weight:500}
+.rnr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
+.rnr:last-child{border-bottom:none}
+.rnl{font-size:13px;color:var(--muted)}
+.rnv{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim)}
+.rnv.h{color:var(--run);font-weight:500}
+.cn{padding:9px 12px;background:var(--light);border-left:2px solid var(--borderc);margin-bottom:18px}
+.cnl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
+.cnt{font-size:12px;color:var(--muted);line-height:1.6;font-style:italic}
+/* LOG */
+.logs{border-top:1px solid var(--border);padding-top:16px}
+.logsl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:11px}
+.plc{border:1px solid var(--borderc);padding:11px;margin-bottom:9px}
+.plc.c{border-left:3px solid var(--swim)}
+.plc.s{border-left:3px solid var(--lift)}
+.plcl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;margin-bottom:9px}
+.plcl.c{color:var(--swim)}.plcl.s{color:var(--lift)}
+.effl{font-family:'DM Mono',monospace;font-size:7px;color:var(--muted);margin-bottom:5px;letter-spacing:1px}
+.effr{display:flex;gap:3px;margin-bottom:9px}
+.eb{flex:1;padding:7px 2px;background:var(--light);border:1px solid var(--borderc);color:var(--muted);font-family:'DM Mono',monospace;font-size:9px;cursor:pointer}
+.eb.sc{background:var(--swim);border-color:var(--swim);color:white;font-weight:700}
+.eb.ss{background:var(--lift);border-color:var(--lift);color:white;font-weight:700}
+.fr{display:grid;gap:7px;margin-bottom:9px}
+.fr.two{grid-template-columns:1fr 1fr}
+.fl{font-family:'DM Mono',monospace;font-size:7px;color:var(--muted);margin-bottom:4px;letter-spacing:1px}
+.fi{width:100%;padding:7px 9px;background:var(--light);border:1px solid var(--borderc);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none}
+.lb{width:100%;padding:10px;border:1px solid var(--borderc);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:not-allowed;color:var(--dim);background:var(--light)}
+.lb.rc{background:var(--swim);color:white;cursor:pointer;border-color:var(--swim)}
+.lb.rs{background:var(--lift);color:white;cursor:pointer;border-color:var(--lift)}
+.lb.sv{background:var(--navy)!important;color:white!important;border-color:var(--navy)!important;cursor:default}
+.rest{text-align:center;padding:36px 0}
+.restbig{font-family:'Libre Baskerville',serif;font-size:66px;font-weight:700;color:var(--light);letter-spacing:4px}
+.restsub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7}
 </style>
 </head>
 <body>
-
-<div class="app-header">
-  <div>
-    <div class="header-logo">Road to <span>Boston</span></div>
-    <div class="header-sub">Indianapolis &middot; Nov 7 &middot; 2:57:59</div>
-  </div>
-  <div class="bq-badge"><div class="bq-dot"></div><span class="bq-text">BQ MODE</span></div>
+<div class="hdr">
+  <div><div class="logo">Road to <span>Boston</span></div><div class="sub">Indianapolis &middot; Nov 7 &middot; 2:57:59</div></div>
+  <div class="badge"><div class="bdot"></div><span class="btxt">BQ MODE</span></div>
 </div>
-<div class="main-scroll" id="mainScroll">
-  <div class="page active" id="page-today">
-    <div class="today-date-bar">Monday &middot; May 11 &middot; Recovery Day 9</div>
-    <div style="padding:16px 16px 0">
-      <div class="hero-card" id="heroCard">
-        <div class="hero-top">
-          <div><div class="hero-title">Back &amp; Biceps</div><div class="hero-sub">Easy Swim &middot; Upper Body</div></div>
-          <div class="hero-arrow">&rsaquo;</div>
+<div class="scroll" id="scr">
+  <div class="pg on" id="pg-today">
+    <div class="dbar">Monday &middot; May 11 &middot; Recovery Day 9</div>
+    <div style="padding:14px 14px 0">
+      <div class="hero" id="herocard">
+        <div class="htop"><div><div class="htitle">Back &amp; Biceps</div><div class="hsub">Easy Swim &middot; Upper Body</div></div><div class="harr">&rsaquo;</div></div>
+        <div class="htags"><span class="tag ts">swim</span><span class="tag tl">lift</span></div>
+        <div class="hstats">
+          <div class="sp"><div class="spl">Pool</div><div class="spv">1,000m</div></div>
+          <div class="sp"><div class="spl">Lengths</div><div class="spv">40</div></div>
+          <div class="sp"><div class="spl">Effort</div><div class="spv">Easy</div></div>
         </div>
-        <div class="hero-tags"><span class="tag tag-swim">swim</span><span class="tag tag-lift">lift</span></div>
-        <div class="hero-stats">
-          <div class="stat-pill"><div class="stat-pill-label">Pool</div><div class="stat-pill-val">1,000m</div></div>
-          <div class="stat-pill"><div class="stat-pill-label">Lengths</div><div class="stat-pill-val">40</div></div>
-          <div class="stat-pill"><div class="stat-pill-label">Effort</div><div class="stat-pill-val">Easy</div></div>
-        </div>
-        <div class="hero-log-row" id="heroLogRow" style="display:none">
-          <div class="hero-log-badge hero-log-badge-c" id="heroCardioLog"></div>
-          <div class="hero-log-badge hero-log-badge-s" id="heroStrengthLog"></div>
+        <div id="hlogrow" style="display:none;gap:6px;margin-top:10px">
+          <div id="hclog" style="flex:1;padding:5px 9px;font-family:DM Mono,monospace;font-size:9px;border-radius:2px;background:rgba(26,95,173,0.08);border:1px solid rgba(26,95,173,0.18);color:#1a5fad"></div>
+          <div id="hslog" style="flex:1;padding:5px 9px;font-family:DM Mono,monospace;font-size:9px;border-radius:2px;background:rgba(26,122,69,0.08);border:1px solid rgba(26,122,69,0.18);color:#1a7a45"></div>
         </div>
       </div>
     </div>
-    <div class="section-header">
-      <div class="section-title">This Week</div>
-      <div class="section-meta" id="doneCount">0/7 done</div>
-    </div>
-    <div class="week-list" id="weekList"></div>
+    <div class="shdr"><div class="stitle">This Week</div><div class="smeta" id="donecount">0/7 done</div></div>
+    <div class="wl" id="wklist"></div>
   </div>
-  <div class="page" id="page-plan">
-    <div class="plan-page-header"><div class="plan-page-title">2-Week Plan</div><div class="plan-page-sub">Recovery &rarr; Base &middot; Tap any day</div></div>
-    <div id="planContent"></div>
+  <div class="pg" id="pg-plan">
+    <div class="pphdr"><div class="pptitle">2-Week Plan</div><div class="ppsub">Recovery &rarr; Base &middot; Tap any day</div></div>
+    <div id="plancont"></div>
   </div>
-  <div class="page" id="page-progress">
-    <div class="progress-page-header"><div class="progress-page-title">Progress</div><div class="progress-page-sub">Post-Durham &middot; The Road to Boston</div></div>
-    <div class="stats-grid">
-      <div class="stat-card"><div class="stat-card-label">Current PR</div><div class="stat-card-val" style="font-size:22px;color:var(--muted)">3:10:55</div></div>
-      <div class="stat-card" style="border-top:3px solid var(--navy)"><div class="stat-card-label">BQ Target</div><div class="stat-card-val" style="font-size:22px;color:var(--navy)">2:57:59</div><div class="stat-card-note" style="color:var(--blue)">2:01 buffer</div></div>
-      <div class="stat-card"><div class="stat-card-label">Days to Indy</div><div class="stat-card-val" style="font-size:34px;color:var(--text)">180</div><div class="stat-card-unit">days</div></div>
-      <div class="stat-card"><div class="stat-card-label">VO&#8322; Max</div><div class="stat-card-val" style="font-size:34px;color:var(--lift)">59</div><div class="stat-card-unit">Garmin est</div></div>
+  <div class="pg" id="pg-progress">
+    <div class="gphdr"><div class="gptitle">Progress</div><div class="gpsub">Post-Durham &middot; Road to Boston</div></div>
+    <div class="sg">
+      <div class="sc"><div class="scl">Current PR</div><div class="scv" style="font-size:20px;color:#7a85a0">3:10:55</div></div>
+      <div class="sc" style="border-top:3px solid #162F77"><div class="scl">BQ Target</div><div class="scv" style="font-size:20px;color:#162F77">2:57:59</div><div class="scn" style="color:#3A6EDB">2:01 buffer</div></div>
+      <div class="sc"><div class="scl">Days to Indy</div><div class="scv" style="font-size:32px;color:#0e1628">180</div><div class="scu">days</div></div>
+      <div class="sc"><div class="scl">VO2 Max</div><div class="scv" style="font-size:32px;color:#1a7a45">59</div><div class="scu">Garmin est</div></div>
     </div>
-    <div class="info-card">
-      <div class="info-card-label">Phase Tracker</div>
-      <div class="phase-row"><div class="phase-row-header"><span class="phase-name">Recovery</span><span class="phase-sub">Day 9 of 26</span></div><div class="phase-track"><div class="phase-fill" style="width:35%;background:var(--blue)"></div></div></div>
-      <div class="phase-row"><div class="phase-row-header"><span class="phase-name">Base Phase</span><span class="phase-sub">May 18 &ndash; Jul 4</span></div><div class="phase-track"><div class="phase-fill" style="width:0%;background:var(--navy)"></div></div></div>
-      <div class="phase-row" style="margin-bottom:0"><div class="phase-row-header"><span class="phase-name">Training Block</span><span class="phase-sub">Jul 5 &ndash; Nov 7</span></div><div class="phase-track"><div class="phase-fill" style="width:0%;background:var(--navy)"></div></div></div>
+    <div class="ic">
+      <div class="icl">Phase Tracker</div>
+      <div class="phr"><div class="phrh"><span class="phn">Recovery</span><span class="phs">Day 9 of 26</span></div><div class="pht"><div class="phf" style="width:35%;background:#3A6EDB"></div></div></div>
+      <div class="phr"><div class="phrh"><span class="phn">Base Phase</span><span class="phs">May 18 &ndash; Jul 4</span></div><div class="pht"><div class="phf" style="width:0%;background:#162F77"></div></div></div>
+      <div class="phr" style="margin-bottom:0"><div class="phrh"><span class="phn">Training Block</span><span class="phs">Jul 5 &ndash; Nov 7</span></div><div class="pht"><div class="phf" style="width:0%;background:#162F77"></div></div></div>
     </div>
-    <div class="info-card">
-      <div class="info-card-label">Race History</div>
-      <div class="race-row"><div><div class="race-name">Chicago Marathon</div></div><div class="race-time">3:32:44</div></div>
-      <div class="race-row"><div><div class="race-name">Durham Marathon</div><div class="race-sub" style="color:var(--lift)">&minus;21:49 PR</div></div><div class="race-time">3:10:55</div></div>
-      <div class="race-row"><div><div class="race-name hi">Indianapolis Monumental</div><div class="race-sub" style="color:var(--blue)">BQ Target &middot; 6:46/mi avg</div></div><div class="race-time hi">sub-2:57:59</div></div>
+    <div class="ic">
+      <div class="icl">Race History</div>
+      <div class="rr"><div><div class="rn">Chicago Marathon</div></div><div class="rt">3:32:44</div></div>
+      <div class="rr"><div><div class="rn">Durham Marathon</div><div class="rs" style="color:#1a7a45">&minus;21:49 PR</div></div><div class="rt">3:10:55</div></div>
+      <div class="rr"><div><div class="rn hi">Indianapolis Monumental</div><div class="rs" style="color:#3A6EDB">BQ Target &middot; 6:46/mi avg</div></div><div class="rt hi">sub-2:57:59</div></div>
     </div>
-    <div class="bq-footnote">BQ standard M18&ndash;34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer.</div>
+    <div class="fn">BQ standard M18&ndash;34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing.</div>
   </div>
 </div>
-<div class="bottom-nav">
-  <button class="nav-btn active" id="nav-today" onclick="showTab('today')"><span class="nav-icon">&#9673;</span><span class="nav-label">Today</span></button>
-  <button class="nav-btn" id="nav-plan" onclick="showTab('plan')"><span class="nav-icon">&#8801;</span><span class="nav-label">Plan</span></button>
-  <button class="nav-btn" id="nav-progress" onclick="showTab('progress')"><span class="nav-icon">&#8593;</span><span class="nav-label">Progress</span></button>
+<div class="nav">
+  <button class="nb on" id="nb-today" onclick="showTab('today')"><span class="ni">&#9673;</span><span class="nl">Today</span></button>
+  <button class="nb" id="nb-plan" onclick="showTab('plan')"><span class="ni">&#8801;</span><span class="nl">Plan</span></button>
+  <button class="nb" id="nb-progress" onclick="showTab('progress')"><span class="ni">&#8593;</span><span class="nl">Progress</span></button>
 </div>
-<div class="sheet-overlay" id="workoutSheet"><div class="sheet" id="sheetContent"></div></div>
-<div class="sheet-overlay" id="planSheet"><div class="sheet" id="planSheetContent"></div></div>
+<div class="ov" id="wksheet"><div class="sh" id="shcont"></div></div>
+<div class="ov" id="plsheet"><div class="sh" id="plshcont"></div></div>
 <script>
-
-var WORKOUTS = {
-monday:{title:“Back & Biceps”,subtitle:“Easy Swim · Upper Body”,tags:[“swim”,“lift”],bqNote:“Active recovery — aerobic blood flow accelerates muscle repair from Durham. Every easy day protects the quality days ahead.”,parts:{cardio:{type:“swim”,label:“MORNING · PARKWEST POOL · 25M/LENGTH”,summary:“Easy recovery swim. Low intensity, full body flush. HR under 120.”,sets:[{name:“Warmup”,desc:“Easy · any stroke · get loose”,lengths:“8 lengths”,meters:“200m”},{name:“Main Set · 6 × 4 lengths”,desc:“30 sec rest · target 1:55–2:05/100m”,lengths:“24 lengths”,meters:“600m”},{name:“Cooldown”,desc:“Slow · long strokes”,lengths:“8 lengths”,meters:“200m”}],total:“40 lengths · 1,000m · ~25 min”,distLabel:“Distance (e.g. 1,000m)”},strength:{type:“lift”,label:“LUNCH · GYM — UPPER ONLY”,summary:“Pull-focused upper body. No legs — still recovering from Durham.”,exercises:[{name:“Chest-Supported DB Row”,sets:“3×8–10”},{name:“Lat Pulldown”,sets:“3×8–10”},{name:“Seated Cable Row”,sets:“3×10–12”},{name:“Machine Rear Delt Fly”,sets:“3×10–12”},{name:“Dumbbell Curl”,sets:“3×10–12”},{name:“Cable Curl”,sets:“3×10–12”},{name:“21s”,sets:“2 sets”}]}},coach:“No legs today. Joint tweaks still resolving — keep the swim relaxed.”},
-tuesday:{title:“Chest & Triceps”,subtitle:“Upper Body · Push Day”,tags:[“lift”],bqNote:“Pure upper body maintenance. 225 baseline protected. Legs get a full rest before Thursday.”,parts:{strength:{type:“lift”,label:“LUNCH · GYM”,summary:“Heavy push day. Protect your 225 bench baseline through this entire block.”,exercises:[{name:“Flat Barbell Bench Press”,sets:“4×5–6”,key:true},{name:“Incline DB Press”,sets:“3×8–10”},{name:“Machine Chest Press”,sets:“3×10–12”},{name:“Cable Fly”,sets:“3×12–15”},{name:“Tricep Rope Pushdown”,sets:“3×12”},{name:“Tricep Extension Machine”,sets:“3×10–12”},{name:“Dips”,sets:“2×10”}]}},coach:“Full chest day. Hit 225. No running today.”},
-wednesday:{title:“Aerobic Swim”,subtitle:“Pool · Zone 2”,tags:[“swim”],bqNote:“Zone 2 swimming builds mitochondrial density — the same aerobic engine that carries you past mile 20 in Indianapolis.”,parts:{cardio:{type:“swim”,label:“MORNING · PARKWEST POOL · 25M/LENGTH”,summary:“Sustained aerobic effort. Zone 2 the entire way.”,sets:[{name:“Warmup”,desc:“Relaxed · settle into rhythm”,lengths:“8 lengths”,meters:“200m”},{name:“Main Set · 4 × 8 lengths”,desc:“45 sec rest · target 1:50–2:00/100m”,lengths:“32 lengths”,meters:“800m”},{name:“Cooldown”,desc:“Slow · wind it down”,lengths:“4 lengths”,meters:“100m”}],total:“44 lengths · 1,100m · ~28 min”,distLabel:“Distance completed”}},coach:“No gym today. Still aerobic — if joints flare, back off.”},
-thursday:{title:“First Run Back”,subtitle:“Road + Modified Legs”,tags:[“run”,“lift”],bqNote:“This is a check-in run, not a training run. The data from today tells me how fast we can progress next week.”,parts:{cardio:{type:“run”,label:“MORNING · ROAD”,summary:“First run since Durham. Flat route, no watch pressure, purely by feel.”,stats:[{label:“Duration”,val:“20–25 min”,hi:true},{label:“Pace”,val:“9:30+ /mi”,hi:true},{label:“HR Cap”,val:“140 bpm”},{label:“Surface”,val:“Flat only”},{label:“Walk breaks”,val:“Take freely”}],distLabel:“Distance (mi)”,paceLabel:“Avg pace”},strength:{type:“lift”,label:“LUNCH · GYM — HALF VOLUME”,summary:“Reintroducing leg work at half volume. Hip abduction is non-negotiable.”,exercises:[{name:“Romanian Deadlift”,sets:“2×8”},{name:“Bulgarian Split Squat”,sets:“2×10”},{name:“Hip Abduction Machine”,sets:“2×15”,key:true},{name:“Seated Calf Raise”,sets:“2×15”},{name:“Single-Leg Glute Bridge”,sets:“2×12”}]}},coach:“Run is a check-in, not a workout. Any joint tweak — stop.”},
-friday:{title:“Shoulders & Arms”,subtitle:“Light Upper · Pre-Long Run”,tags:[“lift”],bqNote:“Light day by design. Legs rest ahead of Saturday. Face pulls protect shoulder health.”,parts:{strength:{type:“lift”,label:“LUNCH · GYM · LIGHT DAY”,summary:“In and out in 40 minutes. Nothing heavy.”,exercises:[{name:“Shoulder Press Machine”,sets:“3×10–12”},{name:“Machine Lateral Raise”,sets:“3×12–15”},{name:“Face Pulls”,sets:“3×15”,key:true},{name:“EZ-Bar Curl”,sets:“3×10–12”},{name:“Cable Tricep Pushdown”,sets:“3×12–15”},{name:“Cable Curl”,sets:“2×12”}]}},coach:“In and out in 40 min. Long run tomorrow — nothing heavy.”},
-saturday:{title:“Easy Run #2”,subtitle:“Road · Run Only”,tags:[“run”],bqNote:“Second run back. Aerobic base is the single most important predictor of marathon performance.”,parts:{cardio:{type:“run”,label:“MORNING · ROAD — RUN ONLY”,summary:“Easy aerobic run. Conversational pace the entire way. No gym today.”,stats:[{label:“Duration”,val:“30–35 min”,hi:true},{label:“Pace”,val:“9:00–9:30 /mi”,hi:true},{label:“HR Cap”,val:“145 bpm”},{label:“Feel”,val:“Conversational”},{label:“Gym”,val:“None today”}],distLabel:“Distance (mi)”,paceLabel:“Avg pace”}},coach:“If Thursday felt good, step it up slightly. No ego.”},
-sunday:{title:“Full Rest”,subtitle:“Complete Recovery”,tags:[“rest”],bqNote:“Rest is training. Your body adapts and gets faster on recovery days. Non-negotiable.”,parts:{},coach:“No running. No gym. No swimming. Sleep well.”}
+var W={
+  monday:{t:"Back & Biceps",s:"Easy Swim · Upper Body",tags:["swim","lift"],bq:"Active recovery — aerobic blood flow accelerates muscle repair from Durham. Every easy day protects the quality days ahead.",parts:{
+    cardio:{type:"swim",lbl:"MORNING · PARKWEST POOL · 25M/LENGTH",sum:"Easy recovery swim. Low intensity, full body flush. HR under 120.",sets:[{n:"Warmup",d:"Easy · any stroke · get loose",l:"8 lengths",m:"200m"},{n:"Main Set · 6 × 4 lengths",d:"30 sec rest · target 1:55–2:05/100m",l:"24 lengths",m:"600m"},{n:"Cooldown",d:"Slow · long strokes",l:"8 lengths",m:"200m"}],tot:"40 lengths · 1,000m · ~25 min",dl:"Distance (e.g. 1,000m)"},
+    strength:{type:"lift",lbl:"LUNCH · GYM — UPPER ONLY",sum:"Pull-focused upper body. No legs — still recovering from Durham.",ex:[{n:"Chest-Supported DB Row",s:"3×8–10"},{n:"Lat Pulldown",s:"3×8–10"},{n:"Seated Cable Row",s:"3×10–12"},{n:"Machine Rear Delt Fly",s:"3×10–12"},{n:"Dumbbell Curl",s:"3×10–12"},{n:"Cable Curl",s:"3×10–12"},{n:"21s",s:"2 sets"}]}
+  },coach:"No legs today. Joint tweaks still resolving — keep the swim relaxed."},
+  tuesday:{t:"Chest & Triceps",s:"Upper Body · Push Day",tags:["lift"],bq:"Pure upper body maintenance. 225 baseline protected. Legs get a full rest before Thursday.",parts:{
+    strength:{type:"lift",lbl:"LUNCH · GYM",sum:"Heavy push day. Protect your 225 bench baseline through this entire block.",ex:[{n:"Flat Barbell Bench Press",s:"4×5–6",k:true},{n:"Incline DB Press",s:"3×8–10"},{n:"Machine Chest Press",s:"3×10–12"},{n:"Cable Fly",s:"3×12–15"},{n:"Tricep Rope Pushdown",s:"3×12"},{n:"Tricep Extension Machine",s:"3×10–12"},{n:"Dips",s:"2×10"}]}
+  },coach:"Full chest day. Hit 225. No running today."},
+  wednesday:{t:"Aerobic Swim",s:"Pool · Zone 2",tags:["swim"],bq:"Zone 2 swimming builds mitochondrial density — the same aerobic engine that carries you past mile 20.",parts:{
+    cardio:{type:"swim",lbl:"MORNING · PARKWEST POOL · 25M/LENGTH",sum:"Sustained aerobic effort. Zone 2 the entire way.",sets:[{n:"Warmup",d:"Relaxed · settle into rhythm",l:"8 lengths",m:"200m"},{n:"Main Set · 4 × 8 lengths",d:"45 sec rest · target 1:50–2:00/100m",l:"32 lengths",m:"800m"},{n:"Cooldown",d:"Slow · wind it down",l:"4 lengths",m:"100m"}],tot:"44 lengths · 1,100m · ~28 min",dl:"Distance completed"}
+  },coach:"No gym today. Still aerobic — if joints flare, back off."},
+  thursday:{t:"First Run Back",s:"Road + Modified Legs",tags:["run","lift"],bq:"This is a check-in run, not a training run. The data from today tells me how fast we can progress next week.",parts:{
+    cardio:{type:"run",lbl:"MORNING · ROAD",sum:"First run since Durham. Flat route, no watch pressure, purely by feel.",stats:[{l:"Duration",v:"20–25 min",h:true},{l:"Pace",v:"9:30+ /mi",h:true},{l:"HR Cap",v:"140 bpm"},{l:"Surface",v:"Flat only"},{l:"Walk breaks",v:"Take freely"}],dl:"Distance (mi)",pl:"Avg pace"},
+    strength:{type:"lift",lbl:"LUNCH · GYM — HALF VOLUME",sum:"Reintroducing leg work at half volume. Hip abduction is non-negotiable.",ex:[{n:"Romanian Deadlift",s:"2×8"},{n:"Bulgarian Split Squat",s:"2×10"},{n:"Hip Abduction Machine",s:"2×15",k:true},{n:"Seated Calf Raise",s:"2×15"},{n:"Single-Leg Glute Bridge",s:"2×12"}]}
+  },coach:"Run is a check-in, not a workout. Any joint tweak — stop."},
+  friday:{t:"Shoulders & Arms",s:"Light Upper · Pre-Long Run",tags:["lift"],bq:"Light day by design. Legs rest ahead of Saturday. Face pulls protect shoulder health.",parts:{
+    strength:{type:"lift",lbl:"LUNCH · GYM · LIGHT DAY",sum:"In and out in 40 minutes. Nothing heavy.",ex:[{n:"Shoulder Press Machine",s:"3×10–12"},{n:"Machine Lateral Raise",s:"3×12–15"},{n:"Face Pulls",s:"3×15",k:true},{n:"EZ-Bar Curl",s:"3×10–12"},{n:"Cable Tricep Pushdown",s:"3×12–15"},{n:"Cable Curl",s:"2×12"}]}
+  },coach:"In and out in 40 min. Long run tomorrow — nothing heavy."},
+  saturday:{t:"Easy Run #2",s:"Road · Run Only",tags:["run"],bq:"Second run back. Aerobic base is the single most important predictor of marathon performance.",parts:{
+    cardio:{type:"run",lbl:"MORNING · ROAD — RUN ONLY",sum:"Easy aerobic run. Conversational pace the entire way. No gym today.",stats:[{l:"Duration",v:"30–35 min",h:true},{l:"Pace",v:"9:00–9:30 /mi",h:true},{l:"HR Cap",v:"145 bpm"},{l:"Feel",v:"Conversational"},{l:"Gym",v:"None today"}],dl:"Distance (mi)",pl:"Avg pace"}
+  },coach:"If Thursday felt good, step it up. No ego."},
+  sunday:{t:"Full Rest",s:"Complete Recovery",tags:["rest"],bq:"Rest is training. Your body adapts and gets faster on recovery days. Non-negotiable.",parts:{},coach:"No running. No gym. No swimming. Sleep well."}
 };
-
-var WEEK = [
-{key:“monday”,   label:“MON”,date:“May 11”,name:“Easy Swim + Back & Biceps”,types:[“swim”,“lift”],today:true},
-{key:“tuesday”,  label:“TUE”,date:“May 12”,name:“Chest & Triceps”,          types:[“lift”]},
-{key:“wednesday”,label:“WED”,date:“May 13”,name:“Aerobic Swim”,             types:[“swim”]},
-{key:“thursday”, label:“THU”,date:“May 14”,name:“First Run Back + Legs”,    types:[“run”,“lift”]},
-{key:“friday”,   label:“FRI”,date:“May 15”,name:“Shoulders & Arms”,         types:[“lift”]},
-{key:“saturday”, label:“SAT”,date:“May 16”,name:“Easy Run #2”,              types:[“run”]},
-{key:“sunday”,   label:“SUN”,date:“May 17”,name:“Full Rest”,                types:[“rest”]}
+var WEEK=[
+  {key:"monday",   lbl:"MON",dt:"May 11",nm:"Easy Swim + Back & Biceps",types:["swim","lift"],tod:true},
+  {key:"tuesday",  lbl:"TUE",dt:"May 12",nm:"Chest & Triceps",          types:["lift"]},
+  {key:"wednesday",lbl:"WED",dt:"May 13",nm:"Aerobic Swim",             types:["swim"]},
+  {key:"thursday", lbl:"THU",dt:"May 14",nm:"First Run Back + Legs",    types:["run","lift"]},
+  {key:"friday",   lbl:"FRI",dt:"May 15",nm:"Shoulders & Arms",         types:["lift"]},
+  {key:"saturday", lbl:"SAT",dt:"May 16",nm:"Easy Run #2",              types:["run"]},
+  {key:"sunday",   lbl:"SUN",dt:"May 17",nm:"Full Rest",                types:["rest"]}
 ];
-
-var TYPE_DOT = {run:”#c8380a”,swim:”#1a5fad”,lift:”#1a7a45”,bike:”#8a6a00”,rest:”#4a4090”};
-
-var PLAN_DATA = [
-{week:“Week 1 · May 11–17”,badge:“RECOVERY”,days:[
-{d:“MON”,name:“Easy Swim + Back & Biceps”,detail:“1,000m · 40 lengths · Upper lift”,bq:“Active recovery. Aerobic flush accelerates healing from Durham.”},
-{d:“TUE”,name:“Chest & Triceps”,detail:“Bench baseline · Full push session”,bq:“Upper body only. 225 protected. Legs rest completely.”},
-{d:“WED”,name:“Aerobic Swim”,detail:“1,100m · 44 lengths · Zone 2”,bq:“Zone 2 swim builds the same engine that carries you past mile 20.”},
-{d:“THU”,name:“First Run Back + Legs”,detail:“20–25 min · 9:30+/mi · Modified legs”,bq:“Check-in run only. Data from this run shapes all of next week.”},
-{d:“FRI”,name:“Shoulders & Arms”,detail:“Light upper · Face pulls”,bq:“Light day. Legs rest ahead of Saturday. 40 min max.”},
-{d:“SAT”,name:“Easy Run #2”,detail:“30–35 min · 9:00–9:30/mi”,bq:“Aerobic base is the #1 predictor of marathon performance.”},
-{d:“SUN”,name:“Full Rest”,detail:“No activity”,bq:“Rest is training. Body adapts on recovery days.”}
-]},
-{week:“Week 2 · May 18–24”,badge:“BASE”,days:[
-{d:“MON”,name:“Easy Run + Posterior Chain”,detail:“30–35 min easy · Full leg session”,bq:“First full leg day. Hip abduction is your runner’s knee insurance.”},
-{d:“TUE”,name:“Easy Run + Back & Biceps”,detail:“35–40 min · 8:45–9:15/mi”,bq:“Building aerobic volume. Consistent easy mileage is the foundation.”},
-{d:“WED”,name:“Swim + Legs Heavy”,detail:“1,200m · 48 lengths · Full legs”,bq:“Nordic hamstring curls start this week. Injury prevention.”},
-{d:“THU”,name:“Easy Run + Chest & Triceps”,detail:“35–40 min · 8:45–9:15/mi”,bq:“Third run of the week. Mileage building steadily.”},
-{d:“FRI”,name:“Bike + Shoulders & Arms”,detail:“18–22 mi · Alt: 45 min swim”,bq:“Cross-training aerobic capacity without run stress.”},
-{d:“SAT”,name:“Long Run”,detail:“60–70 min · 8:30–9:00/mi”,bq:“First real long run since Durham. Practice fueling today.”},
-{d:“SUN”,name:“Full Rest”,detail:“No activity”,bq:“Non-negotiable rest. Absorb the week.”}
-]}
+var DOTS={run:"#c8380a",swim:"#1a5fad",lift:"#1a7a45",rest:"#4a4090"};
+var PD=[
+  {wk:"Week 1 · May 11–17",b:"RECOVERY",days:[
+    {d:"MON",n:"Easy Swim + Back & Biceps",dt:"1,000m · 40 lengths · Upper lift",bq:"Active recovery. Aerobic flush accelerates healing from Durham."},
+    {d:"TUE",n:"Chest & Triceps",dt:"Bench baseline · Full push session",bq:"Upper body only. 225 protected. Legs rest completely."},
+    {d:"WED",n:"Aerobic Swim",dt:"1,100m · 44 lengths · Zone 2",bq:"Zone 2 swim builds the same engine that carries you past mile 20."},
+    {d:"THU",n:"First Run Back + Legs",dt:"20–25 min · 9:30+/mi · Modified legs",bq:"Check-in run only. Data from this run shapes all of next week."},
+    {d:"FRI",n:"Shoulders & Arms",dt:"Light upper · Face pulls",bq:"Light day. Legs rest ahead of Saturday. 40 min max."},
+    {d:"SAT",n:"Easy Run #2",dt:"30–35 min · 9:00–9:30/mi",bq:"Aerobic base is the #1 predictor of marathon performance."},
+    {d:"SUN",n:"Full Rest",dt:"No activity",bq:"Rest is training. Body adapts on recovery days."}
+  ]},
+  {wk:"Week 2 · May 18–24",b:"BASE",days:[
+    {d:"MON",n:"Easy Run + Posterior Chain",dt:"30–35 min easy · Full leg session",bq:"First full leg day. Hip abduction is your runner's knee insurance."},
+    {d:"TUE",n:"Easy Run + Back & Biceps",dt:"35–40 min · 8:45–9:15/mi",bq:"Building aerobic volume. Consistent easy mileage is the foundation."},
+    {d:"WED",n:"Swim + Legs Heavy",dt:"1,200m · 48 lengths · Full legs",bq:"Nordic hamstring curls start this week. Injury prevention."},
+    {d:"THU",n:"Easy Run + Chest & Triceps",dt:"35–40 min · 8:45–9:15/mi",bq:"Third run of the week. Mileage building steadily."},
+    {d:"FRI",n:"Bike + Shoulders & Arms",dt:"18–22 mi · Alt: 45 min swim",bq:"Cross-training aerobic capacity without run stress."},
+    {d:"SAT",n:"Long Run",dt:"60–70 min · 8:30–9:00/mi",bq:"First real long run since Durham. Practice fueling today."},
+    {d:"SUN",n:"Full Rest",dt:"No activity",bq:"Non-negotiable rest. Absorb the week."}
+  ]}
 ];
-
-var logged = {};
-try { logged = JSON.parse(localStorage.getItem(‘rtb_v2’) || ‘{}’); } catch(e) {}
-function save() { try { localStorage.setItem(‘rtb_v2’, JSON.stringify(logged)); } catch(e) {} }
-
-function getStatus(key) {
-var d = logged[key]; if (!d) return ‘none’;
-var w = WORKOUTS[key];
-var hasC = !!(w && w.parts && w.parts.cardio);
-var hasS = !!(w && w.parts && w.parts.strength);
-var c = d[key+’_cardio’], s = d[key+’_strength’];
-if (hasC && hasS) return (c&&s)?‘full’:(c||s)?‘partial’:‘none’;
-if (hasC) return c?‘full’:‘none’;
-if (hasS) return s?‘full’:‘none’;
-return ‘none’;
+var lg={};
+try{lg=JSON.parse(localStorage.getItem("rtbv3")||"{}");}catch(e){}
+function sv(){try{localStorage.setItem("rtbv3",JSON.stringify(lg));}catch(e){}}
+function gst(k){
+  var d=lg[k];if(!d)return"none";
+  var w=W[k],hc=!!(w&&w.parts&&w.parts.cardio),hs=!!(w&&w.parts&&w.parts.strength);
+  var c=d[k+"_c"],s=d[k+"_s"];
+  if(hc&&hs)return(c&&s)?"full":(c||s)?"half":"none";
+  if(hc)return c?"full":"none";
+  if(hs)return s?"full":"none";
+  return"none";
 }
-
-function showTab(id) {
-document.querySelectorAll(’.page’).forEach(function(p){p.classList.remove(‘active’);});
-document.querySelectorAll(’.nav-btn’).forEach(function(b){b.classList.remove(‘active’);});
-document.getElementById(‘page-’+id).classList.add(‘active’);
-document.getElementById(‘nav-’+id).classList.add(‘active’);
-document.getElementById(‘mainScroll’).scrollTop = 0;
+function showTab(id){
+  document.querySelectorAll(".pg").forEach(function(p){p.classList.remove("on");});
+  document.querySelectorAll(".nb").forEach(function(b){b.classList.remove("on");});
+  document.getElementById("pg-"+id).classList.add("on");
+  document.getElementById("nb-"+id).classList.add("on");
+  document.getElementById("scr").scrollTop=0;
 }
-
-function buildWeek() {
-var list = document.getElementById(‘weekList’);
-list.innerHTML = ‘’;
-var done = 0;
-for (var i=0; i<WEEK.length; i++) {
-var day = WEEK[i];
-var status = getStatus(day.key);
-if (status===‘full’) done++;
-var d = logged[day.key]||{};
-var c = d[day.key+’_cardio’], s = d[day.key+’_strength’];
-var dot = TYPE_DOT[day.types[0]]||’#b0bbd0’;
-var row = document.createElement(‘div’);
-row.className = ‘day-row’+(day.today?’ today’:’’);
-(function(k){ row.onclick = function(){ openSheet(k); }; })(day.key);
-var cc=‘day-check’, ct=’’;
-if (status===‘full’){cc+=’ full’;ct=’\u2713’;}
-else if(status===‘partial’){cc+=’ partial’;ct=’\u25d1’;}
-var badges=’’;
-if (c||s) {
-badges=’<div class="day-log-badges">’;
-if(c) badges+=’<div class="log-badge log-badge-cardio">Cardio ‘+c.effort+’/10’+(c.distance?’ · ‘+c.distance:’’)+’</div>’;
-if(s) badges+=’<div class="log-badge log-badge-strength">Str ‘+s.effort+’/10</div>’;
-badges+=’</div>’;
+function bldWk(){
+  var list=document.getElementById("wklist");
+  list.innerHTML="";
+  var done=0;
+  for(var i=0;i<WEEK.length;i++){
+    var day=WEEK[i],st=gst(day.key);
+    if(st==="full")done++;
+    var d=lg[day.key]||{},c=d[day.key+"_c"],s=d[day.key+"_s"];
+    var dot=DOTS[day.types[0]]||"#b0bbd0";
+    var row=document.createElement("div");
+    row.className="dr"+(day.tod?" tod":"");
+    (function(k){row.onclick=function(){openSh(k);};})(day.key);
+    var cc="dc",ct="";
+    if(st==="full"){cc+=" full";ct="&#10003;";}
+    else if(st==="half"){cc+=" half";ct="&#9681;";}
+    var bgs="";
+    if(c||s){
+      bgs='<div class="dbs">';
+      if(c)bgs+='<div class="lbc">Cardio '+c.e+"/10"+(c.d?" · "+c.d:"")+"</div>";
+      if(s)bgs+='<div class="lbs">Str '+s.e+"/10</div>";
+      bgs+="</div>";
+    }
+    row.innerHTML='<div class="drm"><div class="'+cc+'">'+ct+'</div><div class="dtd" style="background:'+dot+'"></div><div class="di"><div class="dl">'+day.lbl+" · "+day.dt+(day.tod?" · TODAY":"")+'</div><div class="dn'+(st==="full"?" done":"")+'">'+day.nm+'</div></div><div class="dch">&#8250;</div></div>'+bgs;
+    list.appendChild(row);
+  }
+  document.getElementById("donecount").textContent=done+"/7 done";
+  var ld=lg["monday"]||{},lc=ld["monday_c"],ls=ld["monday_s"];
+  var hlr=document.getElementById("hlogrow");
+  if(lc||ls){
+    hlr.style.display="flex";
+    if(lc)document.getElementById("hclog").textContent="&#10003; Cardio "+lc.e+"/10"+(lc.d?" · "+lc.d:"");
+    if(ls)document.getElementById("hslog").textContent="&#10003; Strength "+ls.e+"/10";
+  }
 }
-row.innerHTML=’<div class="day-row-main"><div class="'+cc+'">’+ct+’</div><div class="day-type-dot" style="background:'+dot+'"></div><div class="day-info"><div class="day-label-text">’+day.label+’ · ‘+day.date+(day.today?’ · TODAY’:’’)+’</div><div class="day-name-text'+(status==='full'?' done':'')+'">’+day.name+’</div></div><div class="day-chevron">\u203a</div></div>’+badges;
-list.appendChild(row);
+function bldPl(){
+  var cont=document.getElementById("plancont"),html="";
+  for(var wi=0;wi<PD.length;wi++){
+    var wk=PD[wi];
+    html+='<div class="pw"><div class="pwh"><div class="pwn">'+wk.wk+'</div><div class="pwb">'+wk.b+'</div></div><div class="pl">';
+    for(var di=0;di<wk.days.length;di++){
+      var day=wk.days[di];
+      html+='<div class="pr" data-wi="'+wi+'" data-di="'+di+'"><div class="prd">'+day.d+'</div><div class="prc"><div class="prn">'+day.n+'</div><div class="prdt">'+day.dt+'</div></div><div class="pra">&#8250;</div></div>';
+    }
+    html+='</div></div>';
+  }
+  cont.innerHTML=html;
+  cont.querySelectorAll(".pr").forEach(function(r){
+    r.onclick=function(){
+      var wi=parseInt(this.getAttribute("data-wi")),di=parseInt(this.getAttribute("data-di"));
+      openPl(PD[wi].days[di]);
+    };
+  });
 }
-document.getElementById(‘doneCount’).textContent=done+’/7 done’;
-updateHeroLog();
+var eff={};
+function openSh(k){
+  if(!eff[k])eff[k]={c:null,s:null};
+  rndrSh(k);
+  document.getElementById("wksheet").classList.add("on");
+  document.body.style.overflow="hidden";
 }
-
-function updateHeroLog() {
-var d=logged[‘monday’]||{};
-var c=d[‘monday_cardio’],s=d[‘monday_strength’];
-var row=document.getElementById(‘heroLogRow’);
-if(c||s){
-row.style.display=‘flex’;
-if(c) document.getElementById(‘heroCardioLog’).textContent=’\u2713 Cardio ‘+c.effort+’/10’+(c.distance?’ · ‘+c.distance:’’);
-if(s) document.getElementById(‘heroStrengthLog’).textContent=’\u2713 Strength ‘+s.effort+’/10’;
+function closeSh(){
+  document.getElementById("wksheet").classList.remove("on");
+  document.body.style.overflow="";
 }
+document.getElementById("wksheet").onclick=function(e){if(e.target===this)closeSh();};
+document.getElementById("herocard").onclick=function(){openSh("monday");};
+function rndrSh(k){
+  var w=W[k],dayObj=null;
+  for(var i=0;i<WEEK.length;i++){if(WEEK[i].key===k){dayObj=WEEK[i];break;}}
+  var d=lg[k]||{},hb=w.parts.cardio&&w.parts.strength,ir=Object.keys(w.parts).length===0;
+  var h='<div class="shhd"><div class="shhdbar"></div></div>';
+  h+='<div class="shhdr"><div><div class="shdate">'+(dayObj?dayObj.dt:"")+" · Recovery Week</div>";
+  h+='<div class="shtitle">'+w.t+'</div><div class="shsub">'+w.s+"</div>";
+  h+='<div style="display:flex;gap:5px;flex-wrap:wrap">';
+  for(var ti=0;ti<w.tags.length;ti++){var tg=w.tags[ti];h+='<span class="tag t'+tg.charAt(0)+'">'+tg+"</span>";}
+  h+='</div></div><button class="shclose" onclick="closeSh()">&#10005;</button></div>';
+  h+='<div class="shbody">';
+  if(w.bq)h+='<div class="bqb"><div style="font-size:13px;flex-shrink:0">&#127919;</div><div><div class="bqbl">BQ Context</div><div class="bqbt">'+w.bq+"</div></div></div>";
+  if(ir)h+='<div class="rest"><div class="restbig">OFF</div><div class="restsub">No running. No gym. No swimming.<br>Sleep well.</div></div>';
+  if(w.parts.cardio){
+    if(hb)h+='<div class="pdiv"><div class="pdivbar" style="background:#1a5fad"></div><div class="pdivlbl" style="color:#1a5fad">Cardio</div></div>';
+    if(w.parts.cardio.sum)h+='<div class="psum">'+w.parts.cardio.sum+"</div>";
+    h+='<div class="ws"><div class="slbl">'+w.parts.cardio.lbl+"</div>";
+    if(w.parts.cardio.type==="swim"){
+      for(var si=0;si<w.parts.cardio.sets.length;si++){var st=w.parts.cardio.sets[si];h+='<div class="swr"><div><div class="swn">'+st.n+'</div><div class="swd">'+st.d+'</div></div><div style="text-align:right;flex-shrink:0"><div class="swl">'+st.l+'</div><div class="swm">'+st.m+"</div></div></div>";}
+      if(w.parts.cardio.tot)h+='<div class="swt"><span class="swtl">Total</span><span class="swtv">'+w.parts.cardio.tot+"</span></div>";
+    }
+    if(w.parts.cardio.type==="run"){for(var si=0;si<w.parts.cardio.stats.length;si++){var rs=w.parts.cardio.stats[si];h+='<div class="rnr"><span class="rnl">'+rs.l+'</span><span class="rnv'+(rs.h?" h":"")+'">'+rs.v+"</span></div>";}}
+    h+="</div>";
+  }
+  if(w.parts.strength){
+    if(hb)h+='<div class="pdiv"><div class="pdivbar" style="background:#1a7a45"></div><div class="pdivlbl" style="color:#1a7a45">Strength</div></div>';
+    if(w.parts.strength.sum)h+='<div class="psum">'+w.parts.strength.sum+"</div>";
+    h+='<div class="ws"><div class="slbl">'+w.parts.strength.lbl+"</div>";
+    for(var ei=0;ei<w.parts.strength.ex.length;ei++){var ex=w.parts.strength.ex[ei];h+='<div class="lr"><span class="ln'+(ex.k?" k":"")+'">'+ex.n+'</span><span class="ls'+(ex.k?" k":"")+'">'+ex.s+"</span></div>";}
+    h+="</div>";
+  }
+  if(w.coach)h+='<div class="cn"><div class="cnl">Coach</div><div class="cnt">'+w.coach+"</div></div>";
+  if(!ir){
+    h+='<div class="logs"><div class="logsl">Log Workout</div>';
+    if(w.parts.cardio){
+      var ec=d[k+"_c"],curC=(eff[k]&&eff[k].c)||(ec&&ec.e)||null;
+      h+='<div class="plc c"><div class="plcl c">Log Cardio</div><div class="effl">Effort 1–10</div><div class="effr">';
+      for(var n=1;n<=10;n++)h+='<button class="eb'+(curC===n?" sc":"")+'" onclick="setE(\''+k+'\',\'c\','+n+')">'+n+"</button>";
+      h+='</div><div class="fr'+(w.parts.cardio.type==="run"?" two":"")+'"><div><div class="fl">'+(w.parts.cardio.dl||"Distance")+'</div><input class="fi" id="dc'+k+'" value="'+(ec&&ec.d||"")+'" placeholder="'+(w.parts.cardio.type==="swim"?"1,000m":"3.1 mi")+'"></div>';
+      if(w.parts.cardio.type==="run")h+='<div><div class="fl">Avg Pace</div><input class="fi" id="pc'+k+'" value="'+(ec&&ec.p||"")+'" placeholder="9:24 /mi"></div>';
+      h+='</div><button class="lb'+(ec?" sv":curC?" rc":"")+'" onclick="logP(\''+k+'\',\'c\')">'+(ec?"&#10003; Cardio Logged":"Log Cardio")+"</button></div>";
+    }
+    if(w.parts.strength){
+      var es=d[k+"_s"],curS=(eff[k]&&eff[k].s)||(es&&es.e)||null;
+      h+='<div class="plc s"><div class="plcl s">Log Strength</div><div class="effl">Effort 1–10</div><div class="effr">';
+      for(var n=1;n<=10;n++)h+='<button class="eb'+(curS===n?" ss":"")+'" onclick="setE(\''+k+'\',\'s\','+n+')">'+n+"</button>";
+      h+='</div><button class="lb'+(es?" sv":curS?" rs":"")+'" onclick="logP(\''+k+'\',\'s\')">'+(es?"&#10003; Strength Logged":"Log Strength")+"</button></div>";
+    }
+    h+="</div>";
+  }
+  h+="</div>";
+  document.getElementById("shcont").innerHTML=h;
+  document.getElementById("shcont").scrollTop=0;
 }
-
-document.getElementById(‘heroCard’).onclick = function(){ openSheet(‘monday’); };
-
-function buildPlan() {
-var cont=document.getElementById(‘planContent’), html=’’;
-for (var wi=0; wi<PLAN_DATA.length; wi++) {
-var wk=PLAN_DATA[wi];
-html+=’<div class="plan-week"><div class="plan-week-header"><div class="plan-week-name">’+wk.week+’</div><div class="plan-badge">’+wk.badge+’</div></div><div class="plan-list">’;
-for (var di=0; di<wk.days.length; di++) {
-var day=wk.days[di];
-html+=’<div class="plan-row" data-wi="'+wi+'" data-di="'+di+'"><div class="plan-day-label">’+day.d+’</div><div class="plan-content"><div class="plan-workout-name">’+day.name+’</div><div class="plan-detail">’+day.detail+’</div></div><div class="plan-chevron">\u203a</div></div>’;
-}
-html+=’</div></div>’;
-}
-cont.innerHTML=html;
-cont.querySelectorAll(’.plan-row’).forEach(function(row){
-row.onclick=function(){
-var wi=parseInt(this.getAttribute(‘data-wi’));
-var di=parseInt(this.getAttribute(‘data-di’));
-openPlanSheet(PLAN_DATA[wi].days[di]);
-};
-});
-}
-
-var effortState={};
-
-function openSheet(dayKey) {
-if(!effortState[dayKey]) effortState[dayKey]={cardio:null,strength:null};
-renderSheet(dayKey);
-document.getElementById(‘workoutSheet’).classList.add(‘open’);
-document.body.style.overflow=‘hidden’;
-}
-
-function closeSheet() {
-document.getElementById(‘workoutSheet’).classList.remove(‘open’);
-document.body.style.overflow=’’;
-}
-
-document.getElementById(‘workoutSheet’).onclick=function(e){if(e.target===this)closeSheet();};
-
-function renderSheet(dayKey) {
-var w=WORKOUTS[dayKey];
-var dayObj=null;
-for(var i=0;i<WEEK.length;i++){if(WEEK[i].key===dayKey){dayObj=WEEK[i];break;}}
-var d=logged[dayKey]||{};
-var hasBoth=w.parts.cardio&&w.parts.strength;
-var isRest=Object.keys(w.parts).length===0;
-var html=’<div class="sheet-handle"><div class="sheet-handle-bar"></div></div>’;
-html+=’<div class="sheet-header"><div><div class="sheet-date">’+(dayObj?dayObj.date:’’)+’ · Recovery Week</div><div class="sheet-title">’+w.title+’</div><div class="sheet-subtitle">’+w.subtitle+’</div><div style="display:flex;gap:6px;flex-wrap:wrap">’;
-for(var ti=0;ti<w.tags.length;ti++) html+=’<span class="tag tag-'+w.tags[ti]+'">’+w.tags[ti]+’</span>’;
-html+=’</div></div><button class="sheet-close" onclick="closeSheet()">\u2715</button></div><div class="sheet-body">’;
-if(w.bqNote) html+=’<div class="bq-banner"><div class="bq-banner-icon">🎯</div><div><div class="bq-banner-label">BQ Context</div><div class="bq-banner-text">’+w.bqNote+’</div></div></div>’;
-if(isRest) html+=’<div class="rest-display"><div class="rest-big">OFF</div><div class="rest-sub">No running. No gym. No swimming.<br>Sleep well. Body is still repairing.</div></div>’;
-if(w.parts.cardio){
-if(hasBoth) html+=’<div class="part-divider"><div class="part-divider-bar" style="background:var(--swim)"></div><div class="part-divider-label" style="color:var(--swim)">Cardio</div></div>’;
-if(w.parts.cardio.summary) html+=’<div class="part-summary">’+w.parts.cardio.summary+’</div>’;
-html+=’<div class="workout-section"><div class="sec-label">’+w.parts.cardio.label+’</div>’;
-if(w.parts.cardio.type===‘swim’){
-for(var si=0;si<w.parts.cardio.sets.length;si++){var s=w.parts.cardio.sets[si];html+=’<div class="swim-row"><div><div class="swim-name">’+s.name+’</div><div class="swim-desc">’+s.desc+’</div></div><div style="text-align:right;flex-shrink:0"><div class="swim-lengths">’+s.lengths+’</div><div class="swim-meters">’+s.meters+’</div></div></div>’;}
-if(w.parts.cardio.total) html+=’<div class="swim-total"><span class="swim-total-label">Total</span><span class="swim-total-val">’+w.parts.cardio.total+’</span></div>’;
-}
-if(w.parts.cardio.type===‘run’){for(var si=0;si<w.parts.cardio.stats.length;si++){var s=w.parts.cardio.stats[si];html+=’<div class="run-row"><span class="run-label">’+s.label+’</span><span class="run-val'+(s.hi?' hi':'')+'">’+s.val+’</span></div>’;}}
-html+=’</div>’;
-}
-if(w.parts.strength){
-if(hasBoth) html+=’<div class="part-divider"><div class="part-divider-bar" style="background:var(--lift)"></div><div class="part-divider-label" style="color:var(--lift)">Strength</div></div>’;
-if(w.parts.strength.summary) html+=’<div class="part-summary">’+w.parts.strength.summary+’</div>’;
-html+=’<div class="workout-section"><div class="sec-label">’+w.parts.strength.label+’</div>’;
-for(var ei=0;ei<w.parts.strength.exercises.length;ei++){var e=w.parts.strength.exercises[ei];html+=’<div class="lift-row"><span class="lift-name'+(e.key?' key':'')+'">’+e.name+’</span><span class="lift-sets'+(e.key?' key':'')+'">’+e.sets+’</span></div>’;}
-html+=’</div>’;
-}
-if(w.coach) html+=’<div class="coach-note"><div class="coach-note-label">Coach</div><div class="coach-note-text">’+w.coach+’</div></div>’;
-if(!isRest){
-html+=’<div class="log-section"><div class="log-section-label">Log Workout</div>’;
-if(w.parts.cardio){
-var ec=d[dayKey+’_cardio’];
-var curC=(effortState[dayKey]&&effortState[dayKey].cardio)||(ec&&ec.effort)||null;
-html+=’<div class="part-log-card cardio"><div class="part-log-label cardio">Log Cardio</div><div class="effort-sublabel">Effort 1\u201310</div><div class="effort-row">’;
-for(var n=1;n<=10;n++) html+=’<button class="effort-btn'+(curC===n?' sel-cardio':'')+'" onclick="setEff(\''+dayKey+'\',\'cardio\','+n+')">’+n+’</button>’;
-html+=’</div>’;
-html+=’<div class="fields-row'+(w.parts.cardio.type==='run'?' two':'')+'"><div><div class="field-label">’+(w.parts.cardio.distLabel||‘Distance’)+’</div><input class="field-input" id="dc-'+dayKey+'" value="'+(ec&&ec.distance||'')+'" placeholder="'+(w.parts.cardio.type==='swim'?'1,000m':'3.1 mi')+'"></div>’;
-if(w.parts.cardio.type===‘run’) html+=’<div><div class="field-label">Avg Pace</div><input class="field-input" id="pc-'+dayKey+'" value="'+(ec&&ec.pace||'')+'" placeholder="9:24 /mi"></div>’;
-html+=’</div><button class="log-btn'+(ec?' saved':curC?' ready-cardio':'')+'" onclick="logP(\''+dayKey+'\',\'cardio\')">’+(ec?’\u2713 Cardio Logged’:‘Log Cardio’)+’</button></div>’;
-}
-if(w.parts.strength){
-var es=d[dayKey+’_strength’];
-var curS=(effortState[dayKey]&&effortState[dayKey].strength)||(es&&es.effort)||null;
-html+=’<div class="part-log-card strength"><div class="part-log-label strength">Log Strength</div><div class="effort-sublabel">Effort 1\u201310</div><div class="effort-row">’;
-for(var n=1;n<=10;n++) html+=’<button class="effort-btn'+(curS===n?' sel-strength':'')+'" onclick="setEff(\''+dayKey+'\',\'strength\','+n+')">’+n+’</button>’;
-html+=’</div><button class="log-btn'+(es?' saved':curS?' ready-strength':'')+'" onclick="logP(\''+dayKey+'\',\'strength\')">’+(es?’\u2713 Strength Logged’:‘Log Strength’)+’</button></div>’;
-}
-html+=’</div>’;
-}
-html+=’</div>’;
-document.getElementById(‘sheetContent’).innerHTML=html;
-document.getElementById(‘sheetContent’).scrollTop=0;
-}
-
-function setEff(k,p,n){if(!effortState[k])effortState[k]={cardio:null,strength:null};effortState[k][p]=n;renderSheet(k);}
-
+function setE(k,p,n){if(!eff[k])eff[k]={c:null,s:null};eff[k][p]=n;rndrSh(k);}
 function logP(k,p){
-var es=effortState[k];
-var effort=(es&&es[p])||(logged[k]&&logged[k][k+’*’+p]&&logged[k][k+’*’+p].effort);
-if(!effort)return;
-var de=document.getElementById(‘dc-’+k);
-var pe=document.getElementById(‘pc-’+k);
-if(!logged[k])logged[k]={};
-logged[k][k+’_’+p]={effort:effort,distance:de?de.value:’’,pace:pe?pe.value:’’};
-save();buildWeek();renderSheet(k);
+  var ef=(eff[k]&&eff[k][p])||(lg[k]&&lg[k][k+"_"+p]&&lg[k][k+"_"+p].e);
+  if(!ef)return;
+  var de=document.getElementById("dc"+k),pe=document.getElementById("pc"+k);
+  if(!lg[k])lg[k]={};
+  lg[k][k+"_"+p]={e:ef,d:de?de.value:"",p:pe?pe.value:""};
+  sv();bldWk();rndrSh(k);
 }
-
-function openPlanSheet(day){
-document.getElementById(‘planSheetContent’).innerHTML=’<div class="sheet-handle"><div class="sheet-handle-bar"></div></div><div class="sheet-header"><div><div class="sheet-date">’+day.d+’</div><div class="sheet-title" style="font-size:20px">’+day.name+’</div></div><button class="sheet-close" onclick="closePlanSheet()">\u2715</button></div><div class="sheet-body"><div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5">’+day.detail+’</div><div class="bq-banner"><div class="bq-banner-icon">🎯</div><div><div class="bq-banner-label">BQ Context</div><div class="bq-banner-text">’+day.bq+’</div></div></div></div>’;
-document.getElementById(‘planSheet’).classList.add(‘open’);
-document.body.style.overflow=‘hidden’;
+function openPl(day){
+  document.getElementById("plshcont").innerHTML='<div class="shhd"><div class="shhdbar"></div></div><div class="shhdr"><div><div class="shdate">'+day.d+'</div><div class="shtitle" style="font-size:19px">'+day.n+'</div></div><button class="shclose" onclick="closePl()">&#10005;</button></div><div class="shbody"><div style="font-size:13px;color:#7a85a0;margin-bottom:14px;line-height:1.5">'+day.dt+'</div><div class="bqb"><div style="font-size:13px;flex-shrink:0">&#127919;</div><div><div class="bqbl">BQ Context</div><div class="bqbt">'+day.bq+"</div></div></div></div>";
+  document.getElementById("plsheet").classList.add("on");
+  document.body.style.overflow="hidden";
 }
-function closePlanSheet(){document.getElementById(‘planSheet’).classList.remove(‘open’);document.body.style.overflow=’’;}
-document.getElementById(‘planSheet’).onclick=function(e){if(e.target===this)closePlanSheet();};
-
-buildWeek();
-buildPlan();
-
+function closePl(){document.getElementById("plsheet").classList.remove("on");document.body.style.overflow="";}
+document.getElementById("plsheet").onclick=function(e){if(e.target===this)closePl();};
+bldWk();
+bldPl();
 </script>
 </body>
 </html>
