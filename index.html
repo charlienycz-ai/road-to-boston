@@ -325,14 +325,19 @@ function sv(){try{localStorage.setItem(“rtbv5”,JSON.stringify(lg));}catch(e)
 function getTodayIdx(){
 var now=new Date();
 var msPerDay=86400000;
-var diff=Math.floor((now-WEEK_START)/msPerDay);
-if(diff<0||diff>6)return-1; // outside this week
+var diff=Math.floor((now.getTime()-WEEK_START.getTime())/msPerDay);
+// Clamp to 0-6 always so app works every day this week
+if(diff<0)return 0;
+if(diff>6)return 6;
 return diff;
 }
 
 function getTodayDate(){
 var now=new Date();
-return DAYNAMES[now.getDay()===0?6:now.getDay()-1]+”, “+MONTHS[now.getMonth()]+” “+now.getDate();
+var dow=now.getDay(); // 0=Sun,1=Mon…
+// Convert to Mon=0…Sun=6
+var idx=dow===0?6:dow-1;
+return DAYNAMES[idx]+”, “+MONTHS[now.getMonth()]+” “+now.getDate();
 }
 
 function getDaysToIndy(){
