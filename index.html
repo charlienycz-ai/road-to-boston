@@ -203,6 +203,7 @@ input, textarea { font-family:'DM Sans',sans-serif; }
 </style>
 </head>
 <body>
+
 <div class="app-header">
   <div>
     <div class="header-logo">Road to <span>Boston</span></div>
@@ -214,7 +215,7 @@ input, textarea { font-family:'DM Sans',sans-serif; }
   <div class="page active" id="page-today">
     <div class="today-date-bar">Monday &middot; May 11 &middot; Recovery Day 9</div>
     <div style="padding:16px 16px 0">
-      <div class="hero-card" onclick="openSheet('monday')">
+      <div class="hero-card" id="heroCard">
         <div class="hero-top">
           <div><div class="hero-title">Back &amp; Biceps</div><div class="hero-sub">Easy Swim &middot; Upper Body</div></div>
           <div class="hero-arrow">&rsaquo;</div>
@@ -261,7 +262,7 @@ input, textarea { font-family:'DM Sans',sans-serif; }
       <div class="race-row"><div><div class="race-name">Durham Marathon</div><div class="race-sub" style="color:var(--lift)">&minus;21:49 PR</div></div><div class="race-time">3:10:55</div></div>
       <div class="race-row"><div><div class="race-name hi">Indianapolis Monumental</div><div class="race-sub" style="color:var(--blue)">BQ Target &middot; 6:46/mi avg</div></div><div class="race-time hi">sub-2:57:59</div></div>
     </div>
-    <div class="bq-footnote">BQ standard M18&ndash;34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing.</div>
+    <div class="bq-footnote">BQ standard M18&ndash;34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer.</div>
   </div>
 </div>
 <div class="bottom-nav">
@@ -269,222 +270,72 @@ input, textarea { font-family:'DM Sans',sans-serif; }
   <button class="nav-btn" id="nav-plan" onclick="showTab('plan')"><span class="nav-icon">&#8801;</span><span class="nav-label">Plan</span></button>
   <button class="nav-btn" id="nav-progress" onclick="showTab('progress')"><span class="nav-icon">&#8593;</span><span class="nav-label">Progress</span></button>
 </div>
-<div class="sheet-overlay" id="workoutSheet" onclick="closeSheetOutside(event)"><div class="sheet" id="sheetContent"></div></div>
-<div class="sheet-overlay" id="planSheet" onclick="closePlanSheetOutside(event)"><div class="sheet" id="planSheetContent"></div></div>
+<div class="sheet-overlay" id="workoutSheet"><div class="sheet" id="sheetContent"></div></div>
+<div class="sheet-overlay" id="planSheet"><div class="sheet" id="planSheetContent"></div></div>
 <script>
+
 var WORKOUTS = {
-  monday: {
-    title:"Back & Biceps", subtitle:"Easy Swim \u00b7 Upper Body",
-    tags:["swim","lift"],
-    bqNote:"Active recovery \u2014 aerobic blood flow accelerates muscle repair from Durham. Every easy day protects the quality days ahead.",
-    parts:{
-      cardio:{
-        type:"swim", label:"MORNING \u00b7 PARKWEST POOL \u00b7 25M/LENGTH",
-        summary:"Easy recovery swim. Low intensity, full body flush. HR under 120.",
-        sets:[
-          {name:"Warmup",desc:"Easy \u00b7 any stroke \u00b7 get loose",lengths:"8 lengths",meters:"200m"},
-          {name:"Main Set \u00b7 6 \u00d7 4 lengths",desc:"30 sec rest \u00b7 target 1:55\u20132:05/100m",lengths:"24 lengths",meters:"600m"},
-          {name:"Cooldown",desc:"Slow \u00b7 long strokes",lengths:"8 lengths",meters:"200m"}
-        ],
-        total:"40 lengths \u00b7 1,000m \u00b7 ~25 min",
-        distLabel:"Distance (e.g. 1,000m)"
-      },
-      strength:{
-        type:"lift", label:"LUNCH \u00b7 GYM \u2014 UPPER ONLY",
-        summary:"Pull-focused upper body. No legs \u2014 still recovering from Durham.",
-        exercises:[
-          {name:"Chest-Supported DB Row",sets:"3\u00d78\u201310"},
-          {name:"Lat Pulldown",sets:"3\u00d78\u201310"},
-          {name:"Seated Cable Row",sets:"3\u00d710\u201312"},
-          {name:"Machine Rear Delt Fly",sets:"3\u00d710\u201312"},
-          {name:"Dumbbell Curl",sets:"3\u00d710\u201312"},
-          {name:"Cable Curl",sets:"3\u00d710\u201312"},
-          {name:"21s",sets:"2 sets"}
-        ]
-      }
-    },
-    coach:"No legs today. Joint tweaks still resolving \u2014 keep the swim relaxed, don't chase pace."
-  },
-  tuesday:{
-    title:"Chest & Triceps", subtitle:"Upper Body \u00b7 Push Day",
-    tags:["lift"],
-    bqNote:"Pure upper body maintenance. 225 baseline protected. Legs get a full rest before Thursday's first run.",
-    parts:{
-      strength:{
-        type:"lift", label:"LUNCH \u00b7 GYM",
-        summary:"Heavy push day. Protect your 225 bench baseline through this entire block.",
-        exercises:[
-          {name:"Flat Barbell Bench Press",sets:"4\u00d75\u20136",key:true},
-          {name:"Incline DB Press",sets:"3\u00d78\u201310"},
-          {name:"Machine Chest Press",sets:"3\u00d710\u201312"},
-          {name:"Cable Fly",sets:"3\u00d712\u201315"},
-          {name:"Tricep Rope Pushdown",sets:"3\u00d712"},
-          {name:"Tricep Extension Machine",sets:"3\u00d710\u201312"},
-          {name:"Dips",sets:"2\u00d710"}
-        ]
-      }
-    },
-    coach:"Full chest day. Hit 225. No running today \u2014 let the legs rest completely."
-  },
-  wednesday:{
-    title:"Aerobic Swim", subtitle:"Pool \u00b7 Zone 2",
-    tags:["swim"],
-    bqNote:"Zone 2 swimming builds mitochondrial density \u2014 the same aerobic engine that carries you past mile 20 in Indianapolis.",
-    parts:{
-      cardio:{
-        type:"swim", label:"MORNING \u00b7 PARKWEST POOL \u00b7 25M/LENGTH",
-        summary:"Sustained aerobic effort. Zone 2 the entire way \u2014 controlled and rhythmic.",
-        sets:[
-          {name:"Warmup",desc:"Relaxed \u00b7 settle into rhythm",lengths:"8 lengths",meters:"200m"},
-          {name:"Main Set \u00b7 4 \u00d7 8 lengths",desc:"45 sec rest \u00b7 target 1:50\u20132:00/100m",lengths:"32 lengths",meters:"800m"},
-          {name:"Cooldown",desc:"Slow \u00b7 wind it down",lengths:"4 lengths",meters:"100m"}
-        ],
-        total:"44 lengths \u00b7 1,100m \u00b7 ~28 min",
-        distLabel:"Distance completed"
-      }
-    },
-    coach:"No gym today. Still aerobic \u2014 if joints flare, back off. Rest legs ahead of Thursday."
-  },
-  thursday:{
-    title:"First Run Back", subtitle:"Road + Modified Legs",
-    tags:["run","lift"],
-    bqNote:"This is a check-in run, not a training run. The data from today tells me how fast we can progress next week.",
-    parts:{
-      cardio:{
-        type:"run", label:"MORNING \u00b7 ROAD",
-        summary:"First run since Durham. Flat route, no watch pressure, purely by feel. Stop if anything hurts.",
-        stats:[
-          {label:"Duration",val:"20\u201325 min",hi:true},
-          {label:"Pace",val:"9:30+ /mi",hi:true},
-          {label:"HR Cap",val:"140 bpm"},
-          {label:"Surface",val:"Flat only"},
-          {label:"Walk breaks",val:"Take freely"}
-        ],
-        distLabel:"Distance (mi)", paceLabel:"Avg pace"
-      },
-      strength:{
-        type:"lift", label:"LUNCH \u00b7 GYM \u2014 HALF VOLUME",
-        summary:"Reintroducing leg work at half volume. Hip abduction is non-negotiable \u2014 runner's knee insurance.",
-        exercises:[
-          {name:"Romanian Deadlift",sets:"2\u00d78"},
-          {name:"Bulgarian Split Squat",sets:"2\u00d710"},
-          {name:"Hip Abduction Machine \u2605",sets:"2\u00d715",key:true},
-          {name:"Seated Calf Raise",sets:"2\u00d715"},
-          {name:"Single-Leg Glute Bridge",sets:"2\u00d712"}
-        ]
-      }
-    },
-    coach:"Run is a check-in, not a workout. Any joint tweak \u2014 stop. No Nordic curls or box jumps yet."
-  },
-  friday:{
-    title:"Shoulders & Arms", subtitle:"Light Upper \u00b7 Pre-Long Run",
-    tags:["lift"],
-    bqNote:"Light day by design. Legs rest ahead of Saturday. Face pulls protect shoulder health through high mileage.",
-    parts:{
-      strength:{
-        type:"lift", label:"LUNCH \u00b7 GYM \u00b7 LIGHT DAY",
-        summary:"In and out in 40 minutes. Nothing heavy. Legs rest completely.",
-        exercises:[
-          {name:"Shoulder Press Machine",sets:"3\u00d710\u201312"},
-          {name:"Machine Lateral Raise",sets:"3\u00d712\u201315"},
-          {name:"Face Pulls \u2605",sets:"3\u00d715",key:true},
-          {name:"EZ-Bar Curl",sets:"3\u00d710\u201312"},
-          {name:"Cable Tricep Pushdown",sets:"3\u00d712\u201315"},
-          {name:"Cable Curl",sets:"2\u00d712"}
-        ]
-      }
-    },
-    coach:"In and out in 40 min. Long run tomorrow \u2014 nothing heavy."
-  },
-  saturday:{
-    title:"Easy Run #2", subtitle:"Road \u00b7 Run Only",
-    tags:["run"],
-    bqNote:"Second run back. Aerobic base is the single most important predictor of marathon performance. Every easy mile compounds.",
-    parts:{
-      cardio:{
-        type:"run", label:"MORNING \u00b7 ROAD \u2014 RUN ONLY",
-        summary:"Easy aerobic run. Conversational pace the entire way. No gym today.",
-        stats:[
-          {label:"Duration",val:"30\u201335 min",hi:true},
-          {label:"Pace",val:"9:00\u20139:30 /mi",hi:true},
-          {label:"HR Cap",val:"145 bpm"},
-          {label:"Feel",val:"Conversational"},
-          {label:"Gym",val:"None today"}
-        ],
-        distLabel:"Distance (mi)", paceLabel:"Avg pace"
-      }
-    },
-    coach:"If Thursday felt good, step it up slightly. If anything surfaced, cut to 20 min. No ego."
-  },
-  sunday:{
-    title:"Full Rest", subtitle:"Complete Recovery",
-    tags:["rest"],
-    bqNote:"Rest is training. Your body adapts and gets faster on recovery days. Non-negotiable.",
-    parts:{},
-    coach:"No running. No gym. No swimming. Sleep, eat well, let the body finish its work."
-  }
+monday:{title:“Back & Biceps”,subtitle:“Easy Swim · Upper Body”,tags:[“swim”,“lift”],bqNote:“Active recovery — aerobic blood flow accelerates muscle repair from Durham. Every easy day protects the quality days ahead.”,parts:{cardio:{type:“swim”,label:“MORNING · PARKWEST POOL · 25M/LENGTH”,summary:“Easy recovery swim. Low intensity, full body flush. HR under 120.”,sets:[{name:“Warmup”,desc:“Easy · any stroke · get loose”,lengths:“8 lengths”,meters:“200m”},{name:“Main Set · 6 × 4 lengths”,desc:“30 sec rest · target 1:55–2:05/100m”,lengths:“24 lengths”,meters:“600m”},{name:“Cooldown”,desc:“Slow · long strokes”,lengths:“8 lengths”,meters:“200m”}],total:“40 lengths · 1,000m · ~25 min”,distLabel:“Distance (e.g. 1,000m)”},strength:{type:“lift”,label:“LUNCH · GYM — UPPER ONLY”,summary:“Pull-focused upper body. No legs — still recovering from Durham.”,exercises:[{name:“Chest-Supported DB Row”,sets:“3×8–10”},{name:“Lat Pulldown”,sets:“3×8–10”},{name:“Seated Cable Row”,sets:“3×10–12”},{name:“Machine Rear Delt Fly”,sets:“3×10–12”},{name:“Dumbbell Curl”,sets:“3×10–12”},{name:“Cable Curl”,sets:“3×10–12”},{name:“21s”,sets:“2 sets”}]}},coach:“No legs today. Joint tweaks still resolving — keep the swim relaxed.”},
+tuesday:{title:“Chest & Triceps”,subtitle:“Upper Body · Push Day”,tags:[“lift”],bqNote:“Pure upper body maintenance. 225 baseline protected. Legs get a full rest before Thursday.”,parts:{strength:{type:“lift”,label:“LUNCH · GYM”,summary:“Heavy push day. Protect your 225 bench baseline through this entire block.”,exercises:[{name:“Flat Barbell Bench Press”,sets:“4×5–6”,key:true},{name:“Incline DB Press”,sets:“3×8–10”},{name:“Machine Chest Press”,sets:“3×10–12”},{name:“Cable Fly”,sets:“3×12–15”},{name:“Tricep Rope Pushdown”,sets:“3×12”},{name:“Tricep Extension Machine”,sets:“3×10–12”},{name:“Dips”,sets:“2×10”}]}},coach:“Full chest day. Hit 225. No running today.”},
+wednesday:{title:“Aerobic Swim”,subtitle:“Pool · Zone 2”,tags:[“swim”],bqNote:“Zone 2 swimming builds mitochondrial density — the same aerobic engine that carries you past mile 20 in Indianapolis.”,parts:{cardio:{type:“swim”,label:“MORNING · PARKWEST POOL · 25M/LENGTH”,summary:“Sustained aerobic effort. Zone 2 the entire way.”,sets:[{name:“Warmup”,desc:“Relaxed · settle into rhythm”,lengths:“8 lengths”,meters:“200m”},{name:“Main Set · 4 × 8 lengths”,desc:“45 sec rest · target 1:50–2:00/100m”,lengths:“32 lengths”,meters:“800m”},{name:“Cooldown”,desc:“Slow · wind it down”,lengths:“4 lengths”,meters:“100m”}],total:“44 lengths · 1,100m · ~28 min”,distLabel:“Distance completed”}},coach:“No gym today. Still aerobic — if joints flare, back off.”},
+thursday:{title:“First Run Back”,subtitle:“Road + Modified Legs”,tags:[“run”,“lift”],bqNote:“This is a check-in run, not a training run. The data from today tells me how fast we can progress next week.”,parts:{cardio:{type:“run”,label:“MORNING · ROAD”,summary:“First run since Durham. Flat route, no watch pressure, purely by feel.”,stats:[{label:“Duration”,val:“20–25 min”,hi:true},{label:“Pace”,val:“9:30+ /mi”,hi:true},{label:“HR Cap”,val:“140 bpm”},{label:“Surface”,val:“Flat only”},{label:“Walk breaks”,val:“Take freely”}],distLabel:“Distance (mi)”,paceLabel:“Avg pace”},strength:{type:“lift”,label:“LUNCH · GYM — HALF VOLUME”,summary:“Reintroducing leg work at half volume. Hip abduction is non-negotiable.”,exercises:[{name:“Romanian Deadlift”,sets:“2×8”},{name:“Bulgarian Split Squat”,sets:“2×10”},{name:“Hip Abduction Machine”,sets:“2×15”,key:true},{name:“Seated Calf Raise”,sets:“2×15”},{name:“Single-Leg Glute Bridge”,sets:“2×12”}]}},coach:“Run is a check-in, not a workout. Any joint tweak — stop.”},
+friday:{title:“Shoulders & Arms”,subtitle:“Light Upper · Pre-Long Run”,tags:[“lift”],bqNote:“Light day by design. Legs rest ahead of Saturday. Face pulls protect shoulder health.”,parts:{strength:{type:“lift”,label:“LUNCH · GYM · LIGHT DAY”,summary:“In and out in 40 minutes. Nothing heavy.”,exercises:[{name:“Shoulder Press Machine”,sets:“3×10–12”},{name:“Machine Lateral Raise”,sets:“3×12–15”},{name:“Face Pulls”,sets:“3×15”,key:true},{name:“EZ-Bar Curl”,sets:“3×10–12”},{name:“Cable Tricep Pushdown”,sets:“3×12–15”},{name:“Cable Curl”,sets:“2×12”}]}},coach:“In and out in 40 min. Long run tomorrow — nothing heavy.”},
+saturday:{title:“Easy Run #2”,subtitle:“Road · Run Only”,tags:[“run”],bqNote:“Second run back. Aerobic base is the single most important predictor of marathon performance.”,parts:{cardio:{type:“run”,label:“MORNING · ROAD — RUN ONLY”,summary:“Easy aerobic run. Conversational pace the entire way. No gym today.”,stats:[{label:“Duration”,val:“30–35 min”,hi:true},{label:“Pace”,val:“9:00–9:30 /mi”,hi:true},{label:“HR Cap”,val:“145 bpm”},{label:“Feel”,val:“Conversational”},{label:“Gym”,val:“None today”}],distLabel:“Distance (mi)”,paceLabel:“Avg pace”}},coach:“If Thursday felt good, step it up slightly. No ego.”},
+sunday:{title:“Full Rest”,subtitle:“Complete Recovery”,tags:[“rest”],bqNote:“Rest is training. Your body adapts and gets faster on recovery days. Non-negotiable.”,parts:{},coach:“No running. No gym. No swimming. Sleep well.”}
 };
 
 var WEEK = [
-{key:“monday”,   label:“MON”,date:“May 11”,name:“Easy Swim + Back & Biceps”, types:[“swim”,“lift”],today:true},
-{key:“tuesday”,  label:“TUE”,date:“May 12”,name:“Chest & Triceps”,           types:[“lift”]},
-{key:“wednesday”,label:“WED”,date:“May 13”,name:“Aerobic Swim”,              types:[“swim”]},
-{key:“thursday”, label:“THU”,date:“May 14”,name:“First Run Back + Legs”,     types:[“run”,“lift”]},
-{key:“friday”,   label:“FRI”,date:“May 15”,name:“Shoulders & Arms”,          types:[“lift”]},
-{key:“saturday”, label:“SAT”,date:“May 16”,name:“Easy Run #2”,               types:[“run”]},
-{key:“sunday”,   label:“SUN”,date:“May 17”,name:“Full Rest”,                 types:[“rest”]}
+{key:“monday”,   label:“MON”,date:“May 11”,name:“Easy Swim + Back & Biceps”,types:[“swim”,“lift”],today:true},
+{key:“tuesday”,  label:“TUE”,date:“May 12”,name:“Chest & Triceps”,          types:[“lift”]},
+{key:“wednesday”,label:“WED”,date:“May 13”,name:“Aerobic Swim”,             types:[“swim”]},
+{key:“thursday”, label:“THU”,date:“May 14”,name:“First Run Back + Legs”,    types:[“run”,“lift”]},
+{key:“friday”,   label:“FRI”,date:“May 15”,name:“Shoulders & Arms”,         types:[“lift”]},
+{key:“saturday”, label:“SAT”,date:“May 16”,name:“Easy Run #2”,              types:[“run”]},
+{key:“sunday”,   label:“SUN”,date:“May 17”,name:“Full Rest”,                types:[“rest”]}
 ];
 
 var TYPE_DOT = {run:”#c8380a”,swim:”#1a5fad”,lift:”#1a7a45”,bike:”#8a6a00”,rest:”#4a4090”};
 
 var PLAN_DATA = [
-{
-week:“Week 1 \u00b7 May 11\u201317”, badge:“RECOVERY”,
-days:[
-{d:“MON”,name:“Easy Swim + Back & Biceps”, detail:“1,000m \u00b7 40 lengths \u00b7 Upper lift”, bq:“Active recovery. Aerobic flush accelerates healing from Durham’s 1,000ft of elevation.”},
-{d:“TUE”,name:“Chest & Triceps”,           detail:“Bench baseline \u00b7 Full push session”,   bq:“Upper body only. 225 protected. Legs rest completely.”},
-{d:“WED”,name:“Aerobic Swim”,              detail:“1,100m \u00b7 44 lengths \u00b7 Zone 2”,     bq:“Zone 2 swim builds the same engine that carries you past mile 20. No joint stress.”},
-{d:“THU”,name:“First Run Back + Legs”,     detail:“20\u201325 min \u00b7 9:30+/mi \u00b7 Modified legs”, bq:“Check-in run only. Data from this run shapes all of next week’s plan.”},
-{d:“FRI”,name:“Shoulders & Arms”,          detail:“Light upper \u00b7 Face pulls”,             bq:“Light day. Legs rest ahead of Saturday. 40 min max.”},
-{d:“SAT”,name:“Easy Run #2”,               detail:“30\u201335 min \u00b7 9:00\u20139:30/mi”,    bq:“Aerobic base is the #1 predictor of marathon performance. Every easy mile compounds.”},
-{d:“SUN”,name:“Full Rest”,                 detail:“No activity”,                               bq:“Rest is training. Body adapts on recovery days, not workout days.”}
-]
-},
-{
-week:“Week 2 \u00b7 May 18\u201324”, badge:“BASE”,
-days:[
-{d:“MON”,name:“Easy Run + Posterior Chain”, detail:“30\u201335 min easy \u00b7 Full leg session”,    bq:“First full leg day. RDLs and hip abduction are your runner’s knee insurance policy.”},
-{d:“TUE”,name:“Easy Run + Back & Biceps”,   detail:“35\u201340 min \u00b7 8:45\u20139:15/mi”,        bq:“Building aerobic volume. Consistent easy mileage is the foundation.”},
-{d:“WED”,name:“Swim + Legs Heavy”,          detail:“1,200m \u00b7 48 lengths \u00b7 Full legs”,       bq:“Nordic hamstring curls start this week. Eccentric hamstring strength = injury prevention.”},
-{d:“THU”,name:“Easy Run + Chest & Triceps”, detail:“35\u201340 min \u00b7 8:45\u20139:15/mi”,        bq:“Third run of the week. Mileage building steadily.”},
-{d:“FRI”,name:“Bike + Shoulders & Arms”,    detail:“18\u201322 mi \u00b7 Alt: 45 min swim”,          bq:“Cross-training aerobic capacity without run stress. First bike session of the block.”},
-{d:“SAT”,name:“Long Run”,                   detail:“60\u201370 min \u00b7 8:30\u20139:00/mi”,         bq:“First real long run since Durham. Eat a solid dinner Friday. Start fueling practice.”},
-{d:“SUN”,name:“Full Rest”,                  detail:“No activity”,                                    bq:“Non-negotiable rest. Absorb the week’s work.”}
-]
-}
+{week:“Week 1 · May 11–17”,badge:“RECOVERY”,days:[
+{d:“MON”,name:“Easy Swim + Back & Biceps”,detail:“1,000m · 40 lengths · Upper lift”,bq:“Active recovery. Aerobic flush accelerates healing from Durham.”},
+{d:“TUE”,name:“Chest & Triceps”,detail:“Bench baseline · Full push session”,bq:“Upper body only. 225 protected. Legs rest completely.”},
+{d:“WED”,name:“Aerobic Swim”,detail:“1,100m · 44 lengths · Zone 2”,bq:“Zone 2 swim builds the same engine that carries you past mile 20.”},
+{d:“THU”,name:“First Run Back + Legs”,detail:“20–25 min · 9:30+/mi · Modified legs”,bq:“Check-in run only. Data from this run shapes all of next week.”},
+{d:“FRI”,name:“Shoulders & Arms”,detail:“Light upper · Face pulls”,bq:“Light day. Legs rest ahead of Saturday. 40 min max.”},
+{d:“SAT”,name:“Easy Run #2”,detail:“30–35 min · 9:00–9:30/mi”,bq:“Aerobic base is the #1 predictor of marathon performance.”},
+{d:“SUN”,name:“Full Rest”,detail:“No activity”,bq:“Rest is training. Body adapts on recovery days.”}
+]},
+{week:“Week 2 · May 18–24”,badge:“BASE”,days:[
+{d:“MON”,name:“Easy Run + Posterior Chain”,detail:“30–35 min easy · Full leg session”,bq:“First full leg day. Hip abduction is your runner’s knee insurance.”},
+{d:“TUE”,name:“Easy Run + Back & Biceps”,detail:“35–40 min · 8:45–9:15/mi”,bq:“Building aerobic volume. Consistent easy mileage is the foundation.”},
+{d:“WED”,name:“Swim + Legs Heavy”,detail:“1,200m · 48 lengths · Full legs”,bq:“Nordic hamstring curls start this week. Injury prevention.”},
+{d:“THU”,name:“Easy Run + Chest & Triceps”,detail:“35–40 min · 8:45–9:15/mi”,bq:“Third run of the week. Mileage building steadily.”},
+{d:“FRI”,name:“Bike + Shoulders & Arms”,detail:“18–22 mi · Alt: 45 min swim”,bq:“Cross-training aerobic capacity without run stress.”},
+{d:“SAT”,name:“Long Run”,detail:“60–70 min · 8:30–9:00/mi”,bq:“First real long run since Durham. Practice fueling today.”},
+{d:“SUN”,name:“Full Rest”,detail:“No activity”,bq:“Non-negotiable rest. Absorb the week.”}
+]}
 ];
 
 var logged = {};
-try { logged = JSON.parse(localStorage.getItem(‘rtb_light_v1’) || ‘{}’); } catch(e) {}
-function saveLogged() { try { localStorage.setItem(‘rtb_light_v1’, JSON.stringify(logged)); } catch(e) {} }
+try { logged = JSON.parse(localStorage.getItem(‘rtb_v2’) || ‘{}’); } catch(e) {}
+function save() { try { localStorage.setItem(‘rtb_v2’, JSON.stringify(logged)); } catch(e) {} }
 
 function getStatus(key) {
-var d = logged[key];
-if (!d) return ‘none’;
+var d = logged[key]; if (!d) return ‘none’;
 var w = WORKOUTS[key];
 var hasC = !!(w && w.parts && w.parts.cardio);
 var hasS = !!(w && w.parts && w.parts.strength);
-var c = d[key+’_cardio’];
-var s = d[key+’_strength’];
-if (hasC && hasS) return (c && s) ? ‘full’ : (c || s) ? ‘partial’ : ‘none’;
-if (hasC) return c ? ‘full’ : ‘none’;
-if (hasS) return s ? ‘full’ : ‘none’;
+var c = d[key+’_cardio’], s = d[key+’_strength’];
+if (hasC && hasS) return (c&&s)?‘full’:(c||s)?‘partial’:‘none’;
+if (hasC) return c?‘full’:‘none’;
+if (hasS) return s?‘full’:‘none’;
 return ‘none’;
 }
 
 function showTab(id) {
-document.querySelectorAll(’.page’).forEach(function(p) { p.classList.remove(‘active’); });
-document.querySelectorAll(’.nav-btn’).forEach(function(b) { b.classList.remove(‘active’); });
+document.querySelectorAll(’.page’).forEach(function(p){p.classList.remove(‘active’);});
+document.querySelectorAll(’.nav-btn’).forEach(function(b){b.classList.remove(‘active’);});
 document.getElementById(‘page-’+id).classList.add(‘active’);
 document.getElementById(‘nav-’+id).classList.add(‘active’);
 document.getElementById(‘mainScroll’).scrollTop = 0;
@@ -494,208 +345,165 @@ function buildWeek() {
 var list = document.getElementById(‘weekList’);
 list.innerHTML = ‘’;
 var done = 0;
-WEEK.forEach(function(day) {
+for (var i=0; i<WEEK.length; i++) {
+var day = WEEK[i];
 var status = getStatus(day.key);
-if (status === ‘full’) done++;
-var d = logged[day.key] || {};
-var c = d[day.key+’_cardio’];
-var s = d[day.key+’_strength’];
-var dot = TYPE_DOT[day.types[0]] || ‘#b0bbd0’;
+if (status===‘full’) done++;
+var d = logged[day.key]||{};
+var c = d[day.key+’_cardio’], s = d[day.key+’_strength’];
+var dot = TYPE_DOT[day.types[0]]||’#b0bbd0’;
 var row = document.createElement(‘div’);
-row.className = ‘day-row’ + (day.today ? ’ today’ : ‘’);
-row.onclick = function() { openSheet(day.key); };
-var checkClass = ‘day-check’;
-var checkContent = ‘’;
-if (status === ‘full’) { checkClass += ’ full’; checkContent = ‘\u2713’; }
-else if (status === ‘partial’) { checkClass += ’ partial’; checkContent = ‘\u25d1’; }
-var badges = ‘’;
-if (c || s) {
-badges = ‘<div class="day-log-badges">’;
-if (c) badges += ‘<div class="log-badge log-badge-cardio">Cardio ‘+c.effort+’/10’+(c.distance?’ \u00b7 ‘+c.distance:’’)+’</div>’;
-if (s) badges += ‘<div class="log-badge log-badge-strength">Str ‘+s.effort+’/10</div>’;
-badges += ‘</div>’;
+row.className = ‘day-row’+(day.today?’ today’:’’);
+(function(k){ row.onclick = function(){ openSheet(k); }; })(day.key);
+var cc=‘day-check’, ct=’’;
+if (status===‘full’){cc+=’ full’;ct=’\u2713’;}
+else if(status===‘partial’){cc+=’ partial’;ct=’\u25d1’;}
+var badges=’’;
+if (c||s) {
+badges=’<div class="day-log-badges">’;
+if(c) badges+=’<div class="log-badge log-badge-cardio">Cardio ‘+c.effort+’/10’+(c.distance?’ · ‘+c.distance:’’)+’</div>’;
+if(s) badges+=’<div class="log-badge log-badge-strength">Str ‘+s.effort+’/10</div>’;
+badges+=’</div>’;
 }
-row.innerHTML = ‘<div class="day-row-main"><div class="'+checkClass+'">’+checkContent+’</div><div class="day-type-dot" style="background:'+dot+'"></div><div class="day-info"><div class="day-label-text">’+day.label+’ \u00b7 ‘+day.date+(day.today?’ \u00b7 TODAY’:’’)+’</div><div class="day-name-text'+(status==='full'?' done':'')+'">’+day.name+’</div></div><div class="day-chevron">\u203a</div></div>’+badges;
+row.innerHTML=’<div class="day-row-main"><div class="'+cc+'">’+ct+’</div><div class="day-type-dot" style="background:'+dot+'"></div><div class="day-info"><div class="day-label-text">’+day.label+’ · ‘+day.date+(day.today?’ · TODAY’:’’)+’</div><div class="day-name-text'+(status==='full'?' done':'')+'">’+day.name+’</div></div><div class="day-chevron">\u203a</div></div>’+badges;
 list.appendChild(row);
-});
-document.getElementById(‘doneCount’).textContent = done+’/7 done’;
+}
+document.getElementById(‘doneCount’).textContent=done+’/7 done’;
 updateHeroLog();
 }
 
 function updateHeroLog() {
-var d = logged[‘monday’] || {};
-var c = d[‘monday_cardio’];
-var s = d[‘monday_strength’];
-var row = document.getElementById(‘heroLogRow’);
-if (c || s) {
-row.style.display = ‘flex’;
-if (c) document.getElementById(‘heroCardioLog’).textContent = ‘\u2713 Cardio ‘+c.effort+’/10’+(c.distance?’ \u00b7 ‘+c.distance:’’);
-if (s) document.getElementById(‘heroStrengthLog’).textContent = ‘\u2713 Strength ‘+s.effort+’/10’;
+var d=logged[‘monday’]||{};
+var c=d[‘monday_cardio’],s=d[‘monday_strength’];
+var row=document.getElementById(‘heroLogRow’);
+if(c||s){
+row.style.display=‘flex’;
+if(c) document.getElementById(‘heroCardioLog’).textContent=’\u2713 Cardio ‘+c.effort+’/10’+(c.distance?’ · ‘+c.distance:’’);
+if(s) document.getElementById(‘heroStrengthLog’).textContent=’\u2713 Strength ‘+s.effort+’/10’;
 }
 }
+
+document.getElementById(‘heroCard’).onclick = function(){ openSheet(‘monday’); };
 
 function buildPlan() {
-var cont = document.getElementById(‘planContent’);
-var html = ‘’;
-PLAN_DATA.forEach(function(wk) {
-html += ‘<div class="plan-week"><div class="plan-week-header"><div class="plan-week-name">’+wk.week+’</div><div class="plan-badge">’+wk.badge+’</div></div><div class="plan-list">’;
-wk.days.forEach(function(day) {
-var dayJson = JSON.stringify(day).replace(/”/g, ‘"’);
-html += ‘<div class="plan-row" onclick="openPlanSheet('+dayJson+')">’;
-html += ‘<div class="plan-day-label">’+day.d+’</div>’;
-html += ‘<div class="plan-content"><div class="plan-workout-name">’+day.name+’</div><div class="plan-detail">’+day.detail+’</div></div>’;
-html += ‘<div class="plan-chevron">\u203a</div></div>’;
+var cont=document.getElementById(‘planContent’), html=’’;
+for (var wi=0; wi<PLAN_DATA.length; wi++) {
+var wk=PLAN_DATA[wi];
+html+=’<div class="plan-week"><div class="plan-week-header"><div class="plan-week-name">’+wk.week+’</div><div class="plan-badge">’+wk.badge+’</div></div><div class="plan-list">’;
+for (var di=0; di<wk.days.length; di++) {
+var day=wk.days[di];
+html+=’<div class="plan-row" data-wi="'+wi+'" data-di="'+di+'"><div class="plan-day-label">’+day.d+’</div><div class="plan-content"><div class="plan-workout-name">’+day.name+’</div><div class="plan-detail">’+day.detail+’</div></div><div class="plan-chevron">\u203a</div></div>’;
+}
+html+=’</div></div>’;
+}
+cont.innerHTML=html;
+cont.querySelectorAll(’.plan-row’).forEach(function(row){
+row.onclick=function(){
+var wi=parseInt(this.getAttribute(‘data-wi’));
+var di=parseInt(this.getAttribute(‘data-di’));
+openPlanSheet(PLAN_DATA[wi].days[di]);
+};
 });
-html += ‘</div></div>’;
-});
-cont.innerHTML = html;
 }
 
-var currentSheetDay = null;
-var effortState = {};
+var effortState={};
 
 function openSheet(dayKey) {
-currentSheetDay = dayKey;
-if (!effortState[dayKey]) effortState[dayKey] = {cardio:null, strength:null};
+if(!effortState[dayKey]) effortState[dayKey]={cardio:null,strength:null};
 renderSheet(dayKey);
 document.getElementById(‘workoutSheet’).classList.add(‘open’);
-document.body.style.overflow = ‘hidden’;
+document.body.style.overflow=‘hidden’;
 }
 
 function closeSheet() {
 document.getElementById(‘workoutSheet’).classList.remove(‘open’);
-document.body.style.overflow = ‘’;
-currentSheetDay = null;
+document.body.style.overflow=’’;
 }
 
-function closeSheetOutside(e) {
-if (e.target === document.getElementById(‘workoutSheet’)) closeSheet();
-}
+document.getElementById(‘workoutSheet’).onclick=function(e){if(e.target===this)closeSheet();};
 
 function renderSheet(dayKey) {
-var w = WORKOUTS[dayKey];
-var day = null;
-for (var i=0; i<WEEK.length; i++) { if (WEEK[i].key===dayKey) { day=WEEK[i]; break; } }
-var d = logged[dayKey] || {};
-var hasBoth = w.parts.cardio && w.parts.strength;
-var isRest = Object.keys(w.parts).length === 0;
-var html = ‘<div class="sheet-handle"><div class="sheet-handle-bar"></div></div>’;
-html += ‘<div class="sheet-header"><div>’;
-html += ‘<div class="sheet-date">’+(day ? day.date : ‘’)+’ \u00b7 Recovery Week</div>’;
-html += ‘<div class="sheet-title">’+w.title+’</div>’;
-html += ‘<div class="sheet-subtitle">’+w.subtitle+’</div>’;
-html += ‘<div style="display:flex;gap:6px;flex-wrap:wrap">’+w.tags.map(function(t){return ‘<span class="tag tag-'+t+'">’+t+’</span>’;}).join(’’)+’</div>’;
-html += ‘</div><button class="sheet-close" onclick="closeSheet()">\u2715</button></div>’;
-html += ‘<div class="sheet-body">’;
-if (w.bqNote) {
-html += ‘<div class="bq-banner"><div class="bq-banner-icon">\ud83c\udfaf</div><div><div class="bq-banner-label">BQ Context</div><div class="bq-banner-text">’+w.bqNote+’</div></div></div>’;
+var w=WORKOUTS[dayKey];
+var dayObj=null;
+for(var i=0;i<WEEK.length;i++){if(WEEK[i].key===dayKey){dayObj=WEEK[i];break;}}
+var d=logged[dayKey]||{};
+var hasBoth=w.parts.cardio&&w.parts.strength;
+var isRest=Object.keys(w.parts).length===0;
+var html=’<div class="sheet-handle"><div class="sheet-handle-bar"></div></div>’;
+html+=’<div class="sheet-header"><div><div class="sheet-date">’+(dayObj?dayObj.date:’’)+’ · Recovery Week</div><div class="sheet-title">’+w.title+’</div><div class="sheet-subtitle">’+w.subtitle+’</div><div style="display:flex;gap:6px;flex-wrap:wrap">’;
+for(var ti=0;ti<w.tags.length;ti++) html+=’<span class="tag tag-'+w.tags[ti]+'">’+w.tags[ti]+’</span>’;
+html+=’</div></div><button class="sheet-close" onclick="closeSheet()">\u2715</button></div><div class="sheet-body">’;
+if(w.bqNote) html+=’<div class="bq-banner"><div class="bq-banner-icon">🎯</div><div><div class="bq-banner-label">BQ Context</div><div class="bq-banner-text">’+w.bqNote+’</div></div></div>’;
+if(isRest) html+=’<div class="rest-display"><div class="rest-big">OFF</div><div class="rest-sub">No running. No gym. No swimming.<br>Sleep well. Body is still repairing.</div></div>’;
+if(w.parts.cardio){
+if(hasBoth) html+=’<div class="part-divider"><div class="part-divider-bar" style="background:var(--swim)"></div><div class="part-divider-label" style="color:var(--swim)">Cardio</div></div>’;
+if(w.parts.cardio.summary) html+=’<div class="part-summary">’+w.parts.cardio.summary+’</div>’;
+html+=’<div class="workout-section"><div class="sec-label">’+w.parts.cardio.label+’</div>’;
+if(w.parts.cardio.type===‘swim’){
+for(var si=0;si<w.parts.cardio.sets.length;si++){var s=w.parts.cardio.sets[si];html+=’<div class="swim-row"><div><div class="swim-name">’+s.name+’</div><div class="swim-desc">’+s.desc+’</div></div><div style="text-align:right;flex-shrink:0"><div class="swim-lengths">’+s.lengths+’</div><div class="swim-meters">’+s.meters+’</div></div></div>’;}
+if(w.parts.cardio.total) html+=’<div class="swim-total"><span class="swim-total-label">Total</span><span class="swim-total-val">’+w.parts.cardio.total+’</span></div>’;
 }
-if (isRest) {
-html += ‘<div class="rest-display"><div class="rest-big">OFF</div><div class="rest-sub">No running. No gym. No swimming.<br>Sleep well. Body is still repairing.</div></div>’;
+if(w.parts.cardio.type===‘run’){for(var si=0;si<w.parts.cardio.stats.length;si++){var s=w.parts.cardio.stats[si];html+=’<div class="run-row"><span class="run-label">’+s.label+’</span><span class="run-val'+(s.hi?' hi':'')+'">’+s.val+’</span></div>’;}}
+html+=’</div>’;
 }
-if (w.parts.cardio) {
-if (hasBoth) html += ‘<div class="part-divider"><div class="part-divider-bar" style="background:var(--swim)"></div><div class="part-divider-label" style="color:var(--swim)">Cardio</div></div>’;
-if (w.parts.cardio.summary) html += ‘<div class="part-summary">’+w.parts.cardio.summary+’</div>’;
-html += ‘<div class="workout-section"><div class="sec-label">’+w.parts.cardio.label+’</div>’;
-if (w.parts.cardio.type===‘swim’) {
-w.parts.cardio.sets.forEach(function(s) {
-html += ‘<div class="swim-row"><div><div class="swim-name">’+s.name+’</div><div class="swim-desc">’+s.desc+’</div></div><div style="text-align:right;flex-shrink:0"><div class="swim-lengths">’+s.lengths+’</div><div class="swim-meters">’+s.meters+’</div></div></div>’;
-});
-if (w.parts.cardio.total) html += ‘<div class="swim-total"><span class="swim-total-label">Total</span><span class="swim-total-val">’+w.parts.cardio.total+’</span></div>’;
+if(w.parts.strength){
+if(hasBoth) html+=’<div class="part-divider"><div class="part-divider-bar" style="background:var(--lift)"></div><div class="part-divider-label" style="color:var(--lift)">Strength</div></div>’;
+if(w.parts.strength.summary) html+=’<div class="part-summary">’+w.parts.strength.summary+’</div>’;
+html+=’<div class="workout-section"><div class="sec-label">’+w.parts.strength.label+’</div>’;
+for(var ei=0;ei<w.parts.strength.exercises.length;ei++){var e=w.parts.strength.exercises[ei];html+=’<div class="lift-row"><span class="lift-name'+(e.key?' key':'')+'">’+e.name+’</span><span class="lift-sets'+(e.key?' key':'')+'">’+e.sets+’</span></div>’;}
+html+=’</div>’;
 }
-if (w.parts.cardio.type===‘run’) {
-w.parts.cardio.stats.forEach(function(s) {
-html += ‘<div class="run-row"><span class="run-label">’+s.label+’</span><span class="run-val'+(s.hi?' hi':'')+'">’+s.val+’</span></div>’;
-});
+if(w.coach) html+=’<div class="coach-note"><div class="coach-note-label">Coach</div><div class="coach-note-text">’+w.coach+’</div></div>’;
+if(!isRest){
+html+=’<div class="log-section"><div class="log-section-label">Log Workout</div>’;
+if(w.parts.cardio){
+var ec=d[dayKey+’_cardio’];
+var curC=(effortState[dayKey]&&effortState[dayKey].cardio)||(ec&&ec.effort)||null;
+html+=’<div class="part-log-card cardio"><div class="part-log-label cardio">Log Cardio</div><div class="effort-sublabel">Effort 1\u201310</div><div class="effort-row">’;
+for(var n=1;n<=10;n++) html+=’<button class="effort-btn'+(curC===n?' sel-cardio':'')+'" onclick="setEff(\''+dayKey+'\',\'cardio\','+n+')">’+n+’</button>’;
+html+=’</div>’;
+html+=’<div class="fields-row'+(w.parts.cardio.type==='run'?' two':'')+'"><div><div class="field-label">’+(w.parts.cardio.distLabel||‘Distance’)+’</div><input class="field-input" id="dc-'+dayKey+'" value="'+(ec&&ec.distance||'')+'" placeholder="'+(w.parts.cardio.type==='swim'?'1,000m':'3.1 mi')+'"></div>’;
+if(w.parts.cardio.type===‘run’) html+=’<div><div class="field-label">Avg Pace</div><input class="field-input" id="pc-'+dayKey+'" value="'+(ec&&ec.pace||'')+'" placeholder="9:24 /mi"></div>’;
+html+=’</div><button class="log-btn'+(ec?' saved':curC?' ready-cardio':'')+'" onclick="logP(\''+dayKey+'\',\'cardio\')">’+(ec?’\u2713 Cardio Logged’:‘Log Cardio’)+’</button></div>’;
 }
-html += ‘</div>’;
+if(w.parts.strength){
+var es=d[dayKey+’_strength’];
+var curS=(effortState[dayKey]&&effortState[dayKey].strength)||(es&&es.effort)||null;
+html+=’<div class="part-log-card strength"><div class="part-log-label strength">Log Strength</div><div class="effort-sublabel">Effort 1\u201310</div><div class="effort-row">’;
+for(var n=1;n<=10;n++) html+=’<button class="effort-btn'+(curS===n?' sel-strength':'')+'" onclick="setEff(\''+dayKey+'\',\'strength\','+n+')">’+n+’</button>’;
+html+=’</div><button class="log-btn'+(es?' saved':curS?' ready-strength':'')+'" onclick="logP(\''+dayKey+'\',\'strength\')">’+(es?’\u2713 Strength Logged’:‘Log Strength’)+’</button></div>’;
 }
-if (w.parts.strength) {
-if (hasBoth) html += ‘<div class="part-divider"><div class="part-divider-bar" style="background:var(--lift)"></div><div class="part-divider-label" style="color:var(--lift)">Strength</div></div>’;
-if (w.parts.strength.summary) html += ‘<div class="part-summary">’+w.parts.strength.summary+’</div>’;
-html += ‘<div class="workout-section"><div class="sec-label">’+w.parts.strength.label+’</div>’;
-w.parts.strength.exercises.forEach(function(e) {
-html += ‘<div class="lift-row"><span class="lift-name'+(e.key?' key':'')+'">’+e.name+’</span><span class="lift-sets'+(e.key?' key':'')+'">’+e.sets+’</span></div>’;
-});
-html += ‘</div>’;
+html+=’</div>’;
 }
-if (w.coach) html += ‘<div class="coach-note"><div class="coach-note-label">Coach</div><div class="coach-note-text">’+w.coach+’</div></div>’;
-if (!isRest) {
-html += ‘<div class="log-section"><div class="log-section-label">Log Workout</div>’;
-if (w.parts.cardio) {
-var existingC = d[dayKey+’_cardio’];
-var curEffortC = (effortState[dayKey] && effortState[dayKey].cardio) || (existingC && existingC.effort) || null;
-html += ‘<div class="part-log-card cardio"><div class="part-log-label cardio">Log Cardio</div>’;
-html += ‘<div class="effort-sublabel">Effort 1\u201310</div>’;
-html += ‘<div class="effort-row">’;
-for (var n=1; n<=10; n++) {
-html += ‘<button class="effort-btn'+(curEffortC===n?' sel-cardio':'')+'" onclick="setEffort(\''+dayKey+'\',\'cardio\','+n+')">’+n+’</button>’;
-}
-html += ‘</div>’;
-html += ‘<div class="fields-row'+(w.parts.cardio.type==='run'?' two':'')+'"><div><div class="field-label">’+(w.parts.cardio.distLabel||‘Distance’)+’</div><input class="field-input" id="dist-'+dayKey+'-cardio" value="'+(existingC&&existingC.distance||'')+'" placeholder="'+(w.parts.cardio.type==='swim'?'1,000m':'3.1 mi')+'"></div>’;
-if (w.parts.cardio.type===‘run’) html += ‘<div><div class="field-label">’+(w.parts.cardio.paceLabel||‘Avg Pace’)+’</div><input class="field-input" id="pace-'+dayKey+'-cardio" value="'+(existingC&&existingC.pace||'')+'" placeholder="9:24 /mi"></div>’;
-html += ‘</div>’;
-html += ‘<button class="log-btn'+(existingC?' saved':curEffortC?' ready-cardio':'')+'" onclick="logPart(\''+dayKey+'\',\'cardio\')">’+(existingC?’\u2713 Cardio Logged’:‘Log Cardio’)+’</button></div>’;
-}
-if (w.parts.strength) {
-var existingS = d[dayKey+’_strength’];
-var curEffortS = (effortState[dayKey] && effortState[dayKey].strength) || (existingS && existingS.effort) || null;
-html += ‘<div class="part-log-card strength"><div class="part-log-label strength">Log Strength</div>’;
-html += ‘<div class="effort-sublabel">Effort 1\u201310</div>’;
-html += ‘<div class="effort-row">’;
-for (var n=1; n<=10; n++) {
-html += ‘<button class="effort-btn'+(curEffortS===n?' sel-strength':'')+'" onclick="setEffort(\''+dayKey+'\',\'strength\','+n+')">’+n+’</button>’;
-}
-html += ‘</div>’;
-html += ‘<button class="log-btn'+(existingS?' saved':curEffortS?' ready-strength':'')+'" onclick="logPart(\''+dayKey+'\',\'strength\')">’+(existingS?’\u2713 Strength Logged’:‘Log Strength’)+’</button></div>’;
-}
-html += ‘</div>’;
-}
-html += ‘</div>’;
-document.getElementById(‘sheetContent’).innerHTML = html;
-document.getElementById(‘sheetContent’).scrollTop = 0;
+html+=’</div>’;
+document.getElementById(‘sheetContent’).innerHTML=html;
+document.getElementById(‘sheetContent’).scrollTop=0;
 }
 
-function setEffort(dayKey, part, n) {
-if (!effortState[dayKey]) effortState[dayKey] = {cardio:null, strength:null};
-effortState[dayKey][part] = n;
-renderSheet(dayKey);
+function setEff(k,p,n){if(!effortState[k])effortState[k]={cardio:null,strength:null};effortState[k][p]=n;renderSheet(k);}
+
+function logP(k,p){
+var es=effortState[k];
+var effort=(es&&es[p])||(logged[k]&&logged[k][k+’*’+p]&&logged[k][k+’*’+p].effort);
+if(!effort)return;
+var de=document.getElementById(‘dc-’+k);
+var pe=document.getElementById(‘pc-’+k);
+if(!logged[k])logged[k]={};
+logged[k][k+’_’+p]={effort:effort,distance:de?de.value:’’,pace:pe?pe.value:’’};
+save();buildWeek();renderSheet(k);
 }
 
-function logPart(dayKey, part) {
-var es = effortState[dayKey];
-var effort = (es && es[part]) || (logged[dayKey] && logged[dayKey][dayKey+’*’+part] && logged[dayKey][dayKey+’*’+part].effort);
-if (!effort) return;
-var distEl = document.getElementById(‘dist-’+dayKey+’-’+part);
-var paceEl = document.getElementById(‘pace-’+dayKey+’-’+part);
-var distance = distEl ? distEl.value : ‘’;
-var pace = paceEl ? paceEl.value : ‘’;
-if (!logged[dayKey]) logged[dayKey] = {};
-logged[dayKey][dayKey+’_’+part] = {effort:effort, distance:distance, pace:pace};
-saveLogged();
-buildWeek();
-renderSheet(dayKey);
-}
-
-function openPlanSheet(day) {
-var content = document.getElementById(‘planSheetContent’);
-content.innerHTML = ‘<div class="sheet-handle"><div class="sheet-handle-bar"></div></div><div class="sheet-header"><div><div class="sheet-date">’+day.d+’</div><div class="sheet-title" style="font-size:20px">’+day.name+’</div></div><button class="sheet-close" onclick="closePlanSheet()">\u2715</button></div><div class="sheet-body"><div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5">’+day.detail+’</div><div class="bq-banner"><div class="bq-banner-icon">\ud83c\udfaf</div><div><div class="bq-banner-label">BQ Context</div><div class="bq-banner-text">’+day.bq+’</div></div></div></div>’;
+function openPlanSheet(day){
+document.getElementById(‘planSheetContent’).innerHTML=’<div class="sheet-handle"><div class="sheet-handle-bar"></div></div><div class="sheet-header"><div><div class="sheet-date">’+day.d+’</div><div class="sheet-title" style="font-size:20px">’+day.name+’</div></div><button class="sheet-close" onclick="closePlanSheet()">\u2715</button></div><div class="sheet-body"><div style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.5">’+day.detail+’</div><div class="bq-banner"><div class="bq-banner-icon">🎯</div><div><div class="bq-banner-label">BQ Context</div><div class="bq-banner-text">’+day.bq+’</div></div></div></div>’;
 document.getElementById(‘planSheet’).classList.add(‘open’);
-document.body.style.overflow = ‘hidden’;
+document.body.style.overflow=‘hidden’;
 }
-
-function closePlanSheet() {
-document.getElementById(‘planSheet’).classList.remove(‘open’);
-document.body.style.overflow = ‘’;
-}
-
-function closePlanSheetOutside(e) {
-if (e.target === document.getElementById(‘planSheet’)) closePlanSheet();
-}
+function closePlanSheet(){document.getElementById(‘planSheet’).classList.remove(‘open’);document.body.style.overflow=’’;}
+document.getElementById(‘planSheet’).onclick=function(e){if(e.target===this)closePlanSheet();};
 
 buildWeek();
 buildPlan();
-</script>
 
+</script>
 </body>
 </html>
