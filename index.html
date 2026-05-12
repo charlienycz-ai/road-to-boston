@@ -192,6 +192,10 @@ button,input{font-family:'DM Sans',sans-serif}
 <div class="ov" id="wkov"><div class="sh" id="wksh"></div></div>
 <div class="ov" id="plov"><div class="sh" id="plsh"></div></div>
 <script>
+window.onerror = function(msg, src, line, col, err) {
+  document.body.innerHTML += '<div style="position:fixed;bottom:0;left:0;right:0;background:red;color:white;padding:10px;font-size:11px;z-index:9999;font-family:monospace">' + msg + ' (line ' + line + ')</div>';
+  return false;
+};
 var N="#162F77",B="#3A6EDB",Y="#FFDE00";
 var WS=new Date(2026,4,11);
 var DAY=["MON","TUE","WED","THU","FRI","SAT","SUN"];
@@ -550,7 +554,14 @@ if(!lg[idx])lg[idx]={};
 lg[idx][p]={e:e2,d:di2?di2.value:’’,p:pi2?pi2.value:’’};
 sv();rSh(idx);
 }
-rToday();rPlan();rProg();
+try {
+rToday();
+rPlan();
+rProg();
+} catch(err) {
+document.getElementById(“pg-today”).innerHTML = ‘<div style="padding:20px;font-family:monospace;font-size:11px;color:red;background:white;margin:10px">’ + err.message + ‘<br><br>’ + err.stack + ‘</div>’;
+document.getElementById(“pg-today”).classList.add(“on”);
+}
 </script>
 
 </body>
