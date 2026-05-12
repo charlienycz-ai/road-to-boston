@@ -800,9 +800,11 @@ document.body.style.overflow=””;
 document.getElementById(“pl-sheet”).onclick=function(e){if(e.target===this)closePlanSheet();};
 
 // ── INIT ──
+document.addEventListener(“DOMContentLoaded”,function(){
 renderToday();
 renderPlan();
 renderProgress();
+});
 </script>
 
 </body>
