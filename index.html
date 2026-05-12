@@ -193,7 +193,7 @@ button,input{font-family:'DM Sans',sans-serif}
 <div class="ov" id="plov"><div class="sh" id="plsh"></div></div>
 <script>
 window.onerror = function(msg, src, line, col, err) {
-  document.body.innerHTML += '<div style="position:fixed;bottom:0;left:0;right:0;background:red;color:white;padding:10px;font-size:11px;z-index:9999;font-family:monospace">' + msg + ' (line ' + line + ')</div>';
+  document.body.innerHTML += '\x3Cdiv style="position:fixed;bottom:0;left:0;right:0;background:red;color:white;padding:10px;font-size:11px;z-index:9999;font-family:monospace">' + msg + ' (line ' + line + ')\x3C/div>';
   return false;
 };
 var N="#162F77",B="#3A6EDB",Y="#FFDE00";
@@ -304,8 +304,8 @@ function gst(i){
 function gti(){var d=Math.floor((new Date()-WS)/86400000);return d<0?0:d>6?6:d;}
 function gds(){return Math.max(0,Math.ceil((new Date(2026,10,7)-new Date())/86400000));}
 function gts(){var n=new Date(),w=n.getDay(),i=w===0?6:w-1;return DN2[i]+", "+MN[n.getMonth()]+" "+n.getDate();}
-function tag(t){return '<span class="tag" style="'+TAGCSS[t]+'">'+t+"</span>";}
-function bqb(txt){return '<div class="bqb"><span style="font-size:14px;flex-shrink:0">&#127919;</span><div><div class="bqbl">BQ Context</div><div class="bqbt">'+txt+"</div></div></div>";}
+function tag(t){return '\x3Cspan class="tag" style="'+TAGCSS[t]+'">'+t+"\x3C/span>";}
+function bqb(txt){return '\x3Cdiv class="bqb">\x3Cspan style="font-size:14px;flex-shrink:0">&#127919;\x3C/span>\x3Cdiv>\x3Cdiv class="bqbl">BQ Context\x3C/div>\x3Cdiv class="bqbt">'+txt+"\x3C/div>\x3C/div>\x3C/div>";}
 function showTab(id){
   ["today","plan","progress"].forEach(function(t){
     document.getElementById("pg-"+t).classList.toggle("on",t===id);
@@ -320,10 +320,10 @@ function rToday(){
   var ld=lg[ti]||{};
   var hlog="";
   if(ld.c||ld.s){
-    hlog='<div class="hlog">';
-    if(ld.c)hlog+='<div class="hlc">Cardio '+ld.c.e+"/10"+(ld.c.d?" - "+ld.c.d:"")+"</div>";
-    if(ld.s)hlog+='<div class="hls">Strength '+ld.s.e+"/10</div>";
-    hlog+="</div>";
+    hlog='\x3Cdiv class="hlog">';
+    if(ld.c)hlog+='\x3Cdiv class="hlc">Cardio '+ld.c.e+"/10"+(ld.c.d?" - "+ld.c.d:"")+"\x3C/div>";
+    if(ld.s)hlog+='\x3Cdiv class="hls">Strength '+ld.s.e+"/10\x3C/div>";
+    hlog+="\x3C/div>";
   }
   var tagsH=w.tags.map(tag).join("");
   var rows="";
@@ -336,45 +336,45 @@ function rToday(){
     var chktxt=st==="full"?"&#10003;":st==="half"?"&#9681;":"";
     var badges="";
     if(d2.c||d2.s){
-      badges='<div class="dbs">';
-      if(d2.c)badges+='<div class="lbc">Cardio '+d2.c.e+"/10"+(d2.c.d?" - "+d2.c.d:"")+"</div>";
-      if(d2.s)badges+='<div class="lbs">Str '+d2.s.e+"/10</div>";
-      badges+="</div>";
+      badges='\x3Cdiv class="dbs">';
+      if(d2.c)badges+='\x3Cdiv class="lbc">Cardio '+d2.c.e+"/10"+(d2.c.d?" - "+d2.c.d:"")+"\x3C/div>";
+      if(d2.s)badges+='\x3Cdiv class="lbs">Str '+d2.s.e+"/10\x3C/div>";
+      badges+="\x3C/div>";
     }
-    rows+='<div class="dr'+(iT?" tod":"")+'" onclick="oSh('+i+')">';
-    rows+='<div class="drm">';
-    rows+='<div class="'+chkcls+'">'+chktxt+"</div>";
-    rows+='<div class="dtd" style="background:'+dot+'"></div>';
-    rows+='<div class="di"><div class="dl">'+DAY[i]+" - "+MN[dt2.getMonth()]+" "+dt2.getDate()+(iT?" - TODAY":"")+"</div>";
-    rows+='<div class="dn'+(st==="full"?" done":"")+'">'+W[i].t+"</div></div>";
-    rows+='<div class="dch">&#8250;</div></div>'+badges+"</div>";
+    rows+='\x3Cdiv class="dr'+(iT?" tod":"")+'" onclick="oSh('+i+')">';
+    rows+='\x3Cdiv class="drm">';
+    rows+='\x3Cdiv class="'+chkcls+'">'+chktxt+"\x3C/div>";
+    rows+='\x3Cdiv class="dtd" style="background:'+dot+'">\x3C/div>';
+    rows+='\x3Cdiv class="di">\x3Cdiv class="dl">'+DAY[i]+" - "+MN[dt2.getMonth()]+" "+dt2.getDate()+(iT?" - TODAY":"")+"\x3C/div>";
+    rows+='\x3Cdiv class="dn'+(st==="full"?" done":"")+'">'+W[i].t+"\x3C/div>\x3C/div>";
+    rows+='\x3Cdiv class="dch">&#8250;\x3C/div>\x3C/div>'+badges+"\x3C/div>";
   }
   document.getElementById("pg-today").innerHTML=
-    '<div class="dbar">'+gts()+" - Recovery Week</div>"+
-    '<div style="padding:13px 13px 0">'+
-    '<div class="hero" onclick="oSh('+ti+')">'+
-    '<div class="htop"><div><div class="htitle">'+w.t+'</div><div class="hsub">'+w.s+"</div></div>"+
-    '<div class="harr">&#8250;</div></div>'+
-    '<div class="htags">'+tagsH+"</div>"+
-    '<div class="hstats">'+
-    '<div class="sp"><div class="spl">Phase</div><div class="spv">Recovery</div></div>'+
-    '<div class="sp"><div class="spl">Week</div><div class="spv">May 11-17</div></div>'+
-    '<div class="sp"><div class="spl">Status</div><div class="spv">'+(gst(ti)==="full"?"Done":"Active")+"</div></div></div>"+
-    hlog+"</div></div>"+
-    '<div class="shdr"><div class="st">This Week</div><div class="sm">'+done+"/7 done</div></div>"+
-    '<div class="wkl">'+rows+"</div>";
+    '\x3Cdiv class="dbar">'+gts()+" - Recovery Week\x3C/div>"+
+    '\x3Cdiv style="padding:13px 13px 0">'+
+    '\x3Cdiv class="hero" onclick="oSh('+ti+')">'+
+    '\x3Cdiv class="htop">\x3Cdiv>\x3Cdiv class="htitle">'+w.t+'\x3C/div>\x3Cdiv class="hsub">'+w.s+"\x3C/div>\x3C/div>"+
+    '\x3Cdiv class="harr">&#8250;\x3C/div>\x3C/div>'+
+    '\x3Cdiv class="htags">'+tagsH+"\x3C/div>"+
+    '\x3Cdiv class="hstats">'+
+    '\x3Cdiv class="sp">\x3Cdiv class="spl">Phase\x3C/div>\x3Cdiv class="spv">Recovery\x3C/div>\x3C/div>'+
+    '\x3Cdiv class="sp">\x3Cdiv class="spl">Week\x3C/div>\x3Cdiv class="spv">May 11-17\x3C/div>\x3C/div>'+
+    '\x3Cdiv class="sp">\x3Cdiv class="spl">Status\x3C/div>\x3Cdiv class="spv">'+(gst(ti)==="full"?"Done":"Active")+"\x3C/div>\x3C/div>\x3C/div>"+
+    hlog+"\x3C/div>\x3C/div>"+
+    '\x3Cdiv class="shdr">\x3Cdiv class="st">This Week\x3C/div>\x3Cdiv class="sm">'+done+"/7 done\x3C/div>\x3C/div>"+
+    '\x3Cdiv class="wkl">'+rows+"\x3C/div>";
 }
 function rPlan(){
-  var h='<div class="plan-hdr"><div class="plan-title">2-Week Plan</div><div class="plan-sub">Recovery to Base - Tap any day</div></div>';
+  var h='\x3Cdiv class="plan-hdr">\x3Cdiv class="plan-title">2-Week Plan\x3C/div>\x3Cdiv class="plan-sub">Recovery to Base - Tap any day\x3C/div>\x3C/div>';
   PLAN.forEach(function(wk,wi){
-    h+='<div class="pw"><div class="pwh"><div class="pwn">'+wk.wk+'</div><div class="pwb">'+wk.b+"</div></div>";
-    h+='<div class="pll">';
+    h+='\x3Cdiv class="pw">\x3Cdiv class="pwh">\x3Cdiv class="pwn">'+wk.wk+'\x3C/div>\x3Cdiv class="pwb">'+wk.b+"\x3C/div>\x3C/div>";
+    h+='\x3Cdiv class="pll">';
     wk.days.forEach(function(day,di){
-      h+='<div class="pr" onclick="oPl('+wi+','+di+')"><div class="prd">'+day.d+"</div>";
-      h+='<div class="prc"><div class="prn">'+day.n+'</div><div class="prdt">'+day.dt+"</div></div>";
-      h+='<div class="pra">&#8250;</div></div>';
+      h+='\x3Cdiv class="pr" onclick="oPl('+wi+','+di+')">\x3Cdiv class="prd">'+day.d+"\x3C/div>";
+      h+='\x3Cdiv class="prc">\x3Cdiv class="prn">'+day.n+'\x3C/div>\x3Cdiv class="prdt">'+day.dt+"\x3C/div>\x3C/div>";
+      h+='\x3Cdiv class="pra">&#8250;\x3C/div>\x3C/div>';
     });
-    h+="</div></div>";
+    h+="\x3C/div>\x3C/div>";
   });
   document.getElementById("pg-plan").innerHTML=h;
 }
@@ -386,48 +386,48 @@ function rProg(){
     if(d.c&&d.c.d){var v=parseFloat(d.c.d);if(!isNaN(v)){if(tags.indexOf("run")>=0)runMi+=v;else if(tags.indexOf("swim")>=0)swimM+=v;else if(tags.indexOf("bike")>=0)bikeMi+=v;}}
     if(d.s&&d.s.e)liftN++;
   }
-  var h='<div class="prog-hdr"><div class="prog-title">Progress</div><div class="prog-sub">Post-Durham - Road to Boston</div></div>';
-  h+='<div class="shdr"><div class="st">This Week</div><div class="sm">May 11-17</div></div>';
-  h+='<div class="wstats">';
+  var h='\x3Cdiv class="prog-hdr">\x3Cdiv class="prog-title">Progress\x3C/div>\x3Cdiv class="prog-sub">Post-Durham - Road to Boston\x3C/div>\x3C/div>';
+  h+='\x3Cdiv class="shdr">\x3Cdiv class="st">This Week\x3C/div>\x3Cdiv class="sm">May 11-17\x3C/div>\x3C/div>';
+  h+='\x3Cdiv class="wstats">';
   [{ic:"&#127939;",v:runMi.toFixed(1),u:"miles",l:"Running",c:"#c8380a"},
    {ic:"&#127946;",v:Math.round(swimM),u:"meters",l:"Swimming",c:"#1a5fad"},
    {ic:"&#128690;",v:bikeMi.toFixed(1),u:"miles",l:"Biking",c:"#8a6a00"},
    {ic:"&#127947;",v:liftN,u:"sessions",l:"Strength",c:"#1a7a45"}
   ].forEach(function(s){
-    h+='<div class="wsc" style="border-top:3px solid '+s.c+'">';
-    h+='<div class="wsci">'+s.ic+"</div>";
-    h+='<div class="wscv">'+s.v+"</div>";
-    h+='<div class="wscu">'+s.u+"</div>";
-    h+='<div class="wscl">'+s.l+"</div></div>";
+    h+='\x3Cdiv class="wsc" style="border-top:3px solid '+s.c+'">';
+    h+='\x3Cdiv class="wsci">'+s.ic+"\x3C/div>";
+    h+='\x3Cdiv class="wscv">'+s.v+"\x3C/div>";
+    h+='\x3Cdiv class="wscu">'+s.u+"\x3C/div>";
+    h+='\x3Cdiv class="wscl">'+s.l+"\x3C/div>\x3C/div>";
   });
-  h+="</div>";
-  h+='<div class="shdr"><div class="st">Season</div></div>';
-  h+='<div class="sgrid">';
+  h+="\x3C/div>";
+  h+='\x3Cdiv class="shdr">\x3Cdiv class="st">Season\x3C/div>\x3C/div>';
+  h+='\x3Cdiv class="sgrid">';
   [{l:"Current PR",v:"3:10:55",c:"#7a85a0",sz:20},
    {l:"BQ Target",v:"2:57:59",c:N,sz:20,note:"2:01 buffer",bt:N},
    {l:"Days to Indy",v:gds(),c:"#0e1628",sz:30,u:"days"},
    {l:"VO2 Max",v:"59",c:"#1a7a45",sz:30,u:"Garmin est"}
   ].forEach(function(s){
-    h+='<div class="sc"'+(s.bt?' style="border-top:3px solid '+s.bt+'"':'')+'>';
-    h+='<div class="scl">'+s.l+'</div>';
-    h+='<div class="scv2" style="font-size:'+s.sz+'px;color:'+s.c+'">'+s.v+'</div>';
-    if(s.u)h+='<div class="scu">'+s.u+"</div>";
-    if(s.note)h+='<div class="scn">'+s.note+"</div>";
-    h+="</div>";
+    h+='\x3Cdiv class="sc"'+(s.bt?' style="border-top:3px solid '+s.bt+'"':'')+'>';
+    h+='\x3Cdiv class="scl">'+s.l+'\x3C/div>';
+    h+='\x3Cdiv class="scv2" style="font-size:'+s.sz+'px;color:'+s.c+'">'+s.v+'\x3C/div>';
+    if(s.u)h+='\x3Cdiv class="scu">'+s.u+"\x3C/div>";
+    if(s.note)h+='\x3Cdiv class="scn">'+s.note+"\x3C/div>";
+    h+="\x3C/div>";
   });
-  h+="</div>";
-  h+='<div class="ic"><div class="icl">Race History</div>';
+  h+="\x3C/div>";
+  h+='\x3Cdiv class="ic">\x3Cdiv class="icl">Race History\x3C/div>';
   [{r:"Chicago Marathon",t:"3:32:44"},
    {r:"Durham Marathon",t:"3:10:55",sub:"-21:49 PR",sc:"#1a7a45"},
    {r:"Indianapolis Monumental",t:"sub-2:57:59",sub:"BQ Target - 6:46/mi",sc:B,hi:true}
   ].forEach(function(r){
-    h+='<div class="rr"><div><div class="rn'+(r.hi?" hi":"")+'">'+r.r+"</div>";
-    if(r.sub)h+='<div class="rs" style="color:'+r.sc+'">'+r.sub+"</div>";
-    h+="</div>";
-    h+='<div class="rt'+(r.hi?" hi":"")+'">'+r.t+"</div></div>";
+    h+='\x3Cdiv class="rr">\x3Cdiv>\x3Cdiv class="rn'+(r.hi?" hi":"")+'">'+r.r+"\x3C/div>";
+    if(r.sub)h+='\x3Cdiv class="rs" style="color:'+r.sc+'">'+r.sub+"\x3C/div>";
+    h+="\x3C/div>";
+    h+='\x3Cdiv class="rt'+(r.hi?" hi":"")+'">'+r.t+"\x3C/div>\x3C/div>";
   });
-  h+="</div>";
-  h+='<div class="fn">BQ standard M18-34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing.</div>';
+  h+="\x3C/div>";
+  h+='\x3Cdiv class="fn">BQ standard M18-34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing.\x3C/div>';
   document.getElementById("pg-progress").innerHTML=h;
 }
 function oSh(idx){
@@ -452,74 +452,74 @@ function rSh(idx){
   var dts=DN2[idx]+", "+MN[dt2.getMonth()]+" "+dt2.getDate();
   var iT=idx===gti();
   var tagsH=w.tags.map(tag).join("");
-  var h='<div class="shhnd"><div class="shbar"></div></div>';
-  h+='<div class="shhdr"><div>';
-  h+='<div class="shdate">'+dts+(iT?" - Today":"")+"</div>";
-  h+='<div class="shtitle">'+w.t+"</div>";
-  h+='<div class="shsub">'+w.s+"</div>";
-  h+='<div style="display:flex;gap:5px;flex-wrap:wrap">'+tagsH+"</div></div>";
-  h+='<button class="shclose" onclick="cSh()">&#10005;</button></div>';
-  h+='<div class="shbody">';
+  var h='\x3Cdiv class="shhnd">\x3Cdiv class="shbar">\x3C/div>\x3C/div>';
+  h+='\x3Cdiv class="shhdr">\x3Cdiv>';
+  h+='\x3Cdiv class="shdate">'+dts+(iT?" - Today":"")+"\x3C/div>";
+  h+='\x3Cdiv class="shtitle">'+w.t+"\x3C/div>";
+  h+='\x3Cdiv class="shsub">'+w.s+"\x3C/div>";
+  h+='\x3Cdiv style="display:flex;gap:5px;flex-wrap:wrap">'+tagsH+"\x3C/div>\x3C/div>";
+  h+='\x3Cbutton class="shclose" onclick="cSh()">&#10005;\x3C/button>\x3C/div>';
+  h+='\x3Cdiv class="shbody">';
   if(w.bq)h+=bqb(w.bq);
-  if(ir){h+='<div class="restbig">OFF</div><div class="restsub">No running. No gym. No swimming.<br>Sleep well.</div>';}
+  if(ir){h+='\x3Cdiv class="restbig">OFF\x3C/div>\x3Cdiv class="restsub">No running. No gym. No swimming.\x3Cbr>Sleep well.\x3C/div>';}
   if(w.parts.cardio){
-    if(hb)h+='<div class="pdiv"><div class="pdivc" style="background:#1a5fad"></div><div class="pdivl" style="color:#1a5fad">Cardio</div></div>';
-    if(w.parts.cardio.sum)h+='<div class="psum">'+w.parts.cardio.sum+"</div>";
-    h+='<div class="wsec"><div class="slbl">'+w.parts.cardio.lbl+"</div>";
+    if(hb)h+='\x3Cdiv class="pdiv">\x3Cdiv class="pdivc" style="background:#1a5fad">\x3C/div>\x3Cdiv class="pdivl" style="color:#1a5fad">Cardio\x3C/div>\x3C/div>';
+    if(w.parts.cardio.sum)h+='\x3Cdiv class="psum">'+w.parts.cardio.sum+"\x3C/div>";
+    h+='\x3Cdiv class="wsec">\x3Cdiv class="slbl">'+w.parts.cardio.lbl+"\x3C/div>";
     if(w.parts.cardio.type==="swim"){
       w.parts.cardio.sets.forEach(function(s){
-        h+='<div class="swr"><div><div class="swn">'+s.n+'</div><div class="swd">'+s.d+'</div></div>';
-        h+='<div style="text-align:right;flex-shrink:0"><div class="swl">'+s.l+'</div><div class="swm">'+s.m+"</div></div></div>";
+        h+='\x3Cdiv class="swr">\x3Cdiv>\x3Cdiv class="swn">'+s.n+'\x3C/div>\x3Cdiv class="swd">'+s.d+'\x3C/div>\x3C/div>';
+        h+='\x3Cdiv style="text-align:right;flex-shrink:0">\x3Cdiv class="swl">'+s.l+'\x3C/div>\x3Cdiv class="swm">'+s.m+"\x3C/div>\x3C/div>\x3C/div>";
       });
-      if(w.parts.cardio.tot)h+='<div class="swt"><span class="swtl">Total</span><span class="swtv">'+w.parts.cardio.tot+"</span></div>";
+      if(w.parts.cardio.tot)h+='\x3Cdiv class="swt">\x3Cspan class="swtl">Total\x3C/span>\x3Cspan class="swtv">'+w.parts.cardio.tot+"\x3C/span>\x3C/div>";
     }
     if(w.parts.cardio.type==="run"){
       w.parts.cardio.stats.forEach(function(s){
-        h+='<div class="rnrw"><span class="rnl">'+s.l+'</span><span class="rnv'+(s.h?" h":"")+'">'+s.v+"</span></div>";
+        h+='\x3Cdiv class="rnrw">\x3Cspan class="rnl">'+s.l+'\x3C/span>\x3Cspan class="rnv'+(s.h?" h":"")+'">'+s.v+"\x3C/span>\x3C/div>";
       });
     }
-    h+="</div>";
+    h+="\x3C/div>";
   }
   if(w.parts.strength){
-    if(hb)h+='<div class="pdiv"><div class="pdivc" style="background:#1a7a45"></div><div class="pdivl" style="color:#1a7a45">Strength</div></div>';
-    if(w.parts.strength.sum)h+='<div class="psum">'+w.parts.strength.sum+"</div>";
-    h+='<div class="wsec"><div class="slbl">'+w.parts.strength.lbl+"</div>";
+    if(hb)h+='\x3Cdiv class="pdiv">\x3Cdiv class="pdivc" style="background:#1a7a45">\x3C/div>\x3Cdiv class="pdivl" style="color:#1a7a45">Strength\x3C/div>\x3C/div>';
+    if(w.parts.strength.sum)h+='\x3Cdiv class="psum">'+w.parts.strength.sum+"\x3C/div>";
+    h+='\x3Cdiv class="wsec">\x3Cdiv class="slbl">'+w.parts.strength.lbl+"\x3C/div>";
     w.parts.strength.ex.forEach(function(e,ei){
       var chk=lci[ei]||false;
-      h+='<div class="lrow">';
-      h+='<div class="lchk'+(chk?" on":"")+'" onclick="tLift('+idx+','+ei+')">'+(chk?"&#10003;":"")+"</div>";
-      h+='<span class="lname'+(e.k?" k":"")+(chk?" dk":"")+'">'+e.n+"</span>";
-      h+='<span class="lsets'+(e.k?" k":"")+'">'+e.s+"</span></div>";
+      h+='\x3Cdiv class="lrow">';
+      h+='\x3Cdiv class="lchk'+(chk?" on":"")+'" onclick="tLift('+idx+','+ei+')">'+(chk?"&#10003;":"")+"\x3C/div>";
+      h+='\x3Cspan class="lname'+(e.k?" k":"")+(chk?" dk":"")+'">'+e.n+"\x3C/span>";
+      h+='\x3Cspan class="lsets'+(e.k?" k":"")+'">'+e.s+"\x3C/span>\x3C/div>";
     });
-    h+="</div>";
+    h+="\x3C/div>";
   }
-  if(w.coach)h+='<div class="cn"><div class="cnl">Coach</div><div class="cnt">'+w.coach+"</div></div>";
+  if(w.coach)h+='\x3Cdiv class="cn">\x3Cdiv class="cnl">Coach\x3C/div>\x3Cdiv class="cnt">'+w.coach+"\x3C/div>\x3C/div>";
   if(!ir){
-    h+='<div class="logsec"><div class="logsl">Log Workout</div>';
+    h+='\x3Cdiv class="logsec">\x3Cdiv class="logsl">Log Workout\x3C/div>';
     if(w.parts.cardio){
       var ec=d.c,curC=efi.c||(ec&&ec.e)||null;
       var isRun=w.parts.cardio.type==="run";
-      h+='<div class="plc plcc"><div class="plcl plclc">Log Cardio</div>';
-      h+='<div class="effl">Effort 1-10</div><div class="effr">';
-      for(var n=1;n<=10;n++)h+='<button class="eb'+(curC===n?" ebc":"")+'" onclick="sEf('+idx+',"c",'+n+')">'+n+"</button>";
-      h+="</div>";
-      h+='<div class="fg'+(isRun?" fg2":"")+'">';
-      h+='<div><div class="fl">'+(w.parts.cardio.dl||"Distance")+'</div><input class="fi" id="di'+idx+'" value="'+(ec&&ec.d||"")+'" placeholder="'+(isRun?"3.1 mi":"1000m")+'"></div>';
-      if(isRun)h+='<div><div class="fl">Avg Pace</div><input class="fi" id="pi'+idx+'" value="'+(ec&&ec.p||"")+'" placeholder="9:24 /mi"></div>';
-      h+="</div>";
-      h+='<button class="lb'+(ec?' lbsv':curC?' lbrc':'')+'" data-idx="'+idx+'" data-part="c" onclick="hLog(this)">'+(ec?'Cardio Logged':'Log Cardio')+'</button></div>';
+      h+='\x3Cdiv class="plc plcc">\x3Cdiv class="plcl plclc">Log Cardio\x3C/div>';
+      h+='\x3Cdiv class="effl">Effort 1-10\x3C/div>\x3Cdiv class="effr">';
+      for(var n=1;n<=10;n++)h+='\x3Cbutton class="eb'+(curC===n?" ebc":"")+'" onclick="sEf('+idx+',"c",'+n+')">'+n+"\x3C/button>";
+      h+="\x3C/div>";
+      h+='\x3Cdiv class="fg'+(isRun?" fg2":"")+'">';
+      h+='\x3Cdiv>\x3Cdiv class="fl">'+(w.parts.cardio.dl||"Distance")+'\x3C/div>\x3Cinput class="fi" id="di'+idx+'" value="'+(ec&&ec.d||"")+'" placeholder="'+(isRun?"3.1 mi":"1000m")+'">\x3C/div>';
+      if(isRun)h+='\x3Cdiv>\x3Cdiv class="fl">Avg Pace\x3C/div>\x3Cinput class="fi" id="pi'+idx+'" value="'+(ec&&ec.p||"")+'" placeholder="9:24 /mi">\x3C/div>';
+      h+="\x3C/div>";
+      h+='\x3Cbutton class="lb'+(ec?' lbsv':curC?' lbrc':'')+'" data-idx="'+idx+'" data-part="c" onclick="hLog(this)">'+(ec?'Cardio Logged':'Log Cardio')+'\x3C/button>\x3C/div>';
     }
     if(w.parts.strength){
       var es=d.s,curS=efi.s||(es&&es.e)||null;
-      h+='<div class="plc plcs"><div class="plcl plcls">Log Strength</div>';
-      h+='<div class="effl">Effort 1-10</div><div class="effr">';
-      for(var ns=1;ns<=10;ns++)h+='<button class="eb'+(curS===ns?" ebs":"")+'" onclick="sEf('+idx+',"s",'+ns+')">'+ns+"</button>";
-      h+="</div>";
-      h+='<button class="lb'+(es?' lbsv':curS?' lbrs':'')+'" data-idx="'+idx+'" data-part="s" onclick="hLog(this)">'+(es?'Strength Logged':'Log Strength')+'</button></div>';
+      h+='\x3Cdiv class="plc plcs">\x3Cdiv class="plcl plcls">Log Strength\x3C/div>';
+      h+='\x3Cdiv class="effl">Effort 1-10\x3C/div>\x3Cdiv class="effr">';
+      for(var ns=1;ns<=10;ns++)h+='\x3Cbutton class="eb'+(curS===ns?" ebs":"")+'" onclick="sEf('+idx+',"s",'+ns+')">'+ns+"\x3C/button>";
+      h+="\x3C/div>";
+      h+='\x3Cbutton class="lb'+(es?' lbsv':curS?' lbrs':'')+'" data-idx="'+idx+'" data-part="s" onclick="hLog(this)">'+(es?'Strength Logged':'Log Strength')+'\x3C/button>\x3C/div>';
     }
-    h+="</div>";
+    h+="\x3C/div>";
   }
-  h+="</div>";
+  h+="\x3C/div>";
   document.getElementById("wksh").innerHTML=h;
   document.getElementById("wksh").scrollTop=0;
 }
@@ -530,12 +530,12 @@ function sEf(idx,p,n){if(!ef[idx])ef[idx]={c:null,s:null};ef[idx][p]=n;rSh(idx);
 // lPart replaced by hLog
 function oPl(wi,di){
 var day=PLAN[wi].days[di];
-var h=’<div class="shhnd"><div class="shbar"></div></div>’;
-h+=’<div class="shhdr"><div><div class="shdate">’+day.d+”</div>”;
-h+=’<div class="shtitle" style="font-size:19px">’+day.n+”</div></div>”;
-h+=’<button class="shclose" onclick="cPl()">✕</button></div>’;
-h+=’<div class="shbody"><div style="font-size:13px;color:#7a85a0;margin-bottom:14px;line-height:1.5">’+day.dt+”</div>”;
-h+=bqb(day.bq)+”</div>”;
+var h=’\x3Cdiv class=“shhnd”>\x3Cdiv class=“shbar”>\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv class=“shhdr”>\x3Cdiv>\x3Cdiv class=“shdate”>’+day.d+”\x3C/div>”;
+h+=’\x3Cdiv class=“shtitle” style=“font-size:19px”>’+day.n+”\x3C/div>\x3C/div>”;
+h+=’\x3Cbutton class=“shclose” onclick=“cPl()”>✕\x3C/button>\x3C/div>’;
+h+=’\x3Cdiv class=“shbody”>\x3Cdiv style=“font-size:13px;color:#7a85a0;margin-bottom:14px;line-height:1.5”>’+day.dt+”\x3C/div>”;
+h+=bqb(day.bq)+”\x3C/div>”;
 document.getElementById(“plsh”).innerHTML=h;
 document.getElementById(“plov”).classList.add(“on”);
 document.body.style.overflow=“hidden”;
@@ -559,7 +559,7 @@ rToday();
 rPlan();
 rProg();
 } catch(err) {
-document.getElementById(“pg-today”).innerHTML = ‘<div style="padding:20px;font-family:monospace;font-size:11px;color:red;background:white;margin:10px">’ + err.message + ‘<br><br>’ + err.stack + ‘</div>’;
+document.getElementById(“pg-today”).innerHTML = ‘\x3Cdiv style=“padding:20px;font-family:monospace;font-size:11px;color:red;background:white;margin:10px”>’ + err.message + ‘\x3Cbr>\x3Cbr>’ + err.stack + ‘\x3C/div>’;
 document.getElementById(“pg-today”).classList.add(“on”);
 }
 </script>
