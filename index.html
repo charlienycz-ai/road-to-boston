@@ -1,287 +1,87 @@
-<!DOCTYPE html>
+import { useState, useEffect } from “react”;
 
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Road to Boston">
-<meta name="theme-color" content="#ffffff">
-<title>Road to Boston</title>
-<link rel="apple-touch-icon" href="data:image/png;base64,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EREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAbEAEBERGRALABERkQGxABARERkQCwAREZEBsQAQEREZEAsAERGRAXmLDkBEpCcWsx0xEWWICS9DdHj5H/8bFVqOkMBqBPnXIDigGsH+1QgJrIaPxQaL2Q5vsx0Wbxu8zXaYveyotXvBZvOCtdYMm90Ea60Z1VYzSit8UVrpi9IKH5RV+KKkwhf5xQHIPReI3KLA//1vELILglFjNYs+HKRjLABERJcQH1mK9s1zkZxYgOaxRWgRdw7NY4uQGFUMs5fD5fe3mO2wmO3w86lt1M87HMCZghBknA1FRk44MnLCkJ4dgQMZUThxJhx2h8nljCQ3U3TaNNfPZCIiHUuKKUbP1CyktcpB++a5aN8iF2FBVaJjNVpltQWHTzXBgYwo7EmPxdZDCTh4Mgo2O0sB/T8WAABNo4ux7cMPRMfQBZvdBLvDBLvdC3a7CVabF2qsZlTXeKPK6o3qGjMqqn1+n76s/P3/Sit8UVjqj8ISf5wr9UdB6e/TmWcLg1BS4Sv6VyIDatssD/07nkTPtqfRMzULsRFloiO5XXmVD3YcicPWQwnYuD8Jmw8m8hKCwfESADnF7OWAGQ7AbAcA+Lv4fpXVFuQUBiErLwSZZ8NwMjcUmWdDkZ4dgaOnI1FRZXE9NBleaGA1BqZlYEjXdAzufAJxkaWiI3lcoF8NBnQ6iQGdTuJhbERFlQUb9idhzc4WWL2zBY5nR4iOSB7G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">
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--yellow:#FFDE00;--blue:#3A6EDB;--navy:#162F77;--white:#fff;--off:#f7f6f2;--light:#eef0f7;--border:rgba(22,47,119,0.12);--borderc:rgba(22,47,119,0.22);--text:#0e1628;--muted:#7a85a0;--dim:#b0bbd0;--run:#c8380a;--swim:#1a5fad;--lift:#1a7a45}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden}
-body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--text);max-width:430px;margin:0 auto;height:100%;display:flex;flex-direction:column}
-button{font-family:'DM Sans',sans-serif}
-.hdr{padding:14px 18px 11px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--navy);background:var(--white);flex-shrink:0}
-.logo{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:var(--navy)}.logo span{color:var(--blue)}
-.lsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:2px}
-.badge{display:flex;align-items:center;gap:5px;padding:5px 10px;background:var(--navy);border-radius:3px}
-.bdot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
-.btxt{font-family:'DM Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:1px}
-.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px;background:var(--off)}
-.pg{display:none}.pg.on{display:block}
-.nav{display:flex;border-top:1px solid var(--borderc);background:var(--white);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom)}
-.nb{flex:1;padding:10px 4px 12px;background:none;border:none;color:var(--dim);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
-.nb.on{color:var(--navy)}.ni{font-size:15px;line-height:1}
-.nl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase}
-.dbar{background:var(--navy);padding:9px 18px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6)}
-.hero{margin:13px 13px 0;background:var(--white);border:1px solid var(--borderc);border-top:4px solid var(--navy);padding:17px;cursor:pointer}
-.htop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}
-.htitle{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:3px}
-.hsub{font-size:12px;color:var(--muted)}
-.harr{width:30px;height:30px;border:1px solid var(--borderc);display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--navy);background:var(--light);flex-shrink:0}
-.htags{display:flex;gap:5px;margin-bottom:13px}
-.tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-weight:500}
-.ts{background:rgba(26,95,173,0.08);color:var(--swim);border:1px solid rgba(26,95,173,0.2)}
-.tl{background:rgba(26,122,69,0.08);color:var(--lift);border:1px solid rgba(26,122,69,0.2)}
-.tr{background:rgba(200,56,10,0.08);color:var(--run);border:1px solid rgba(200,56,10,0.2)}
-.tx{background:rgba(74,64,144,0.08);color:#4a4090;border:1px solid rgba(74,64,144,0.2)}
-.hstats{display:flex;gap:7px}
-.sp{flex:1;padding:7px 9px;background:var(--light);border:1px solid var(--border)}
-.spl{font-family:'DM Mono',monospace;font-size:7px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
-.spv{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--navy)}
-.shdr{padding:16px 14px 9px;display:flex;justify-content:space-between;align-items:baseline}
-.stitle{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;color:var(--navy)}
-.smeta{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)}
-.wl{padding:0 13px;display:flex;flex-direction:column;gap:4px}
-.dr{padding:11px 12px;background:var(--white);border:1px solid var(--border);border-left:3px solid transparent;cursor:pointer}
-.dr.tod{border-left-color:var(--navy)}
-.drm{display:flex;align-items:center;gap:10px}
-.dc{width:21px;height:21px;border-radius:50%;background:var(--light);border:1.5px solid var(--borderc);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;flex-shrink:0}
-.dc.full{background:var(--lift);border-color:var(--lift)}
-.dc.half{background:var(--yellow);border-color:#c8a800;color:#5a4400;font-weight:700}
-.dtd{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.di{flex:1;min-width:0}
-.dl{font-family:'DM Mono',monospace;font-size:7px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
-.dn{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dn.done{color:var(--muted)}.dch{color:var(--dim);font-size:13px}
-.dbs{display:flex;gap:4px;margin-top:5px;margin-left:31px;flex-wrap:wrap}
-.lbc{padding:2px 6px;font-family:'DM Mono',monospace;font-size:7px;border-radius:2px;background:rgba(26,95,173,0.08);border:1px solid rgba(26,95,173,0.18);color:var(--swim)}
-.lbs{padding:2px 6px;font-family:'DM Mono',monospace;font-size:7px;border-radius:2px;background:rgba(26,122,69,0.08);border:1px solid rgba(26,122,69,0.18);color:var(--lift)}
-.pphdr{background:var(--navy);padding:17px 17px 13px}
-.pptitle{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:2px}
-.ppsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
-.pw{margin:13px 13px 0}
-.pwh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.pwn{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700;color:var(--navy)}
-.pwb{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--navy);padding:2px 7px;background:rgba(255,222,0,0.25);border:1px solid rgba(255,222,0,0.6);border-radius:2px}
-.pl{background:var(--white);border:1px solid var(--borderc);overflow:hidden}
-.pr{display:flex;gap:11px;padding:11px 12px;border-bottom:1px solid var(--border);cursor:pointer;align-items:center}
-.pr:last-child{border-bottom:none}
-.prd{font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);width:25px;flex-shrink:0;letter-spacing:1px}
-.prc{flex:1}.prn{font-size:13px;font-weight:500;color:var(--text);margin-bottom:1px}
-.prdt{font-size:11px;color:var(--muted)}.pra{color:var(--dim);font-size:13px;flex-shrink:0}
-.gphdr{background:var(--navy);padding:17px 17px 13px}
-.gptitle{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:2px}
-.gpsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
-.wstats{margin:0 13px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.wsc{background:var(--white);border:1px solid var(--borderc);padding:14px;border-top:3px solid var(--border)}
-.wsc.run{border-top-color:var(--run)}.wsc.swim{border-top-color:var(--swim)}
-.wsc.bike{border-top-color:#8a6a00}.wsc.lift{border-top-color:var(--lift)}
-.wscicon{font-size:18px;margin-bottom:6px}
-.wscval{font-family:'Libre Baskerville',serif;font-size:28px;font-weight:700;color:var(--navy);line-height:1}
-.wscunit{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px}
-.wsclbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-top:4px}
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:13px 13px 0}
-.sc{background:var(--white);border:1px solid var(--borderc);padding:13px}
-.scl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:7px}
-.scv{font-family:'Libre Baskerville',serif;font-weight:700;line-height:1}
-.scu{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px}
-.scn{font-family:'DM Mono',monospace;font-size:7px;margin-top:3px}
-.ic{margin:8px 13px 0;background:var(--white);border:1px solid var(--borderc);padding:14px}
-.icl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid var(--border)}
-.phr{margin-bottom:12px}.phr:last-child{margin-bottom:0}
-.phrh{display:flex;justify-content:space-between;margin-bottom:4px}
-.phn{font-size:12px;color:var(--text);font-weight:500}
-.phs{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)}
-.pht{height:3px;background:var(--light);border-radius:1px;overflow:hidden}
-.phf{height:100%;border-radius:1px}
-.rr{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
-.rr:last-child{border-bottom:none}
-.rn{font-size:13px;color:var(--muted)}.rn.hi{color:var(--navy);font-weight:600;font-family:'Libre Baskerville',serif}
-.rs{font-family:'DM Mono',monospace;font-size:8px;margin-top:2px}
-.rt{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--muted)}.rt.hi{color:var(--navy);font-weight:700}
-.fn{margin:8px 13px 18px;padding:9px 12px;background:var(--light);border-left:3px solid var(--navy);font-family:'DM Mono',monospace;font-size:8px;color:var(--muted);line-height:1.6}
-.ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(14,22,40,0.5);backdrop-filter:blur(4px);flex-direction:column;justify-content:flex-end}
-.ov.on{display:flex}
-.sh{background:var(--white);border-top:3px solid var(--navy);max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:40px}
-.shhd{display:flex;justify-content:center;padding:11px 0 0}
-.shhdbar{width:36px;height:4px;background:var(--borderc);border-radius:2px}
-.shhdr{padding:12px 17px 13px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start}
-.shclose{background:var(--light);border:1px solid var(--borderc);color:var(--muted);width:28px;height:28px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:10px}
-.shbody{padding:13px 17px 0}
-.shdate{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
-.shtitle{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:2px}
-.shsub{font-size:12px;color:var(--muted);margin-bottom:9px}
-.bqb{padding:9px 12px;background:var(--light);border-left:3px solid var(--navy);margin-bottom:15px;display:flex;gap:9px;align-items:flex-start}
-.bqbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--navy);text-transform:uppercase;margin-bottom:3px;opacity:.7}
-.bqbt{font-size:12px;color:var(--text);line-height:1.6}
-.pdiv{display:flex;align-items:center;gap:7px;margin-bottom:10px}
-.pdivbar{width:3px;height:16px;border-radius:1px}
-.pdivlbl{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700}
-.psum{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px;font-style:italic}
-.slbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
-.ws2{margin-bottom:17px}
-.swr{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;gap:10px;border-bottom:1px solid var(--border)}
-.swr:last-child{border-bottom:none}
-.swn{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px}
-.swd{font-size:10px;color:var(--muted);line-height:1.4}
-.swl{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:var(--swim)}
-.swm{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted)}
-.swt{display:flex;justify-content:space-between;align-items:center;margin-top:7px;padding:6px 10px;background:rgba(26,95,173,0.06);border:1px solid rgba(26,95,173,0.15)}
-.swtl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--swim)}
-.swtv{font-family:'DM Mono',monospace;font-size:11px;color:var(--swim)}
-.lrow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);gap:8px}
-.lrow:last-child{border-bottom:none}
-.lchk{width:20px;height:20px;border-radius:3px;border:1.5px solid var(--borderc);background:var(--light);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:white;flex-shrink:0}
-.lchk.done{background:var(--lift);border-color:var(--lift)}
-.lname{font-size:13px;color:var(--muted);flex:1}
-.lname.k{color:var(--text);font-weight:500}.lname.struck{color:var(--dim);text-decoration:line-through}
-.lsets{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim);flex-shrink:0}
-.lsets.k{color:var(--navy);font-weight:500}
-.rnr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}
-.rnr:last-child{border-bottom:none}
-.rnl{font-size:13px;color:var(--muted)}
-.rnv{font-family:'DM Mono',monospace;font-size:11px;color:var(--dim)}.rnv.h{color:var(--run);font-weight:500}
-.cn{padding:9px 12px;background:var(--light);border-left:2px solid var(--borderc);margin-bottom:17px}
-.cnl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:3px}
-.cnt{font-size:12px;color:var(--muted);line-height:1.6;font-style:italic}
-.logs{border-top:1px solid var(--border);padding-top:15px}
-.logsl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
-.plc{border:1px solid var(--borderc);padding:11px;margin-bottom:9px}
-.plc.c{border-left:3px solid var(--swim)}.plc.s{border-left:3px solid var(--lift)}
-.plcl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;margin-bottom:9px}
-.plcl.c{color:var(--swim)}.plcl.s{color:var(--lift)}
-.effl{font-family:'DM Mono',monospace;font-size:7px;color:var(--muted);margin-bottom:5px;letter-spacing:1px}
-.effr{display:flex;gap:3px;margin-bottom:9px}
-.eb{flex:1;padding:7px 2px;background:var(--light);border:1px solid var(--borderc);color:var(--muted);font-family:'DM Mono',monospace;font-size:9px;cursor:pointer}
-.eb.sc{background:var(--swim);border-color:var(--swim);color:white;font-weight:700}
-.eb.ss{background:var(--lift);border-color:var(--lift);color:white;font-weight:700}
-.fr{display:grid;gap:7px;margin-bottom:9px}.fr.two{grid-template-columns:1fr 1fr}
-.fl{font-family:'DM Mono',monospace;font-size:7px;color:var(--muted);margin-bottom:4px;letter-spacing:1px}
-.fi{width:100%;padding:7px 9px;background:var(--light);border:1px solid var(--borderc);color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none}
-.lb{width:100%;padding:10px;border:1px solid var(--borderc);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:not-allowed;color:var(--dim);background:var(--light)}
-.lb.rc{background:var(--swim);color:white;cursor:pointer;border-color:var(--swim)}
-.lb.rs{background:var(--lift);color:white;cursor:pointer;border-color:var(--lift)}
-.lb.sv{background:var(--navy)!important;color:white!important;border-color:var(--navy)!important;cursor:default}
-.rest{text-align:center;padding:36px 0}
-.restbig{font-family:'Libre Baskerville',serif;font-size:66px;font-weight:700;color:var(--light);letter-spacing:4px}
-.restsub{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7}
-</style>
-</head>
-<body>
-<div class="hdr">
-  <div><div class="logo">Road to <span>Boston</span></div><div class="lsub">Indianapolis &middot; Nov 7 &middot; 2:57:59</div></div>
-  <div class="badge"><div class="bdot"></div><span class="btxt">BQ MODE</span></div>
-</div>
-<div class="scroll" id="scr">
-  <div class="pg on" id="pg-today">
-    <div class="dbar" id="datebar"></div>
-    <div style="padding:13px 13px 0">
-      <div class="hero" id="herocard">
-        <div class="htop"><div><div class="htitle" id="herotitle">Loading</div><div class="hsub" id="herosub"></div></div><div class="harr">&rsaquo;</div></div>
-        <div class="htags" id="herotags"></div>
-        <div class="hstats" id="herostats"></div>
-        <div id="hlogrow" style="display:none;gap:5px;margin-top:9px">
-          <div id="hclog" style="flex:1;padding:5px 8px;font-family:DM Mono,monospace;font-size:9px;border-radius:2px;background:rgba(26,95,173,0.08);border:1px solid rgba(26,95,173,0.18);color:#1a5fad"></div>
-          <div id="hslog" style="flex:1;padding:5px 8px;font-family:DM Mono,monospace;font-size:9px;border-radius:2px;background:rgba(26,122,69,0.08);border:1px solid rgba(26,122,69,0.18);color:#1a7a45"></div>
-        </div>
-      </div>
-    </div>
-    <div class="shdr"><div class="stitle">This Week</div><div class="smeta" id="donecount">0/7 done</div></div>
-    <div class="wl" id="wklist"></div>
-  </div>
-  <div class="pg" id="pg-plan">
-    <div class="pphdr"><div class="pptitle">2-Week Plan</div><div class="ppsub">Recovery &rarr; Base &middot; Tap any day</div></div>
-    <div id="plancont"></div>
-  </div>
-  <div class="pg" id="pg-progress">
-    <div class="gphdr"><div class="gptitle">Progress</div><div class="gpsub">Post-Durham &middot; Road to Boston</div></div>
-    <div class="shdr" style="padding-top:14px"><div class="stitle">This Week</div><div class="smeta" id="weekdates"></div></div>
-    <div class="wstats">
-      <div class="wsc run"><div class="wscicon">&#127939;</div><div class="wscval" id="ws-run">0.0</div><div class="wscunit">miles</div><div class="wsclbl">Running</div></div>
-      <div class="wsc swim"><div class="wscicon">&#127946;</div><div class="wscval" id="ws-swim">0</div><div class="wscunit">meters</div><div class="wsclbl">Swimming</div></div>
-      <div class="wsc bike"><div class="wscicon">&#128690;</div><div class="wscval" id="ws-bike">0.0</div><div class="wscunit">miles</div><div class="wsclbl">Biking</div></div>
-      <div class="wsc lift"><div class="wscicon">&#127947;</div><div class="wscval" id="ws-lift">0</div><div class="wscunit">sessions</div><div class="wsclbl">Strength</div></div>
-    </div>
-    <div class="shdr" style="padding-top:16px"><div class="stitle">Season</div></div>
-    <div class="sg">
-      <div class="sc"><div class="scl">Current PR</div><div class="scv" style="font-size:20px;color:#7a85a0">3:10:55</div></div>
-      <div class="sc" style="border-top:3px solid #162F77"><div class="scl">BQ Target</div><div class="scv" style="font-size:20px;color:#162F77">2:57:59</div><div class="scn" style="color:#3A6EDB">2:01 buffer</div></div>
-      <div class="sc"><div class="scl">Days to Indy</div><div class="scv" style="font-size:30px;color:#0e1628" id="daysout">179</div><div class="scu">days</div></div>
-      <div class="sc"><div class="scl">VO2 Max</div><div class="scv" style="font-size:30px;color:#1a7a45">59</div><div class="scu">Garmin est</div></div>
-    </div>
-    <div class="ic">
-      <div class="icl">Phase Tracker</div>
-      <div class="phr"><div class="phrh"><span class="phn">Recovery</span><span class="phs">Day 10 of 26</span></div><div class="pht"><div class="phf" style="width:38%;background:#3A6EDB"></div></div></div>
-      <div class="phr"><div class="phrh"><span class="phn">Base Phase</span><span class="phs">May 18 - Jul 4</span></div><div class="pht"><div class="phf" style="width:0%;background:#162F77"></div></div></div>
-      <div class="phr" style="margin-bottom:0"><div class="phrh"><span class="phn">Training Block</span><span class="phs">Jul 5 - Nov 7</span></div><div class="pht"><div class="phf" style="width:0%;background:#162F77"></div></div></div>
-    </div>
-    <div class="ic">
-      <div class="icl">Race History</div>
-      <div class="rr"><div><div class="rn">Chicago Marathon</div></div><div class="rt">3:32:44</div></div>
-      <div class="rr"><div><div class="rn">Durham Marathon</div><div class="rs" style="color:#1a7a45">-21:49 PR</div></div><div class="rt">3:10:55</div></div>
-      <div class="rr"><div><div class="rn hi">Indianapolis Monumental</div><div class="rs" style="color:#3A6EDB">BQ Target - 6:46/mi avg</div></div><div class="rt hi">sub-2:57:59</div></div>
-    </div>
-    <div class="fn">BQ standard M18-34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer.</div>
-  </div>
-</div>
-<div class="nav">
-  <button class="nb on" id="nb-today" onclick="showTab('today')"><span class="ni">&#9673;</span><span class="nl">Today</span></button>
-  <button class="nb" id="nb-plan" onclick="showTab('plan')"><span class="ni">&#8801;</span><span class="nl">Plan</span></button>
-  <button class="nb" id="nb-progress" onclick="showTab('progress')"><span class="ni">&#8593;</span><span class="nl">Progress</span></button>
-</div>
-<div class="ov" id="wksheet"><div class="sh" id="shcont"></div></div>
-<div class="ov" id="plsheet"><div class="sh" id="plshcont"></div></div>
-<script type="text/javascript">
+const NAVY = “#162F77”;
+const BLUE = “#3A6EDB”;
+const YELLOW = “#FFDE00”;
 
-var DAYS=[“MON”,“TUE”,“WED”,“THU”,“FRI”,“SAT”,“SUN”];
-var DAYNAMES=[“Monday”,“Tuesday”,“Wednesday”,“Thursday”,“Friday”,“Saturday”,“Sunday”];
-var MONTHS=[“Jan”,“Feb”,“Mar”,“Apr”,“May”,“Jun”,“Jul”,“Aug”,“Sep”,“Oct”,“Nov”,“Dec”];
-var DOTS={run:”#c8380a”,swim:”#1a5fad”,lift:”#1a7a45”,rest:”#4a4090”,bike:”#8a6a00”};
-var WEEK_START=new Date(2026,4,11);
+const WEEK_START = new Date(2026, 4, 11);
+const DAYS = [“MON”,“TUE”,“WED”,“THU”,“FRI”,“SAT”,“SUN”];
+const DAYNAMES = [“Monday”,“Tuesday”,“Wednesday”,“Thursday”,“Friday”,“Saturday”,“Sunday”];
+const MONTHS = [“Jan”,“Feb”,“Mar”,“Apr”,“May”,“Jun”,“Jul”,“Aug”,“Sep”,“Oct”,“Nov”,“Dec”];
+const DOTS = {run:”#c8380a”,swim:”#1a5fad”,lift:”#1a7a45”,rest:”#4a4090”,bike:”#8a6a00”};
 
-var W=[
-{t:“Easy Swim + Back & Biceps”,s:“Easy Swim - Upper Body”,tags:[“swim”,“lift”],bq:“Active recovery - aerobic blood flow accelerates muscle repair from Durham.”,parts:{
-cardio:{type:“swim”,lbl:“MORNING - PARKWEST POOL - 25M/LENGTH”,sum:“Easy recovery swim. Low intensity, full body flush. HR under 120.”,sets:[{n:“Warmup”,d:“Easy, any stroke, get loose”,l:“8 lengths”,m:“200m”},{n:“Main Set - 6x4 lengths”,d:“30 sec rest, target 1:55-2:05/100m”,l:“24 lengths”,m:“600m”},{n:“Cooldown”,d:“Slow, long strokes”,l:“8 lengths”,m:“200m”}],tot:“40 lengths - 1,000m - 25 min”,dl:“Distance (e.g. 1000m)”},
-strength:{type:“lift”,lbl:“LUNCH - GYM - UPPER ONLY”,sum:“Pull-focused upper body. No legs - still recovering from Durham.”,ex:[{n:“Chest-Supported DB Row”,s:“3x8-10”},{n:“Lat Pulldown”,s:“3x8-10”},{n:“Seated Cable Row”,s:“3x10-12”},{n:“Machine Rear Delt Fly”,s:“3x10-12”},{n:“Dumbbell Curl”,s:“3x10-12”},{n:“Cable Curl”,s:“3x10-12”},{n:“21s”,s:“2 sets”}]}
-},coach:“No legs today. Keep the swim relaxed.”},
-{t:“Chest & Triceps”,s:“Upper Body - Push Day”,tags:[“lift”],bq:“Pure upper body maintenance. 225 baseline protected.”,parts:{
-strength:{type:“lift”,lbl:“LUNCH - GYM”,sum:“Heavy push day. Protect your 225 bench baseline.”,ex:[{n:“Flat Barbell Bench Press”,s:“4x5-6”,k:true},{n:“Incline DB Press”,s:“3x8-10”},{n:“Machine Chest Press”,s:“3x10-12”},{n:“Cable Fly”,s:“3x12-15”},{n:“Tricep Rope Pushdown”,s:“3x12”},{n:“Tricep Extension Machine”,s:“3x10-12”},{n:“Dips”,s:“2x10”}]}
-},coach:“Full chest day. Hit 225. No running today.”},
-{t:“Aerobic Swim”,s:“Pool - Zone 2”,tags:[“swim”],bq:“Zone 2 swimming builds the same aerobic engine that carries you past mile 20.”,parts:{
-cardio:{type:“swim”,lbl:“MORNING - PARKWEST POOL - 25M/LENGTH”,sum:“Sustained aerobic effort. Zone 2 the entire way.”,sets:[{n:“Warmup”,d:“Relaxed, settle into rhythm”,l:“8 lengths”,m:“200m”},{n:“Main Set - 4x8 lengths”,d:“45 sec rest, target 1:50-2:00/100m”,l:“32 lengths”,m:“800m”},{n:“Cooldown”,d:“Slow, wind it down”,l:“4 lengths”,m:“100m”}],tot:“44 lengths - 1,100m - 28 min”,dl:“Distance completed”}
-},coach:“No gym today. Still aerobic - if joints flare, back off.”},
-{t:“First Run Back”,s:“Road + Modified Legs”,tags:[“run”,“lift”],bq:“This is a check-in run, not a training run. Data from today shapes next week.”,parts:{
-cardio:{type:“run”,lbl:“MORNING - ROAD”,sum:“First run since Durham. Flat route, no watch pressure, purely by feel.”,stats:[{l:“Duration”,v:“20-25 min”,h:true},{l:“Pace”,v:“9:30+ /mi”,h:true},{l:“HR Cap”,v:“140 bpm”},{l:“Surface”,v:“Flat only”},{l:“Walk breaks”,v:“Take freely”}],dl:“Distance (mi)”,pl:“Avg pace”},
-strength:{type:“lift”,lbl:“LUNCH - GYM - HALF VOLUME”,sum:“Reintroducing leg work at half volume. Hip abduction is non-negotiable.”,ex:[{n:“Romanian Deadlift”,s:“2x8”},{n:“Bulgarian Split Squat”,s:“2x10”},{n:“Hip Abduction Machine”,s:“2x15”,k:true},{n:“Seated Calf Raise”,s:“2x15”},{n:“Single-Leg Glute Bridge”,s:“2x12”}]}
-},coach:“Run is a check-in, not a workout. Any joint tweak - stop.”},
-{t:“Shoulders & Arms”,s:“Light Upper - Pre-Long Run”,tags:[“lift”],bq:“Light day by design. Legs rest ahead of Saturday.”,parts:{
-strength:{type:“lift”,lbl:“LUNCH - GYM - LIGHT DAY”,sum:“In and out in 40 minutes. Nothing heavy.”,ex:[{n:“Shoulder Press Machine”,s:“3x10-12”},{n:“Machine Lateral Raise”,s:“3x12-15”},{n:“Face Pulls”,s:“3x15”,k:true},{n:“EZ-Bar Curl”,s:“3x10-12”},{n:“Cable Tricep Pushdown”,s:“3x12-15”},{n:“Cable Curl”,s:“2x12”}]}
-},coach:“In and out in 40 min. Long run tomorrow.”},
-{t:“Easy Run #2”,s:“Road - Run Only”,tags:[“run”],bq:“Second run back. Aerobic base is the single most important predictor of marathon performance.”,parts:{
-cardio:{type:“run”,lbl:“MORNING - ROAD - RUN ONLY”,sum:“Easy aerobic run. Conversational pace the entire way. No gym today.”,stats:[{l:“Duration”,v:“30-35 min”,h:true},{l:“Pace”,v:“9:00-9:30 /mi”,h:true},{l:“HR Cap”,v:“145 bpm”},{l:“Feel”,v:“Conversational”},{l:“Gym”,v:“None today”}],dl:“Distance (mi)”,pl:“Avg pace”}
-},coach:“If Thursday felt good, step it up. No ego.”},
-{t:“Full Rest”,s:“Complete Recovery”,tags:[“rest”],bq:“Rest is training. Your body adapts and gets faster on recovery days.”,parts:{},coach:“No running. No gym. No swimming. Sleep well.”}
+const W = [
+{t:“Easy Swim + Back & Biceps”,s:“Easy Swim - Upper Body”,tags:[“swim”,“lift”],
+bq:“Active recovery - aerobic blood flow accelerates muscle repair from Durham. Every easy day protects the quality days ahead.”,
+parts:{
+cardio:{type:“swim”,lbl:“MORNING - PARKWEST POOL - 25M PER LENGTH”,sum:“Easy recovery swim. Low intensity, full body flush. HR under 120.”,
+sets:[{n:“Warmup”,d:“Easy, any stroke, get loose”,l:“8 lengths”,m:“200m”},
+{n:“Main Set - 6 x 4 lengths”,d:“30 sec rest, target 1:55-2:05 per 100m”,l:“24 lengths”,m:“600m”},
+{n:“Cooldown”,d:“Slow, long strokes”,l:“8 lengths”,m:“200m”}],
+tot:“40 lengths - 1,000m - 25 min”,dl:“Distance (e.g. 1000m)”},
+strength:{type:“lift”,lbl:“LUNCH - GYM - UPPER ONLY”,sum:“Pull-focused upper body. No legs - still recovering from Durham.”,
+ex:[{n:“Chest-Supported DB Row”,s:“3x8-10”},{n:“Lat Pulldown”,s:“3x8-10”},
+{n:“Seated Cable Row”,s:“3x10-12”},{n:“Machine Rear Delt Fly”,s:“3x10-12”},
+{n:“Dumbbell Curl”,s:“3x10-12”},{n:“Cable Curl”,s:“3x10-12”},{n:“21s”,s:“2 sets”}]}},
+coach:“No legs today. Keep the swim relaxed.”},
+{t:“Chest & Triceps”,s:“Upper Body - Push Day”,tags:[“lift”],
+bq:“Pure upper body maintenance. 225 baseline protected. Legs get a full rest.”,
+parts:{strength:{type:“lift”,lbl:“LUNCH - GYM”,sum:“Heavy push day. Protect your 225 bench baseline.”,
+ex:[{n:“Flat Barbell Bench Press”,s:“4x5-6”,k:true},{n:“Incline DB Press”,s:“3x8-10”},
+{n:“Machine Chest Press”,s:“3x10-12”},{n:“Cable Fly”,s:“3x12-15”},
+{n:“Tricep Rope Pushdown”,s:“3x12”},{n:“Tricep Extension Machine”,s:“3x10-12”},{n:“Dips”,s:“2x10”}]}},
+coach:“Full chest day. Hit 225. No running today.”},
+{t:“Aerobic Swim”,s:“Pool - Zone 2”,tags:[“swim”],
+bq:“Zone 2 swimming builds the same aerobic engine that carries you past mile 20 in Indianapolis.”,
+parts:{cardio:{type:“swim”,lbl:“MORNING - PARKWEST POOL - 25M PER LENGTH”,sum:“Sustained aerobic effort. Zone 2 the entire way.”,
+sets:[{n:“Warmup”,d:“Relaxed, settle into rhythm”,l:“8 lengths”,m:“200m”},
+{n:“Main Set - 4 x 8 lengths”,d:“45 sec rest, target 1:50-2:00 per 100m”,l:“32 lengths”,m:“800m”},
+{n:“Cooldown”,d:“Slow, wind it down”,l:“4 lengths”,m:“100m”}],
+tot:“44 lengths - 1,100m - 28 min”,dl:“Distance completed”}},
+coach:“No gym today. Still aerobic - if joints flare, back off.”},
+{t:“First Run Back”,s:“Road + Modified Legs”,tags:[“run”,“lift”],
+bq:“This is a check-in run, not a training run. The data from today tells me how fast we progress next week.”,
+parts:{
+cardio:{type:“run”,lbl:“MORNING - ROAD”,sum:“First run since Durham. Flat route, no watch pressure, purely by feel.”,
+stats:[{l:“Duration”,v:“20-25 min”,h:true},{l:“Pace”,v:“9:30+ per mi”,h:true},
+{l:“HR Cap”,v:“140 bpm”},{l:“Surface”,v:“Flat only”},{l:“Walk breaks”,v:“Take freely”}],
+dl:“Distance (mi)”,pl:“Avg pace”},
+strength:{type:“lift”,lbl:“LUNCH - GYM - HALF VOLUME”,sum:“Reintroducing leg work at half volume. Hip abduction is non-negotiable.”,
+ex:[{n:“Romanian Deadlift”,s:“2x8”},{n:“Bulgarian Split Squat”,s:“2x10”},
+{n:“Hip Abduction Machine”,s:“2x15”,k:true},{n:“Seated Calf Raise”,s:“2x15”},
+{n:“Single-Leg Glute Bridge”,s:“2x12”}]}},
+coach:“Run is a check-in, not a workout. Any joint tweak - stop.”},
+{t:“Shoulders & Arms”,s:“Light Upper - Pre-Long Run”,tags:[“lift”],
+bq:“Light day by design. Legs rest ahead of Saturday. Face pulls protect shoulder health.”,
+parts:{strength:{type:“lift”,lbl:“LUNCH - GYM - LIGHT DAY”,sum:“In and out in 40 minutes. Nothing heavy.”,
+ex:[{n:“Shoulder Press Machine”,s:“3x10-12”},{n:“Machine Lateral Raise”,s:“3x12-15”},
+{n:“Face Pulls”,s:“3x15”,k:true},{n:“EZ-Bar Curl”,s:“3x10-12”},
+{n:“Cable Tricep Pushdown”,s:“3x12-15”},{n:“Cable Curl”,s:“2x12”}]}},
+coach:“In and out in 40 min. Long run tomorrow.”},
+{t:“Easy Run #2”,s:“Road - Run Only”,tags:[“run”],
+bq:“Second run back. Aerobic base is the single most important predictor of marathon performance.”,
+parts:{cardio:{type:“run”,lbl:“MORNING - ROAD - RUN ONLY”,sum:“Easy aerobic run. Conversational pace the entire way.”,
+stats:[{l:“Duration”,v:“30-35 min”,h:true},{l:“Pace”,v:“9:00-9:30 per mi”,h:true},
+{l:“HR Cap”,v:“145 bpm”},{l:“Feel”,v:“Conversational”},{l:“Gym”,v:“None today”}],
+dl:“Distance (mi)”,pl:“Avg pace”}},
+coach:“If Thursday felt good, step it up. No ego.”},
+{t:“Full Rest”,s:“Complete Recovery”,tags:[“rest”],
+bq:“Rest is training. Your body adapts and gets faster on recovery days. Non-negotiable.”,
+parts:{},coach:“No running. No gym. No swimming. Sleep well.”}
 ];
 
-var PD=[
+const PLAN = [
 {wk:“Week 1 - May 11-17”,b:“RECOVERY”,days:[
 {d:“MON”,n:“Easy Swim + Back & Biceps”,dt:“1000m - 40 lengths - Upper lift”,bq:“Active recovery. Aerobic flush accelerates healing from Durham.”},
 {d:“TUE”,n:“Chest & Triceps”,dt:“Bench baseline - Full push session”,bq:“Upper body only. 225 protected. Legs rest completely.”},
 {d:“WED”,n:“Aerobic Swim”,dt:“1100m - 44 lengths - Zone 2”,bq:“Zone 2 swim builds the same engine that carries you past mile 20.”},
 {d:“THU”,n:“First Run Back + Legs”,dt:“20-25 min - 9:30+/mi - Modified legs”,bq:“Check-in run only. Data from this run shapes all of next week.”},
-{d:“FRI”,n:“Shoulders & Arms”,dt:“Light upper - Face pulls”,bq:“Light day. Legs rest ahead of Saturday. 40 min max.”},
+{d:“FRI”,n:“Shoulders & Arms”,dt:“Light upper - Face pulls”,bq:“Light day. Legs rest ahead of Saturday.”},
 {d:“SAT”,n:“Easy Run #2”,dt:“30-35 min - 9:00-9:30/mi”,bq:“Aerobic base is the #1 predictor of marathon performance.”},
 {d:“SUN”,n:“Full Rest”,dt:“No activity”,bq:“Rest is training. Body adapts on recovery days.”}
 ]},
 {wk:“Week 2 - May 18-24”,b:“BASE”,days:[
-{d:“MON”,n:“Easy Run + Posterior Chain”,dt:“30-35 min easy - Full leg session”,bq:“First full leg day. Hip abduction is your runners knee insurance.”},
+{d:“MON”,n:“Easy Run + Posterior Chain”,dt:“30-35 min easy - Full leg session”,bq:“First full leg day. Hip abduction is your runner’s knee insurance.”},
 {d:“TUE”,n:“Easy Run + Back & Biceps”,dt:“35-40 min - 8:45-9:15/mi”,bq:“Building aerobic volume. Consistent easy mileage is the foundation.”},
 {d:“WED”,n:“Swim + Legs Heavy”,dt:“1200m - 48 lengths - Full legs”,bq:“Nordic hamstring curls start this week. Injury prevention.”},
 {d:“THU”,n:“Easy Run + Chest & Triceps”,dt:“35-40 min - 8:45-9:15/mi”,bq:“Third run of the week. Mileage building steadily.”},
@@ -291,254 +91,495 @@ var PD=[
 ]}
 ];
 
-var lg={};
-try{lg=JSON.parse(localStorage.getItem(“rtbv5”)||”{}”);}catch(e){}
-function sv(){try{localStorage.setItem(“rtbv5”,JSON.stringify(lg));}catch(e){}}
-
-function getTodayIdx(){
-var now=new Date();
-var diff=Math.floor((now.getTime()-WEEK_START.getTime())/86400000);
-if(diff<0)return 0;
-if(diff>6)return 6;
-return diff;
+function getTodayIdx() {
+const now = new Date();
+const diff = Math.floor((now.getTime() - WEEK_START.getTime()) / 86400000);
+return Math.max(0, Math.min(6, diff));
 }
 
-function gst(i){
-var d=lg[i];if(!d)return”none”;
-var w=W[i];
-var hc=!!(w.parts&&w.parts.cardio),hs=!!(w.parts&&w.parts.strength);
-var c=d[“c”],s=d[“s”];
-if(hc&&hs)return(c&&s)?“full”:(c||s)?“half”:“none”;
-if(hc)return c?“full”:“none”;
-if(hs)return s?“full”:“none”;
-return”none”;
+function getDaysToIndy() {
+const indy = new Date(2026, 10, 7);
+return Math.max(0, Math.ceil((indy.getTime() - new Date().getTime()) / 86400000));
 }
 
-function showTab(id){
-document.querySelectorAll(”.pg”).forEach(function(p){p.classList.remove(“on”);});
-document.querySelectorAll(”.nb”).forEach(function(b){b.classList.remove(“on”);});
-document.getElementById(“pg-”+id).classList.add(“on”);
-document.getElementById(“nb-”+id).classList.add(“on”);
-document.getElementById(“scr”).scrollTop=0;
-if(id===“progress”)updStats();
+function getTodayStr() {
+const now = new Date();
+const dow = now.getDay();
+const idx = dow === 0 ? 6 : dow - 1;
+return `${DAYNAMES[idx]}, ${MONTHS[now.getMonth()]} ${now.getDate()}`;
 }
 
-function init(){
-var idx=getTodayIdx();
-var now=new Date();
-var dow=now.getDay();
-var didx=dow===0?6:dow-1;
-var dstr=DAYNAMES[didx]+”, “+MONTHS[now.getMonth()]+” “+now.getDate();
-document.getElementById(“datebar”).textContent=dstr+” - Recovery Week”;
-var indy=new Date(2026,10,7);
-var daysLeft=Math.ceil((indy.getTime()-now.getTime())/86400000);
-document.getElementById(“daysout”).textContent=daysLeft>0?daysLeft:0;
-var w=W[idx];
-document.getElementById(“herotitle”).textContent=w.t;
-document.getElementById(“herosub”).textContent=w.s;
-var tags=w.tags;
-var tc={swim:“ts”,lift:“tl”,run:“tr”,rest:“tx”,bike:“tb”};
-var th=””;
-for(var i=0;i<tags.length;i++)th+=’<span class=“tag ‘+(tc[tags[i]]||“ts”)+’”>’+tags[i]+”</span>”;
-document.getElementById(“herotags”).innerHTML=th;
-var sh=’<div class="sp"><div class="spl">Phase</div><div class="spv">Recovery</div></div>’;
-if(w.parts.cardio){
-if(w.parts.cardio.type===“swim”)sh=’<div class="sp"><div class="spl">Pool</div><div class="spv">1000m</div></div>’+sh;
-if(w.parts.cardio.type===“run”)sh=’<div class="sp"><div class="spl">Run</div><div class="spv">Easy</div></div>’+sh;
-}
-if(w.parts.strength)sh=’<div class="sp"><div class="spl">Gym</div><div class="spv">Lift</div></div>’+sh;
-document.getElementById(“herostats”).innerHTML=sh;
-document.getElementById(“herocard”).onclick=function(){openSh(idx);};
-bldWk();
-}
-
-function bldWk(){
-var idx=getTodayIdx();
-var list=document.getElementById(“wklist”);
-list.innerHTML=””;
-var done=0;
-for(var i=0;i<7;i++){
-var st=gst(i);
-if(st===“full”)done++;
-var d=lg[i]||{},c=d[“c”],s=d[“s”];
-var dot=DOTS[W[i].tags[0]]||”#b0bbd0”;
-var dt=new Date(WEEK_START.getTime()+i*86400000);
-var dtStr=MONTHS[dt.getMonth()]+” “+dt.getDate();
-var row=document.createElement(“div”);
-var isTod=(i===idx);
-row.className=“dr”+(isTod?” tod”:””);
-(function(ii){row.onclick=function(){openSh(ii);};})(i);
-var cc=“dc”,ct=””;
-if(st===“full”){cc+=” full”;ct=”✓”;}
-else if(st===“half”){cc+=” half”;ct=”◑”;}
-var bgs=””;
-if(c||s){
-bgs=’<div class="dbs">’;
-if(c)bgs+=’<div class="lbc">Cardio ‘+c.e+”/10”+(c.d?” - “+c.d:””)+”</div>”;
-if(s)bgs+=’<div class="lbs">Str ‘+s.e+”/10</div>”;
-bgs+=”</div>”;
-}
-row.innerHTML=’<div class="drm"><div class="'+cc+'">’+ct+’</div><div class="dtd" style="background:'+dot+'"></div><div class="di"><div class="dl">’+DAYS[i]+” - “+dtStr+(isTod?” - TODAY”:””)+’</div><div class=“dn’+(st===“full”?” done”:””)+’”>’+W[i].t+’</div></div><div class="dch">›</div></div>’+bgs;
-list.appendChild(row);
-}
-document.getElementById(“donecount”).textContent=done+”/7 done”;
-var todLg=lg[idx]||{},lc=todLg[“c”],ls=todLg[“s”];
-var hlr=document.getElementById(“hlogrow”);
-if(lc||ls){
-hlr.style.display=“flex”;
-if(lc)document.getElementById(“hclog”).textContent=“Cardio “+lc.e+”/10”+(lc.d?” - “+lc.d:””);
-if(ls)document.getElementById(“hslog”).textContent=“Strength “+ls.e+”/10”;
-} else hlr.style.display=“none”;
-}
-
-function updStats(){
-var runMi=0,swimM=0,bikeMi=0,liftN=0;
-for(var i=0;i<7;i++){
-var d=lg[i];if(!d)continue;
-var c=d[“c”],s=d[“s”];
-var tags=W[i].tags;
-if(c&&c.d){
-var val=parseFloat(c.d);
-if(!isNaN(val)){
-if(tags.indexOf(“run”)>=0)runMi+=val;
-else if(tags.indexOf(“swim”)>=0)swimM+=val;
-else if(tags.indexOf(“bike”)>=0)bikeMi+=val;
-}
-}
-if(s&&s.e)liftN++;
-}
-document.getElementById(“ws-run”).textContent=runMi.toFixed(1);
-document.getElementById(“ws-swim”).textContent=Math.round(swimM);
-document.getElementById(“ws-bike”).textContent=bikeMi.toFixed(1);
-document.getElementById(“ws-lift”).textContent=liftN;
-var end=new Date(WEEK_START.getTime()+6*86400000);
-document.getElementById(“weekdates”).textContent=MONTHS[WEEK_START.getMonth()]+” “+WEEK_START.getDate()+” - “+MONTHS[end.getMonth()]+” “+end.getDate();
-}
-
-function bldPl(){
-var cont=document.getElementById(“plancont”),html=””;
-for(var wi=0;wi<PD.length;wi++){
-var wk=PD[wi];
-html+=’<div class="pw"><div class="pwh"><div class="pwn">’+wk.wk+’</div><div class="pwb">’+wk.b+’</div></div><div class="pl">’;
-for(var di=0;di<wk.days.length;di++){
-var day=wk.days[di];
-html+=’<div class="pr" data-wi="'+wi+'" data-di="'+di+'"><div class="prd">’+day.d+’</div><div class="prc"><div class="prn">’+day.n+’</div><div class="prdt">’+day.dt+’</div></div><div class="pra">›</div></div>’;
-}
-html+=’</div></div>’;
-}
-cont.innerHTML=html;
-cont.querySelectorAll(”.pr”).forEach(function(r){
-r.onclick=function(){
-var wi=parseInt(this.getAttribute(“data-wi”)),di=parseInt(this.getAttribute(“data-di”));
-openPl(PD[wi].days[di]);
+const TAG_STYLE = {
+swim:{bg:“rgba(26,95,173,0.1)”,color:”#1a5fad”,border:“rgba(26,95,173,0.25)”},
+lift:{bg:“rgba(26,122,69,0.1)”,color:”#1a7a45”,border:“rgba(26,122,69,0.25)”},
+run:{bg:“rgba(200,56,10,0.1)”,color:”#c8380a”,border:“rgba(200,56,10,0.25)”},
+rest:{bg:“rgba(74,64,144,0.1)”,color:”#4a4090”,border:“rgba(74,64,144,0.25)”},
+bike:{bg:“rgba(138,106,0,0.1)”,color:”#8a6a00”,border:“rgba(138,106,0,0.25)”},
 };
+
+function Tag({type}) {
+const s = TAG_STYLE[type] || TAG_STYLE.rest;
+return <span style={{fontFamily:”‘DM Mono’,monospace”,fontSize:8,letterSpacing:“2px”,textTransform:“uppercase”,padding:“3px 7px”,borderRadius:2,fontWeight:500,background:s.bg,color:s.color,border:`1px solid ${s.border}`}}>{type}</span>;
+}
+
+function BQBanner({text}) {
+return (
+<div style={{padding:“10px 14px”,background:”#eef0f7”,borderLeft:`3px solid ${NAVY}`,marginBottom:16,display:“flex”,gap:10,alignItems:“flex-start”}}>
+<span style={{fontSize:14,flexShrink:0}}>🎯</span>
+<div>
+<div style={{fontFamily:”‘DM Mono’,monospace”,fontSize:7,letterSpacing:“2px”,color:NAVY,textTransform:“uppercase”,marginBottom:4,opacity:0.7}}>BQ Context</div>
+<div style={{fontSize:12,color:”#0e1628”,lineHeight:1.6}}>{text}</div>
+</div>
+</div>
+);
+}
+
+function WorkoutSheet({idx, onClose, logged, liftChecks, onToggleLift, onLog, effortState, onSetEffort}) {
+const w = W[idx];
+const d = logged[idx] || {};
+const hasBoth = w.parts.cardio && w.parts.strength;
+const isRest = Object.keys(w.parts).length === 0;
+const lc = liftChecks[idx] || {};
+const dt = new Date(WEEK_START.getTime() + idx * 86400000);
+const dtStr = `${DAYNAMES[idx]}, ${MONTHS[dt.getMonth()]} ${dt.getDate()}`;
+const isTod = idx === getTodayIdx();
+
+const [distC, setDistC] = useState(d.c?.d || “”);
+const [paceC, setPaceC] = useState(d.c?.p || “”);
+
+return (
+<div onClick={e => e.target === e.currentTarget && onClose()} style={{position:“fixed”,inset:0,zIndex:300,background:“rgba(14,22,40,0.5)”,backdropFilter:“blur(4px)”,display:“flex”,flexDirection:“column”,justifyContent:“flex-end”}}>
+<div style={{background:“white”,borderTop:`3px solid ${NAVY}`,maxHeight:“92vh”,overflowY:“auto”,WebkitOverflowScrolling:“touch”,paddingBottom:40}}>
+{/* Handle */}
+<div style={{display:“flex”,justifyContent:“center”,padding:“12px 0 0”}}>
+<div style={{width:36,height:4,background:“rgba(22,47,119,0.2)”,borderRadius:2}}/>
+</div>
+{/* Header */}
+<div style={{padding:“12px 18px 14px”,borderBottom:“1px solid rgba(22,47,119,0.12)”,display:“flex”,justifyContent:“space-between”,alignItems:“flex-start”}}>
+<div>
+<div style={{fontFamily:”‘DM Mono’,monospace”,fontSize:7,letterSpacing:“2px”,color:”#7a85a0”,textTransform:“uppercase”,marginBottom:4}}>{dtStr}{isTod ? “ - Today” : “”}</div>
+<div style={{fontFamily:”‘Libre Baskerville’,serif”,fontSize:21,fontWeight:700,color:NAVY,marginBottom:2}}>{w.t}</div>
+<div style={{fontSize:12,color:”#7a85a0”,marginBottom:9}}>{w.s}</div>
+<div style={{display:“flex”,gap:5,flexWrap:“wrap”}}>{w.tags.map(t => <Tag key={t} type={t}/>)}</div>
+</div>
+<button onClick={onClose} style={{background:”#eef0f7”,border:“1px solid rgba(22,47,119,0.22)”,color:”#7a85a0”,width:28,height:28,fontSize:13,cursor:“pointer”,display:“flex”,alignItems:“center”,justifyContent:“center”,flexShrink:0,marginLeft:10}}>✕</button>
+</div>
+
+```
+    <div style={{padding:"14px 18px 0"}}>
+      {w.bq && <BQBanner text={w.bq}/>}
+
+      {isRest && (
+        <div style={{textAlign:"center",padding:"40px 0"}}>
+          <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:66,fontWeight:700,color:"#eef0f7",letterSpacing:4}}>OFF</div>
+          <div style={{fontSize:13,color:"#7a85a0",marginTop:10,lineHeight:1.7}}>No running. No gym. No swimming.<br/>Sleep well. Body is still repairing.</div>
+        </div>
+      )}
+
+      {/* Cardio section */}
+      {w.parts.cardio && (
+        <div style={{marginBottom:20}}>
+          {hasBoth && <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><div style={{width:3,height:16,background:"#1a5fad",borderRadius:1}}/><div style={{fontFamily:"'Libre Baskerville',serif",fontSize:13,fontWeight:700,color:"#1a5fad"}}>Cardio</div></div>}
+          {w.parts.cardio.sum && <div style={{fontSize:12,color:"#7a85a0",lineHeight:1.6,marginBottom:9,fontStyle:"italic"}}>{w.parts.cardio.sum}</div>}
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"3px",textTransform:"uppercase",color:"#b0bbd0",marginBottom:8,paddingBottom:6,borderBottom:"1px solid rgba(22,47,119,0.1)"}}>{w.parts.cardio.lbl}</div>
+          {w.parts.cardio.type === "swim" && (
+            <>
+              {w.parts.cardio.sets.map((s,i) => (
+                <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",padding:"8px 0",gap:10,borderBottom:"1px solid rgba(22,47,119,0.07)"}}>
+                  <div><div style={{fontSize:12,fontWeight:500,color:"#0e1628",marginBottom:2}}>{s.n}</div><div style={{fontSize:10,color:"#7a85a0"}}>{s.d}</div></div>
+                  <div style={{textAlign:"right",flexShrink:0}}><div style={{fontFamily:"'DM Mono',monospace",fontSize:12,fontWeight:500,color:"#1a5fad"}}>{s.l}</div><div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#b0bbd0"}}>{s.m}</div></div>
+                </div>
+              ))}
+              {w.parts.cardio.tot && <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:8,padding:"6px 10px",background:"rgba(26,95,173,0.06)",border:"1px solid rgba(26,95,173,0.15)"}}><span style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",textTransform:"uppercase",color:"#1a5fad"}}>Total</span><span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:"#1a5fad"}}>{w.parts.cardio.tot}</span></div>}
+            </>
+          )}
+          {w.parts.cardio.type === "run" && w.parts.cardio.stats.map((s,i) => (
+            <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"7px 0",borderBottom:"1px solid rgba(22,47,119,0.07)"}}>
+              <span style={{fontSize:13,color:"#7a85a0"}}>{s.l}</span>
+              <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:s.h?"#c8380a":"#b0bbd0",fontWeight:s.h?500:400}}>{s.v}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Strength section */}
+      {w.parts.strength && (
+        <div style={{marginBottom:20}}>
+          {hasBoth && <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><div style={{width:3,height:16,background:"#1a7a45",borderRadius:1}}/><div style={{fontFamily:"'Libre Baskerville',serif",fontSize:13,fontWeight:700,color:"#1a7a45"}}>Strength</div></div>}
+          {w.parts.strength.sum && <div style={{fontSize:12,color:"#7a85a0",lineHeight:1.6,marginBottom:9,fontStyle:"italic"}}>{w.parts.strength.sum}</div>}
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"3px",textTransform:"uppercase",color:"#b0bbd0",marginBottom:8,paddingBottom:6,borderBottom:"1px solid rgba(22,47,119,0.1)"}}>{w.parts.strength.lbl}</div>
+          {w.parts.strength.ex.map((e,i) => {
+            const checked = lc[i] || false;
+            return (
+              <div key={i} style={{display:"flex",alignItems:"center",gap:8,padding:"8px 0",borderBottom:"1px solid rgba(22,47,119,0.07)"}}>
+                <div onClick={() => onToggleLift(idx,i)} style={{width:20,height:20,borderRadius:3,border:`1.5px solid ${checked?"#1a7a45":"rgba(22,47,119,0.22)"}`,background:checked?"#1a7a45":"#eef0f7",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,color:"white",flexShrink:0}}>{checked?"✓":""}</div>
+                <span style={{fontSize:13,color:checked?"#b0bbd0":e.k?"#0e1628":"#7a85a0",fontWeight:e.k?500:400,flex:1,textDecoration:checked?"line-through":"none"}}>{e.n}</span>
+                <span style={{fontFamily:"'DM Mono',monospace",fontSize:11,color:e.k?NAVY:"#b0bbd0",fontWeight:e.k?500:400,flexShrink:0}}>{e.s}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Coach note */}
+      {w.coach && <div style={{padding:"9px 12px",background:"#eef0f7",borderLeft:"2px solid rgba(22,47,119,0.22)",marginBottom:18}}><div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"#7a85a0",textTransform:"uppercase",marginBottom:3}}>Coach</div><div style={{fontSize:12,color:"#7a85a0",lineHeight:1.6,fontStyle:"italic"}}>{w.coach}</div></div>}
+
+      {/* Log section */}
+      {!isRest && (
+        <div style={{borderTop:"1px solid rgba(22,47,119,0.12)",paddingTop:16}}>
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"3px",color:"#7a85a0",textTransform:"uppercase",marginBottom:12}}>Log Workout</div>
+
+          {w.parts.cardio && (() => {
+            const ec = d.c;
+            const curE = effortState[idx]?.c || ec?.e || null;
+            return (
+              <div style={{border:"1px solid rgba(22,47,119,0.22)",borderLeft:"3px solid #1a5fad",padding:12,marginBottom:10}}>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"3px",textTransform:"uppercase",color:"#1a5fad",marginBottom:10}}>Log Cardio</div>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:"#7a85a0",marginBottom:6}}>Effort 1-10</div>
+                <div style={{display:"flex",gap:3,marginBottom:10}}>
+                  {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                    <button key={n} onClick={() => onSetEffort(idx,"c",n)} style={{flex:1,padding:"7px 2px",background:curE===n?"#1a5fad":"#eef0f7",border:`1px solid ${curE===n?"#1a5fad":"rgba(22,47,119,0.22)"}`,color:curE===n?"white":"#7a85a0",fontFamily:"'DM Mono',monospace",fontSize:9,fontWeight:curE===n?700:400,cursor:"pointer"}}>{n}</button>
+                  ))}
+                </div>
+                <div style={{display:"grid",gridTemplateColumns:w.parts.cardio.type==="run"?"1fr 1fr":"1fr",gap:8,marginBottom:10}}>
+                  <div>
+                    <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:"#7a85a0",marginBottom:4}}>{w.parts.cardio.dl||"Distance"}</div>
+                    <input value={distC} onChange={e=>setDistC(e.target.value)} placeholder={w.parts.cardio.type==="swim"?"1000m":"3.1 mi"} style={{width:"100%",padding:"7px 9px",background:"#eef0f7",border:"1px solid rgba(22,47,119,0.22)",color:"#0e1628",fontFamily:"'DM Mono',monospace",fontSize:11,outline:"none"}}/>
+                  </div>
+                  {w.parts.cardio.type==="run" && (
+                    <div>
+                      <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:"#7a85a0",marginBottom:4}}>Avg Pace</div>
+                      <input value={paceC} onChange={e=>setPaceC(e.target.value)} placeholder="9:24 /mi" style={{width:"100%",padding:"7px 9px",background:"#eef0f7",border:"1px solid rgba(22,47,119,0.22)",color:"#0e1628",fontFamily:"'DM Mono',monospace",fontSize:11,outline:"none"}}/>
+                    </div>
+                  )}
+                </div>
+                <button onClick={() => onLog(idx,"c",curE,distC,paceC)} style={{width:"100%",padding:10,background:ec?"#162F77":curE?"#1a5fad":"#eef0f7",color:ec||curE?"white":"#b0bbd0",border:"none",fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:600,cursor:curE?"pointer":"not-allowed"}}>
+                  {ec ? "✓ Cardio Logged" : "Log Cardio"}
+                </button>
+              </div>
+            );
+          })()}
+
+          {w.parts.strength && (() => {
+            const es = d.s;
+            const curE = effortState[idx]?.s || es?.e || null;
+            return (
+              <div style={{border:"1px solid rgba(22,47,119,0.22)",borderLeft:"3px solid #1a7a45",padding:12,marginBottom:10}}>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"3px",textTransform:"uppercase",color:"#1a7a45",marginBottom:10}}>Log Strength</div>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:"#7a85a0",marginBottom:6}}>Effort 1-10</div>
+                <div style={{display:"flex",gap:3,marginBottom:10}}>
+                  {[1,2,3,4,5,6,7,8,9,10].map(n => (
+                    <button key={n} onClick={() => onSetEffort(idx,"s",n)} style={{flex:1,padding:"7px 2px",background:curE===n?"#1a7a45":"#eef0f7",border:`1px solid ${curE===n?"#1a7a45":"rgba(22,47,119,0.22)"}`,color:curE===n?"white":"#7a85a0",fontFamily:"'DM Mono',monospace",fontSize:9,fontWeight:curE===n?700:400,cursor:"pointer"}}>{n}</button>
+                  ))}
+                </div>
+                <button onClick={() => onLog(idx,"s",curE,"","")} style={{width:"100%",padding:10,background:es?"#162F77":curE?"#1a7a45":"#eef0f7",color:es||curE?"white":"#b0bbd0",border:"none",fontFamily:"'DM Sans',sans-serif",fontSize:13,fontWeight:600,cursor:curE?"pointer":"not-allowed"}}>
+                  {es ? "✓ Strength Logged" : "Log Strength"}
+                </button>
+              </div>
+            );
+          })()}
+        </div>
+      )}
+    </div>
+  </div>
+</div>
+```
+
+);
+}
+
+function PlanSheet({day, onClose}) {
+return (
+<div onClick={e => e.target === e.currentTarget && onClose()} style={{position:“fixed”,inset:0,zIndex:300,background:“rgba(14,22,40,0.5)”,backdropFilter:“blur(4px)”,display:“flex”,flexDirection:“column”,justifyContent:“flex-end”}}>
+<div style={{background:“white”,borderTop:`3px solid ${NAVY}`,maxHeight:“75vh”,overflowY:“auto”,paddingBottom:40}}>
+<div style={{display:“flex”,justifyContent:“center”,padding:“12px 0 0”}}><div style={{width:36,height:4,background:“rgba(22,47,119,0.2)”,borderRadius:2}}/></div>
+<div style={{padding:“12px 18px 14px”,borderBottom:“1px solid rgba(22,47,119,0.12)”,display:“flex”,justifyContent:“space-between”,alignItems:“flex-start”}}>
+<div><div style={{fontFamily:”‘DM Mono’,monospace”,fontSize:7,letterSpacing:“2px”,color:”#7a85a0”,textTransform:“uppercase”,marginBottom:4}}>{day.d}</div><div style={{fontFamily:”‘Libre Baskerville’,serif”,fontSize:19,fontWeight:700,color:NAVY}}>{day.n}</div></div>
+<button onClick={onClose} style={{background:”#eef0f7”,border:“1px solid rgba(22,47,119,0.22)”,color:”#7a85a0”,width:28,height:28,fontSize:13,cursor:“pointer”,display:“flex”,alignItems:“center”,justifyContent:“center”,flexShrink:0,marginLeft:10}}>✕</button>
+</div>
+<div style={{padding:“14px 18px”}}>
+<div style={{fontSize:13,color:”#7a85a0”,marginBottom:14,lineHeight:1.5}}>{day.dt}</div>
+<BQBanner text={day.bq}/>
+</div>
+</div>
+</div>
+);
+}
+
+export default function App() {
+const [tab, setTab] = useState(“today”);
+const [openIdx, setOpenIdx] = useState(null);
+const [planDay, setPlanDay] = useState(null);
+const [logged, setLogged] = useState(() => {
+try { return JSON.parse(localStorage.getItem(“rtb_react_v1”) || “{}”); } catch(e) { return {}; }
 });
+const [liftChecks, setLiftChecks] = useState({});
+const [effortState, setEffortState] = useState({});
+
+function save(updated) {
+setLogged(updated);
+try { localStorage.setItem(“rtb_react_v1”, JSON.stringify(updated)); } catch(e) {}
 }
 
-var eff={};
-var liftChk={};
-
-function openSh(idx){
-if(!eff[idx])eff[idx]={c:null,s:null};
-if(!liftChk[idx])liftChk[idx]={};
-rndrSh(idx);
-document.getElementById(“wksheet”).classList.add(“on”);
-document.body.style.overflow=“hidden”;
-}
-function closeSh(){document.getElementById(“wksheet”).classList.remove(“on”);document.body.style.overflow=””;}
-document.getElementById(“wksheet”).onclick=function(e){if(e.target===this)closeSh();};
-
-function togLift(idx,ei){
-if(!liftChk[idx])liftChk[idx]={};
-liftChk[idx][ei]=!liftChk[idx][ei];
-rndrSh(idx);
+function getStatus(i) {
+const d = logged[i]; if (!d) return “none”;
+const w = W[i];
+const hc = !!(w.parts?.cardio), hs = !!(w.parts?.strength);
+const c = d.c, s = d.s;
+if (hc && hs) return (c && s) ? “full” : (c || s) ? “half” : “none”;
+if (hc) return c ? “full” : “none”;
+if (hs) return s ? “full” : “none”;
+return “none”;
 }
 
-function rndrSh(idx){
-var w=W[idx];
-var dt=new Date(WEEK_START.getTime()+idx*86400000);
-var dtStr=DAYNAMES[idx]+”, “+MONTHS[dt.getMonth()]+” “+dt.getDate();
-var isTod=(idx===getTodayIdx());
-var d=lg[idx]||{},hb=w.parts.cardio&&w.parts.strength,ir=Object.keys(w.parts).length===0;
-var lc=liftChk[idx]||{};
-var tc={swim:“ts”,lift:“tl”,run:“tr”,rest:“tx”,bike:“tb”};
-var h=’<div class="shhd"><div class="shhdbar"></div></div>’;
-h+=’<div class="shhdr"><div><div class="shdate">’+dtStr+(isTod?” - Today”:””)+’</div>’;
-h+=’<div class="shtitle">’+w.t+’</div><div class="shsub">’+w.s+’</div>’;
-h+=’<div style="display:flex;gap:5px;flex-wrap:wrap">’;
-for(var ti=0;ti<w.tags.length;ti++)h+=’<span class=“tag ‘+(tc[w.tags[ti]]||“ts”)+’”>’+w.tags[ti]+”</span>”;
-h+=’</div></div><button class="shclose" onclick="closeSh()">✕</button></div>’;
-h+=’<div class="shbody">’;
-if(w.bq)h+=’<div class="bqb"><div style="font-size:13px;flex-shrink:0">🎯</div><div><div class="bqbl">BQ Context</div><div class="bqbt">’+w.bq+’</div></div></div>’;
-if(ir)h+=’<div class="rest"><div class="restbig">OFF</div><div class="restsub">No running. No gym. No swimming.<br>Sleep well.</div></div>’;
-if(w.parts.cardio){
-if(hb)h+=’<div class="pdiv"><div class="pdivbar" style="background:#1a5fad"></div><div class="pdivlbl" style="color:#1a5fad">Cardio</div></div>’;
-if(w.parts.cardio.sum)h+=’<div class="psum">’+w.parts.cardio.sum+’</div>’;
-h+=’<div class="ws2"><div class="slbl">’+w.parts.cardio.lbl+’</div>’;
-if(w.parts.cardio.type===“swim”){
-for(var si=0;si<w.parts.cardio.sets.length;si++){var st=w.parts.cardio.sets[si];h+=’<div class="swr"><div><div class="swn">’+st.n+’</div><div class="swd">’+st.d+’</div></div><div style="text-align:right;flex-shrink:0"><div class="swl">’+st.l+’</div><div class="swm">’+st.m+’</div></div></div>’;}
-if(w.parts.cardio.tot)h+=’<div class="swt"><span class="swtl">Total</span><span class="swtv">’+w.parts.cardio.tot+’</span></div>’;
-}
-if(w.parts.cardio.type===“run”){for(var si=0;si<w.parts.cardio.stats.length;si++){var rs=w.parts.cardio.stats[si];h+=’<div class="rnr"><span class="rnl">’+rs.l+’</span><span class=“rnv’+(rs.h?” h”:””)+’”>’+rs.v+’</span></div>’;}}
-h+=’</div>’;
-}
-if(w.parts.strength){
-if(hb)h+=’<div class="pdiv"><div class="pdivbar" style="background:#1a7a45"></div><div class="pdivlbl" style="color:#1a7a45">Strength</div></div>’;
-if(w.parts.strength.sum)h+=’<div class="psum">’+w.parts.strength.sum+’</div>’;
-h+=’<div class="ws2"><div class="slbl">’+w.parts.strength.lbl+’</div>’;
-var ex=w.parts.strength.ex;
-for(var ei=0;ei<ex.length;ei++){
-var e=ex[ei],chk=lc[ei]||false;
-h+=’<div class="lrow"><div class=“lchk’+(chk?” done”:””)+’” onclick=“togLift(’+idx+’,’+ei+’)”>’+(chk?”✓”:””)+’</div><span class=“lname’+(e.k?” k”:””)+(chk?” struck”:””)+’”>’+e.n+’</span><span class=“lsets’+(e.k?” k”:””)+’”>’+e.s+’</span></div>’;
-}
-h+=’</div>’;
-}
-if(w.coach)h+=’<div class="cn"><div class="cnl">Coach</div><div class="cnt">’+w.coach+’</div></div>’;
-if(!ir){
-h+=’<div class="logs"><div class="logsl">Log Workout</div>’;
-if(w.parts.cardio){
-var ec=d[“c”],curC=(eff[idx]&&eff[idx].c)||(ec&&ec.e)||null;
-h+=’<div class="plc c"><div class="plcl c">Log Cardio</div><div class="effl">Effort 1-10</div><div class="effr">’;
-for(var n=1;n<=10;n++)h+=’<button class=“eb’+(curC===n?” sc”:””)+’” onclick=“setE(’+idx+’,“c”,’+n+’)”>’+n+’</button>’;
-h+=’</div><div class=“fr’+(w.parts.cardio.type===“run”?” two”:””)+’”><div><div class="fl">’+(w.parts.cardio.dl||“Distance”)+’</div><input class=“fi” id=“dc’+idx+’” value=”’+(ec&&ec.d||””)+’” placeholder=”’+(w.parts.cardio.type===“swim”?“1000m”:“3.1 mi”)+’”></div>’;
-if(w.parts.cardio.type===“run”)h+=’<div><div class="fl">Avg Pace</div><input class=“fi” id=“pc’+idx+’” value=”’+(ec&&ec.p||””)+’” placeholder=“9:24 /mi”></div>’;
-h+=’</div><button class=“lb’+(ec?” sv”:curC?” rc”:””)+’” onclick=“logP(’+idx+’,“c”)”>’+(ec?“Cardio Logged”:“Log Cardio”)+’</button></div>’;
-}
-if(w.parts.strength){
-var es=d[“s”],curS=(eff[idx]&&eff[idx].s)||(es&&es.e)||null;
-h+=’<div class="plc s"><div class="plcl s">Log Strength</div><div class="effl">Effort 1-10</div><div class="effr">’;
-for(var n=1;n<=10;n++)h+=’<button class=“eb’+(curS===n?” ss”:””)+’” onclick=“setE(’+idx+’,“s”,’+n+’)”>’+n+’</button>’;
-h+=’</div><button class=“lb’+(es?” sv”:curS?” rs”:””)+’” onclick=“logP(’+idx+’,“s”)”>’+(es?“Strength Logged”:“Log Strength”)+’</button></div>’;
-}
-h+=’</div>’;
-}
-h+=’</div>’;
-document.getElementById(“shcont”).innerHTML=h;
-document.getElementById(“shcont”).scrollTop=0;
+function handleLog(idx, part, effort, dist, pace) {
+if (!effort) return;
+const updated = { …logged, [idx]: { …(logged[idx]||{}), [part]: { e: effort, d: dist, p: pace } } };
+save(updated);
 }
 
-function setE(idx,p,n){if(!eff[idx])eff[idx]={c:null,s:null};eff[idx][p]=n;rndrSh(idx);}
-function logP(idx,p){
-var ef=(eff[idx]&&eff[idx][p])||(lg[idx]&&lg[idx][p]&&lg[idx][p].e);
-if(!ef)return;
-var de=document.getElementById(“dc”+idx),pe=document.getElementById(“pc”+idx);
-if(!lg[idx])lg[idx]={};
-lg[idx][p]={e:ef,d:de?de.value:””,p:pe?pe.value:””};
-sv();bldWk();rndrSh(idx);
+function handleToggleLift(idx, ei) {
+setLiftChecks(prev => ({ …prev, [idx]: { …(prev[idx]||{}), [ei]: !(prev[idx]?.[ei]) } }));
 }
 
-function openPl(day){
-document.getElementById(“plshcont”).innerHTML=’<div class="shhd"><div class="shhdbar"></div></div><div class="shhdr"><div><div class="shdate">’+day.d+’</div><div class="shtitle" style="font-size:18px">’+day.n+’</div></div><button class="shclose" onclick="closePl()">✕</button></div><div class="shbody"><div style="font-size:13px;color:#7a85a0;margin-bottom:13px;line-height:1.5">’+day.dt+’</div><div class="bqb"><div style="font-size:13px;flex-shrink:0">🎯</div><div><div class="bqbl">BQ Context</div><div class="bqbt">’+day.bq+’</div></div></div></div>’;
-document.getElementById(“plsheet”).classList.add(“on”);
-document.body.style.overflow=“hidden”;
+function handleSetEffort(idx, part, n) {
+setEffortState(prev => ({ …prev, [idx]: { …(prev[idx]||{}), [part]: n } }));
 }
-function closePl(){document.getElementById(“plsheet”).classList.remove(“on”);document.body.style.overflow=””;}
-document.getElementById(“plsheet”).onclick=function(e){if(e.target===this)closePl();};
 
-init();
-bldPl();
-updStats();
+const todayIdx = getTodayIdx();
+const todayW = W[todayIdx];
+const done = [0,1,2,3,4,5,6].filter(i => getStatus(i) === “full”).length;
 
-</script>
-</body>
-</html>
+// Weekly stats
+let runMi=0, swimM=0, bikeMi=0, liftN=0;
+for (let i=0; i<7; i++) {
+const d = logged[i]; if (!d) continue;
+const tags = W[i].tags;
+if (d.c?.d) {
+const val = parseFloat(d.c.d);
+if (!isNaN(val)) {
+if (tags.includes(“run”)) runMi += val;
+else if (tags.includes(“swim”)) swimM += val;
+else if (tags.includes(“bike”)) bikeMi += val;
+}
+}
+if (d.s?.e) liftN++;
+}
+
+const st = { fontFamily:”‘DM Sans’,sans-serif”, background:“white”, color:”#0e1628”, maxWidth:430, margin:“0 auto”, height:“100vh”, display:“flex”, flexDirection:“column”, overflow:“hidden” };
+
+return (
+<div style={st}>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+```
+  {/* Header */}
+  <div style={{padding:"14px 18px 11px",display:"flex",justifyContent:"space-between",alignItems:"center",borderBottom:`2px solid ${NAVY}`,background:"white",flexShrink:0}}>
+    <div>
+      <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:18,fontWeight:700,color:NAVY}}>Road to <span style={{color:BLUE}}>Boston</span></div>
+      <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"#7a85a0",textTransform:"uppercase",marginTop:2}}>Indianapolis · Nov 7 · 2:57:59</div>
+    </div>
+    <div style={{display:"flex",alignItems:"center",gap:5,padding:"5px 10px",background:NAVY,borderRadius:3}}>
+      <div style={{width:6,height:6,borderRadius:"50%",background:YELLOW}}/>
+      <span style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:YELLOW,letterSpacing:1}}>BQ MODE</span>
+    </div>
+  </div>
+
+  {/* Main scroll */}
+  <div style={{flex:1,overflowY:"auto",WebkitOverflowScrolling:"touch",paddingBottom:80,background:"#f7f6f2"}}>
+
+    {/* TODAY TAB */}
+    {tab === "today" && (
+      <div>
+        <div style={{background:NAVY,padding:"9px 18px",fontFamily:"'DM Mono',monospace",fontSize:8,letterSpacing:"3px",textTransform:"uppercase",color:"rgba(255,255,255,0.6)"}}>{getTodayStr()} - Recovery Week</div>
+
+        {/* Hero */}
+        <div style={{margin:"13px 13px 0",background:"white",border:"1px solid rgba(22,47,119,0.22)",borderTop:`4px solid ${NAVY}`,padding:17,cursor:"pointer"}} onClick={() => setOpenIdx(todayIdx)}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:11}}>
+            <div><div style={{fontFamily:"'Libre Baskerville',serif",fontSize:21,fontWeight:700,color:NAVY,marginBottom:3}}>{todayW.t}</div><div style={{fontSize:12,color:"#7a85a0"}}>{todayW.s}</div></div>
+            <div style={{width:30,height:30,border:"1px solid rgba(22,47,119,0.22)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,color:NAVY,background:"#eef0f7",flexShrink:0}}>›</div>
+          </div>
+          <div style={{display:"flex",gap:5,marginBottom:13}}>{todayW.tags.map(t => <Tag key={t} type={t}/>)}</div>
+          <div style={{display:"flex",gap:7}}>
+            {[{l:"Phase",v:"Recovery"},{l:"Week",v:"May 11-17"},{l:"Status",v:getStatus(todayIdx)==="full"?"Done":"Active"}].map((s,i) => (
+              <div key={i} style={{flex:1,padding:"7px 9px",background:"#eef0f7",border:"1px solid rgba(22,47,119,0.12)"}}>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:"#7a85a0",letterSpacing:"2px",textTransform:"uppercase",marginBottom:2}}>{s.l}</div>
+                <div style={{fontFamily:"'DM Mono',monospace",fontSize:12,fontWeight:500,color:NAVY}}>{s.v}</div>
+              </div>
+            ))}
+          </div>
+          {/* Log badges */}
+          {(logged[todayIdx]?.c || logged[todayIdx]?.s) && (
+            <div style={{display:"flex",gap:5,marginTop:10}}>
+              {logged[todayIdx]?.c && <div style={{flex:1,padding:"5px 8px",fontFamily:"'DM Mono',monospace",fontSize:9,background:"rgba(26,95,173,0.08)",border:"1px solid rgba(26,95,173,0.18)",color:"#1a5fad"}}>✓ Cardio {logged[todayIdx].c.e}/10{logged[todayIdx].c.d ? ` · ${logged[todayIdx].c.d}` : ""}</div>}
+              {logged[todayIdx]?.s && <div style={{flex:1,padding:"5px 8px",fontFamily:"'DM Mono',monospace",fontSize:9,background:"rgba(26,122,69,0.08)",border:"1px solid rgba(26,122,69,0.18)",color:"#1a7a45"}}>✓ Strength {logged[todayIdx].s.e}/10</div>}
+            </div>
+          )}
+        </div>
+
+        {/* Week list */}
+        <div style={{padding:"16px 14px 9px",display:"flex",justifyContent:"space-between",alignItems:"baseline"}}>
+          <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:14,fontWeight:700,color:NAVY}}>This Week</div>
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#7a85a0"}}>{done}/7 done</div>
+        </div>
+        <div style={{padding:"0 13px",display:"flex",flexDirection:"column",gap:4}}>
+          {[0,1,2,3,4,5,6].map(i => {
+            const st2 = getStatus(i);
+            const isTod = i === todayIdx;
+            const dt2 = new Date(WEEK_START.getTime() + i * 86400000);
+            const dot = DOTS[W[i].tags[0]] || "#b0bbd0";
+            const d2 = logged[i] || {};
+            return (
+              <div key={i} onClick={() => setOpenIdx(i)} style={{padding:"11px 12px",background:"white",border:"1px solid rgba(22,47,119,0.12)",borderLeft:`3px solid ${isTod?NAVY:"transparent"}`,cursor:"pointer"}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <div style={{width:21,height:21,borderRadius:"50%",background:st2==="full"?"#1a7a45":st2==="half"?YELLOW:"#eef0f7",border:`1.5px solid ${st2==="full"?"#1a7a45":st2==="half"?"#c8a800":"rgba(22,47,119,0.22)"}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,color:st2==="half"?"#5a4400":"white",fontWeight:700,flexShrink:0}}>{st2==="full"?"✓":st2==="half"?"◑":""}</div>
+                  <div style={{width:5,height:5,borderRadius:"50%",background:dot,flexShrink:0}}/>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:"#b0bbd0",letterSpacing:"2px",textTransform:"uppercase",marginBottom:2}}>{DAYS[i]} · {MONTHS[dt2.getMonth()]} {dt2.getDate()}{isTod?" · TODAY":""}</div>
+                    <div style={{fontSize:13,fontWeight:500,color:st2==="full"?"#7a85a0":"#0e1628",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{W[i].t}</div>
+                  </div>
+                  <span style={{color:"#b0bbd0",fontSize:13}}>›</span>
+                </div>
+                {(d2.c || d2.s) && (
+                  <div style={{display:"flex",gap:4,marginTop:5,marginLeft:31,flexWrap:"wrap"}}>
+                    {d2.c && <div style={{padding:"2px 6px",fontFamily:"'DM Mono',monospace",fontSize:7,background:"rgba(26,95,173,0.08)",border:"1px solid rgba(26,95,173,0.18)",color:"#1a5fad"}}>Cardio {d2.c.e}/10{d2.c.d?` · ${d2.c.d}`:""}</div>}
+                    {d2.s && <div style={{padding:"2px 6px",fontFamily:"'DM Mono',monospace",fontSize:7,background:"rgba(26,122,69,0.08)",border:"1px solid rgba(26,122,69,0.18)",color:"#1a7a45"}}>Str {d2.s.e}/10</div>}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    {/* PLAN TAB */}
+    {tab === "plan" && (
+      <div>
+        <div style={{background:NAVY,padding:"17px 17px 13px"}}>
+          <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:18,fontWeight:700,color:"white",marginBottom:2}}>2-Week Plan</div>
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",textTransform:"uppercase"}}>Recovery to Base · Tap any day</div>
+        </div>
+        {PLAN.map((wk,wi) => (
+          <div key={wi} style={{margin:"13px 13px 0"}}>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:9}}>
+              <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:13,fontWeight:700,color:NAVY}}>{wk.wk}</div>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:NAVY,padding:"2px 7px",background:"rgba(255,222,0,0.25)",border:"1px solid rgba(255,222,0,0.6)",borderRadius:2}}>{wk.b}</div>
+            </div>
+            <div style={{background:"white",border:"1px solid rgba(22,47,119,0.22)",overflow:"hidden"}}>
+              {wk.days.map((day,di) => (
+                <div key={di} onClick={() => setPlanDay(day)} style={{display:"flex",gap:11,padding:"11px 12px",borderBottom:di<wk.days.length-1?"1px solid rgba(22,47,119,0.08)":"none",cursor:"pointer",alignItems:"center"}}>
+                  <div style={{fontFamily:"'DM Mono',monospace",fontSize:8,color:"#7a85a0",width:25,flexShrink:0,letterSpacing:1}}>{day.d}</div>
+                  <div style={{flex:1}}>
+                    <div style={{fontSize:13,fontWeight:500,color:"#0e1628",marginBottom:1}}>{day.n}</div>
+                    <div style={{fontSize:11,color:"#7a85a0"}}>{day.dt}</div>
+                  </div>
+                  <div style={{color:"#b0bbd0",fontSize:13,flexShrink:0}}>›</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {/* PROGRESS TAB */}
+    {tab === "progress" && (
+      <div>
+        <div style={{background:NAVY,padding:"17px 17px 13px"}}>
+          <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:18,fontWeight:700,color:"white",marginBottom:2}}>Progress</div>
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"rgba(255,255,255,0.4)",textTransform:"uppercase"}}>Post-Durham · Road to Boston</div>
+        </div>
+
+        {/* Weekly stats */}
+        <div style={{padding:"16px 14px 9px",display:"flex",justifyContent:"space-between",alignItems:"baseline"}}>
+          <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:14,fontWeight:700,color:NAVY}}>This Week</div>
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#7a85a0"}}>May 11-17</div>
+        </div>
+        <div style={{margin:"0 13px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+          {[
+            {icon:"🏃",val:runMi.toFixed(1),unit:"miles",lbl:"Running",color:"#c8380a"},
+            {icon:"🏊",val:Math.round(swimM),unit:"meters",lbl:"Swimming",color:"#1a5fad"},
+            {icon:"🚴",val:bikeMi.toFixed(1),unit:"miles",lbl:"Biking",color:"#8a6a00"},
+            {icon:"🏋",val:liftN,unit:"sessions",lbl:"Strength",color:"#1a7a45"},
+          ].map((s,i) => (
+            <div key={i} style={{background:"white",border:"1px solid rgba(22,47,119,0.22)",borderTop:`3px solid ${s.color}`,padding:14}}>
+              <div style={{fontSize:18,marginBottom:6}}>{s.icon}</div>
+              <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:28,fontWeight:700,color:NAVY,lineHeight:1}}>{s.val}</div>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#7a85a0",marginTop:2}}>{s.unit}</div>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"#b0bbd0",textTransform:"uppercase",marginTop:4}}>{s.lbl}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Season stats */}
+        <div style={{padding:"16px 14px 9px"}}><div style={{fontFamily:"'Libre Baskerville',serif",fontSize:14,fontWeight:700,color:NAVY}}>Season</div></div>
+        <div style={{margin:"0 13px",display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
+          {[
+            {l:"Current PR",v:"3:10:55",color:"#7a85a0",sz:20},
+            {l:"BQ Target",v:"2:57:59",color:NAVY,sz:20,note:"2:01 buffer",borderTop:`3px solid ${NAVY}`},
+            {l:"Days to Indy",v:getDaysToIndy(),unit:"days",color:"#0e1628",sz:30},
+            {l:"VO2 Max",v:"59",unit:"Garmin est",color:"#1a7a45",sz:30},
+          ].map((s,i) => (
+            <div key={i} style={{background:"white",border:"1px solid rgba(22,47,119,0.22)",borderTop:s.borderTop||"1px solid rgba(22,47,119,0.22)",padding:13}}>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"#7a85a0",textTransform:"uppercase",marginBottom:7}}>{s.l}</div>
+              <div style={{fontFamily:"'Libre Baskerville',serif",fontSize:s.sz,fontWeight:700,color:s.color,lineHeight:1}}>{s.v}</div>
+              {s.unit && <div style={{fontFamily:"'DM Mono',monospace",fontSize:9,color:"#7a85a0",marginTop:2}}>{s.unit}</div>}
+              {s.note && <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,color:BLUE,marginTop:3}}>{s.note}</div>}
+            </div>
+          ))}
+        </div>
+
+        {/* Race history */}
+        <div style={{margin:"8px 13px 0",background:"white",border:"1px solid rgba(22,47,119,0.22)",padding:14}}>
+          <div style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"2px",color:"#7a85a0",textTransform:"uppercase",marginBottom:12,paddingBottom:7,borderBottom:"1px solid rgba(22,47,119,0.08)"}}>Race History</div>
+          {[
+            {r:"Chicago Marathon",t:"3:32:44"},
+            {r:"Durham Marathon",t:"3:10:55",sub:"-21:49 PR",sc:"#1a7a45"},
+            {r:"Indianapolis Monumental",t:"sub-2:57:59",sub:"BQ Target · 6:46/mi",sc:BLUE,hi:true},
+          ].map((r,i) => (
+            <div key={i} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"9px 0",borderBottom:i<2?"1px solid rgba(22,47,119,0.08)":"none"}}>
+              <div>
+                <div style={{fontSize:13,color:r.hi?NAVY:"#7a85a0",fontWeight:r.hi?600:400,fontFamily:r.hi?"'Libre Baskerville',serif":"inherit"}}>{r.r}</div>
+                {r.sub && <div style={{fontFamily:"'DM Mono',monospace",fontSize:8,color:r.sc,marginTop:2}}>{r.sub}</div>}
+              </div>
+              <div style={{fontFamily:"'DM Mono',monospace",fontSize:13,fontWeight:r.hi?700:500,color:r.hi?NAVY:"#7a85a0"}}>{r.t}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{margin:"8px 13px 18px",padding:"9px 12px",background:"#eef0f7",borderLeft:`3px solid ${NAVY}`,fontFamily:"'DM Mono',monospace",fontSize:8,color:"#7a85a0",lineHeight:1.6}}>BQ standard M18-34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing.</div>
+      </div>
+    )}
+  </div>
+
+  {/* Bottom nav */}
+  <div style={{display:"flex",borderTop:"1px solid rgba(22,47,119,0.22)",background:"white",flexShrink:0}}>
+    {[{id:"today",icon:"◉",lbl:"Today"},{id:"plan",icon:"≡",lbl:"Plan"},{id:"progress",icon:"↑",lbl:"Progress"}].map(t => (
+      <button key={t.id} onClick={() => setTab(t.id)} style={{flex:1,padding:"10px 4px 12px",background:"none",border:"none",color:tab===t.id?NAVY:"#b0bbd0",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
+        <span style={{fontSize:15,lineHeight:1}}>{t.icon}</span>
+        <span style={{fontFamily:"'DM Mono',monospace",fontSize:7,letterSpacing:"1.5px",textTransform:"uppercase"}}>{t.lbl}</span>
+      </button>
+    ))}
+  </div>
+
+  {/* Workout sheet */}
+  {openIdx !== null && (
+    <WorkoutSheet
+      idx={openIdx}
+      onClose={() => setOpenIdx(null)}
+      logged={logged}
+      liftChecks={liftChecks}
+      onToggleLift={handleToggleLift}
+      onLog={handleLog}
+      effortState={effortState}
+      onSetEffort={handleSetEffort}
+    />
+  )}
+
+  {/* Plan sheet */}
+  {planDay && <PlanSheet day={planDay} onClose={() => setPlanDay(null)}/>}
+</div>
+```
+
+);
+}
