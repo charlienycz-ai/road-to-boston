@@ -13,19 +13,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;overflow:hidden;background:#f7f6f2}
-body{font-family:'DM Sans',sans-serif;color:#0e1628;max-width:430px;margin:0 auto;height:100%;display:flex;flex-direction:column}
+html,body{background:#f7f6f2;}
+body{font-family:'DM Sans',sans-serif;color:#0e1628;max-width:430px;margin:0 auto;}
 button,input{font-family:'DM Sans',sans-serif}
-#hdr{padding:14px 18px 11px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #162F77;background:white;flex-shrink:0}
+#hdr{padding:14px 18px 11px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #162F77;background:white;position:fixed;top:0;left:0;right:0;max-width:430px;margin:0 auto;z-index:100}
 .logo{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:#162F77}
 .logo-b{color:#3A6EDB}
 .lsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-top:2px}
 .badge{display:flex;align-items:center;gap:5px;padding:5px 10px;background:#162F77;border-radius:3px}
 .bdot{width:6px;height:6px;border-radius:50%;background:#FFDE00}
 .btxt{font-family:'DM Mono',monospace;font-size:9px;color:#FFDE00;letter-spacing:1px}
-#scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px;background:#f7f6f2}
-.pg{display:none}.pg.on{display:block}
-#bnav{display:flex;border-top:1px solid rgba(22,47,119,0.22);background:white;flex-shrink:0}
+#scroll{padding-bottom:80px;background:#f7f6f2;padding-top:60px;}
+.pg{display:none}.pg.on{display:block;min-height:100vh}
+#bnav{display:flex;border-top:1px solid rgba(22,47,119,0.22);background:white;position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;z-index:100}
 .nb{flex:1;padding:10px 4px 12px;background:none;border:none;color:#b0bbd0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
 .nb.on{color:#162F77}
 .nbi{font-size:15px;line-height:1}
