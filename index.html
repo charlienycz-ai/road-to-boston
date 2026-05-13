@@ -13,335 +13,554 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'DM Sans',sans-serif;color:#0e1628;max-width:430px;margin:0 auto;min-height:100vh;background:#f7f6f2}
-a{text-decoration:none;color:inherit}
-
-/* HEADER */
-.hdr{padding:14px 18px 11px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #162F77;background:white;position:sticky;top:0;z-index:10}
-.logo{font-family:‘Libre Baskerville’,serif;font-size:18px;font-weight:700;color:#162F77}
+html,body{height:100%;overflow:hidden;background:#f7f6f2}
+body{font-family:'DM Sans',sans-serif;color:#0e1628;max-width:430px;margin:0 auto;height:100%;display:flex;flex-direction:column}
+button,input{font-family:'DM Sans',sans-serif}
+#hdr{padding:14px 18px 11px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #162F77;background:white;flex-shrink:0}
+.logo{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:#162F77}
 .logo-b{color:#3A6EDB}
-.lsub{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-top:2px}
+.lsub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-top:2px}
 .badge{display:flex;align-items:center;gap:5px;padding:5px 10px;background:#162F77;border-radius:3px}
 .bdot{width:6px;height:6px;border-radius:50%;background:#FFDE00}
-.btxt{font-family:‘DM Mono’,monospace;font-size:9px;color:#FFDE00;letter-spacing:1px}
-
-/* TABS - CSS only using :target */
-.tab-content{display:none;padding-bottom:80px}
-.tab-content:target{display:block}
-#tab-today{display:block}
-body:has(#tab-plan:target) #tab-today{display:none}
-body:has(#tab-progress:target) #tab-today{display:none}
-
-/* BOTTOM NAV */
-.bnav{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;display:flex;border-top:1px solid rgba(22,47,119,0.22);background:white;z-index:10}
-.nb{flex:1;padding:10px 4px 12px;display:flex;flex-direction:column;align-items:center;gap:3px;color:#b0bbd0;text-decoration:none}
+.btxt{font-family:'DM Mono',monospace;font-size:9px;color:#FFDE00;letter-spacing:1px}
+#scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px;background:#f7f6f2}
+.pg{display:none}.pg.on{display:block}
+#bnav{display:flex;border-top:1px solid rgba(22,47,119,0.22);background:white;flex-shrink:0}
+.nb{flex:1;padding:10px 4px 12px;background:none;border:none;color:#b0bbd0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.nb.on{color:#162F77}
 .nbi{font-size:15px;line-height:1}
-.nbl{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase}
-.nb:target-within,.nb.active{color:#162F77}
-
-/* TODAY */
-.dbar{background:#162F77;padding:9px 18px;font-family:‘DM Mono’,monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6)}
-.hero{margin:13px 13px 0;background:white;border:1px solid rgba(22,47,119,0.22);border-top:4px solid #162F77;padding:17px}
-.hero-title{font-family:‘Libre Baskerville’,serif;font-size:21px;font-weight:700;color:#162F77;margin-bottom:3px}
-.hero-sub{font-size:12px;color:#7a85a0;margin-bottom:12px}
-.tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:13px}
-.tag{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-weight:500}
-.tag-swim{background:rgba(26,95,173,0.1);color:#1a5fad;border:1px solid rgba(26,95,173,0.25)}
-.tag-lift{background:rgba(26,122,69,0.1);color:#1a7a45;border:1px solid rgba(26,122,69,0.25)}
-.tag-run{background:rgba(200,56,10,0.1);color:#c8380a;border:1px solid rgba(200,56,10,0.25)}
-.tag-rest{background:rgba(74,64,144,0.1);color:#4a4090;border:1px solid rgba(74,64,144,0.25)}
+.nbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase}
+.dbar{background:#162F77;padding:9px 18px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.6)}
+.hero{margin:13px 13px 0;background:white;border:1px solid rgba(22,47,119,0.22);border-top:4px solid #162F77;padding:17px;cursor:pointer}
+.htop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:11px}
+.htitle{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:#162F77;margin-bottom:3px}
+.hsub{font-size:12px;color:#7a85a0}
+.harr{width:30px;height:30px;border:1px solid rgba(22,47,119,0.22);display:flex;align-items:center;justify-content:center;font-size:15px;color:#162F77;background:#eef0f7;flex-shrink:0}
+.htags{display:flex;gap:5px;margin-bottom:13px;flex-wrap:wrap}
 .hstats{display:flex;gap:7px}
 .sp{flex:1;padding:7px 9px;background:#eef0f7;border:1px solid rgba(22,47,119,0.12)}
-.spl{font-family:‘DM Mono’,monospace;font-size:7px;color:#7a85a0;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
-.spv{font-family:‘DM Mono’,monospace;font-size:12px;font-weight:500;color:#162F77}
-.sec-hdr{padding:16px 14px 9px;display:flex;justify-content:space-between;align-items:baseline}
-.sec-title{font-family:‘Libre Baskerville’,serif;font-size:14px;font-weight:700;color:#162F77}
-.sec-meta{font-family:‘DM Mono’,monospace;font-size:9px;color:#7a85a0}
-.wkl{padding:0 13px;display:flex;flex-direction:column;gap:4px;margin-bottom:16px}
-.dr{padding:11px 12px;background:white;border:1px solid rgba(22,47,119,0.12);border-left:3px solid transparent;display:flex;align-items:center;gap:10px}
-.dr.today{border-left-color:#162F77}
-.dr-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
-.dr-info{flex:1;min-width:0}
-.dr-label{font-family:‘DM Mono’,monospace;font-size:7px;color:#b0bbd0;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
-.dr-name{font-size:13px;font-weight:500;color:#0e1628;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-/* PLAN */
-.plan-hdr{background:#162F77;padding:17px 17px 13px}
-.plan-title{font-family:‘Libre Baskerville’,serif;font-size:18px;font-weight:700;color:white;margin-bottom:2px}
-.plan-sub{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.spl{font-family:'DM Mono',monospace;font-size:7px;color:#7a85a0;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.spv{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:#162F77}
+.hlog{display:flex;gap:5px;margin-top:10px}
+.hlc{flex:1;padding:5px 8px;font-family:'DM Mono',monospace;font-size:9px;background:rgba(26,95,173,0.08);border:1px solid rgba(26,95,173,0.18);color:#1a5fad}
+.hls{flex:1;padding:5px 8px;font-family:'DM Mono',monospace;font-size:9px;background:rgba(26,122,69,0.08);border:1px solid rgba(26,122,69,0.18);color:#1a7a45}
+.shdr{padding:16px 14px 9px;display:flex;justify-content:space-between;align-items:baseline}
+.st{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;color:#162F77}
+.sm{font-family:'DM Mono',monospace;font-size:9px;color:#7a85a0}
+.wkl{padding:0 13px;display:flex;flex-direction:column;gap:4px}
+.dr{padding:11px 12px;background:white;border:1px solid rgba(22,47,119,0.12);border-left:3px solid transparent;cursor:pointer}
+.dr.tod{border-left-color:#162F77}
+.drm{display:flex;align-items:center;gap:10px}
+.dc{width:21px;height:21px;border-radius:50%;background:#eef0f7;border:1.5px solid rgba(22,47,119,0.22);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;flex-shrink:0;font-weight:700}
+.dc.full{background:#1a7a45;border-color:#1a7a45}
+.dc.half{background:#FFDE00;border-color:#c8a800;color:#5a4400}
+.dtd{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.di{flex:1;min-width:0}
+.dl{font-family:'DM Mono',monospace;font-size:7px;color:#b0bbd0;letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.dn{font-size:13px;font-weight:500;color:#0e1628;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dn.done{color:#7a85a0}
+.dch{color:#b0bbd0;font-size:13px}
+.dbs{display:flex;gap:4px;margin-top:5px;margin-left:31px;flex-wrap:wrap}
+.lbc{padding:2px 6px;font-family:'DM Mono',monospace;font-size:7px;border-radius:2px;background:rgba(26,95,173,0.08);border:1px solid rgba(26,95,173,0.18);color:#1a5fad}
+.lbs{padding:2px 6px;font-family:'DM Mono',monospace;font-size:7px;border-radius:2px;background:rgba(26,122,69,0.08);border:1px solid rgba(26,122,69,0.18);color:#1a7a45}
+.tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 7px;border-radius:2px;font-weight:500}
+.plan-hdr,.prog-hdr{background:#162F77;padding:17px 17px 13px}
+.plan-title,.prog-title{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;color:white;margin-bottom:2px}
+.plan-sub,.prog-sub{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
 .pw{margin:13px 13px 0}
 .pwh{display:flex;align-items:center;gap:8px;margin-bottom:9px}
-.pwn{font-family:‘Libre Baskerville’,serif;font-size:13px;font-weight:700;color:#162F77}
-.pwb{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;color:#162F77;padding:2px 7px;background:rgba(255,222,0,0.25);border:1px solid rgba(255,222,0,0.6);border-radius:2px}
-.pll{background:white;border:1px solid rgba(22,47,119,0.22);overflow:hidden;margin-bottom:4px}
-.pr{display:flex;gap:11px;padding:11px 12px;border-bottom:1px solid rgba(22,47,119,0.08);align-items:flex-start}
+.pwn{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700;color:#162F77}
+.pwb{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#162F77;padding:2px 7px;background:rgba(255,222,0,0.25);border:1px solid rgba(255,222,0,0.6);border-radius:2px}
+.pll{background:white;border:1px solid rgba(22,47,119,0.22);overflow:hidden}
+.pr{display:flex;gap:11px;padding:11px 12px;border-bottom:1px solid rgba(22,47,119,0.08);cursor:pointer;align-items:center}
 .pr:last-child{border-bottom:none}
-.prd{font-family:‘DM Mono’,monospace;font-size:8px;color:#7a85a0;width:25px;flex-shrink:0;letter-spacing:1px;padding-top:2px}
-.prn{font-size:13px;font-weight:500;color:#0e1628;margin-bottom:2px}
+.prd{font-family:'DM Mono',monospace;font-size:8px;color:#7a85a0;width:25px;flex-shrink:0;letter-spacing:1px}
+.prc{flex:1}
+.prn{font-size:13px;font-weight:500;color:#0e1628;margin-bottom:1px}
 .prdt{font-size:11px;color:#7a85a0}
-.pr-bq{font-size:11px;color:#162F77;margin-top:5px;padding:6px 8px;background:#eef0f7;border-left:2px solid #162F77;line-height:1.5}
-
-/* PROGRESS */
-.prog-hdr{background:#162F77;padding:17px 17px 13px}
-.prog-title{font-family:‘Libre Baskerville’,serif;font-size:18px;font-weight:700;color:white;margin-bottom:2px}
-.prog-sub{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase}
+.pra{color:#b0bbd0;font-size:13px;flex-shrink:0}
+.wstats{margin:0 13px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wsc{background:white;border:1px solid rgba(22,47,119,0.22);padding:14px}
+.wsci{font-size:18px;margin-bottom:6px}
+.wscv{font-family:'Libre Baskerville',serif;font-size:28px;font-weight:700;color:#162F77;line-height:1}
+.wscu{font-family:'DM Mono',monospace;font-size:9px;color:#7a85a0;margin-top:2px}
+.wscl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#b0bbd0;text-transform:uppercase;margin-top:4px}
 .sgrid{margin:0 13px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sc{background:white;border:1px solid rgba(22,47,119,0.22);padding:13px}
-.sc-bq{border-top:3px solid #162F77}
-.scl{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:7px}
-.scv{font-family:‘Libre Baskerville’,serif;font-weight:700;line-height:1}
-.scu{font-family:‘DM Mono’,monospace;font-size:9px;color:#7a85a0;margin-top:2px}
-.scn{font-family:‘DM Mono’,monospace;font-size:7px;margin-top:3px;color:#3A6EDB}
+.scl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:7px}
+.scv2{font-family:'Libre Baskerville',serif;font-weight:700;line-height:1}
+.scu{font-family:'DM Mono',monospace;font-size:9px;color:#7a85a0;margin-top:2px}
+.scn{font-family:'DM Mono',monospace;font-size:7px;margin-top:3px;color:#3A6EDB}
 .ic{margin:8px 13px 0;background:white;border:1px solid rgba(22,47,119,0.22);padding:14px}
-.icl{font-family:‘DM Mono’,monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid rgba(22,47,119,0.08)}
+.icl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:12px;padding-bottom:7px;border-bottom:1px solid rgba(22,47,119,0.08)}
 .rr{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(22,47,119,0.08)}
 .rr:last-child{border-bottom:none}
 .rn{font-size:13px;color:#7a85a0}
-.rn-hi{font-size:13px;color:#162F77;font-weight:600;font-family:‘Libre Baskerville’,serif}
-.rs{font-family:‘DM Mono’,monospace;font-size:8px;margin-top:2px}
-.rt{font-family:‘DM Mono’,monospace;font-size:13px;font-weight:500;color:#7a85a0}
-.rt-hi{font-family:‘DM Mono’,monospace;font-size:13px;font-weight:700;color:#162F77}
-.fn{margin:8px 13px 18px;padding:9px 12px;background:#eef0f7;border-left:3px solid #162F77;font-family:‘DM Mono’,monospace;font-size:8px;color:#7a85a0;line-height:1.6}
+.rn.hi{color:#162F77;font-weight:600;font-family:'Libre Baskerville',serif}
+.rs{font-family:'DM Mono',monospace;font-size:8px;margin-top:2px}
+.rt{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:#7a85a0}
+.rt.hi{color:#162F77;font-weight:700}
+.fn{margin:8px 13px 18px;padding:9px 12px;background:#eef0f7;border-left:3px solid #162F77;font-family:'DM Mono',monospace;font-size:8px;color:#7a85a0;line-height:1.6}
+.ov{display:none;position:fixed;inset:0;z-index:300;background:rgba(14,22,40,0.55);flex-direction:column;justify-content:flex-end}
+.ov.on{display:flex}
+.sh{background:white;border-top:3px solid #162F77;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:44px}
+.shhnd{display:flex;justify-content:center;padding:12px 0 0}
+.shbar{width:36px;height:4px;background:rgba(22,47,119,0.2);border-radius:2px}
+.shhdr{padding:12px 18px 14px;border-bottom:1px solid rgba(22,47,119,0.12);display:flex;justify-content:space-between;align-items:flex-start}
+.shclose{background:#eef0f7;border:1px solid rgba(22,47,119,0.22);color:#7a85a0;width:28px;height:28px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:10px;border-radius:2px}
+.shbody{padding:14px 18px 0}
+.shdate{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:4px}
+.shtitle{font-family:'Libre Baskerville',serif;font-size:21px;font-weight:700;color:#162F77;margin-bottom:2px}
+.shsub{font-size:12px;color:#7a85a0;margin-bottom:9px}
+.bqb{padding:10px 14px;background:#eef0f7;border-left:3px solid #162F77;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start}
+.bqbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#162F77;text-transform:uppercase;margin-bottom:4px;opacity:0.7}
+.bqbt{font-size:12px;color:#0e1628;line-height:1.6}
+.pdiv{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.pdivc{width:3px;height:16px;border-radius:1px}
+.pdivl{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700}
+.psum{font-size:12px;color:#7a85a0;line-height:1.6;margin-bottom:9px;font-style:italic}
+.slbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:#b0bbd0;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(22,47,119,0.1)}
+.wsec{margin-bottom:20px}
+.swr{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;gap:10px;border-bottom:1px solid rgba(22,47,119,0.07)}
+.swr:last-child{border-bottom:none}
+.swn{font-size:12px;font-weight:500;color:#0e1628;margin-bottom:2px}
+.swd{font-size:10px;color:#7a85a0;line-height:1.4}
+.swl{font-family:'DM Mono',monospace;font-size:12px;font-weight:500;color:#1a5fad}
+.swm{font-family:'DM Mono',monospace;font-size:9px;color:#b0bbd0}
+.swt{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:6px 10px;background:rgba(26,95,173,0.06);border:1px solid rgba(26,95,173,0.15)}
+.swtl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:#1a5fad}
+.swtv{font-family:'DM Mono',monospace;font-size:11px;color:#1a5fad}
+.lrow{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)}
+.lrow:last-child{border-bottom:none}
+.lchk{width:20px;height:20px;border-radius:3px;border:1.5px solid rgba(22,47,119,0.22);background:#eef0f7;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:white;flex-shrink:0}
+.lchk.on{background:#1a7a45;border-color:#1a7a45}
+.lname{font-size:13px;color:#7a85a0;flex:1}
+.lname.k{color:#0e1628;font-weight:500}
+.lname.dk{color:#b0bbd0;text-decoration:line-through}
+.lsets{font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0;flex-shrink:0}
+.lsets.k{color:#162F77;font-weight:500}
+.rnrw{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(22,47,119,0.07)}
+.rnrw:last-child{border-bottom:none}
+.rnl{font-size:13px;color:#7a85a0}
+.rnv{font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0}
+.rnv.h{color:#c8380a;font-weight:500}
+.cn{padding:9px 12px;background:#eef0f7;border-left:2px solid rgba(22,47,119,0.22);margin-bottom:18px}
+.cnl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:3px}
+.cnt{font-size:12px;color:#7a85a0;line-height:1.6;font-style:italic}
+.logsec{border-top:1px solid rgba(22,47,119,0.12);padding-top:16px}
+.logsl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;color:#7a85a0;text-transform:uppercase;margin-bottom:12px}
+.plc{border:1px solid rgba(22,47,119,0.22);padding:12px;margin-bottom:10px}
+.plcc{border-left:3px solid #1a5fad}
+.plcs{border-left:3px solid #1a7a45}
+.plcl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.plclc{color:#1a5fad}.plcls{color:#1a7a45}
+.effl{font-family:'DM Mono',monospace;font-size:7px;color:#7a85a0;margin-bottom:6px;letter-spacing:1px}
+.effr{display:flex;gap:3px;margin-bottom:10px}
+.eb{flex:1;padding:7px 2px;background:#eef0f7;border:1px solid rgba(22,47,119,0.22);color:#7a85a0;font-family:'DM Mono',monospace;font-size:9px;cursor:pointer}
+.ebc{background:#1a5fad;border-color:#1a5fad;color:white;font-weight:700}
+.ebs{background:#1a7a45;border-color:#1a7a45;color:white;font-weight:700}
+.fg{display:grid;gap:8px;margin-bottom:10px}
+.fg2{grid-template-columns:1fr 1fr}
+.fl{font-family:'DM Mono',monospace;font-size:7px;color:#7a85a0;margin-bottom:4px;letter-spacing:1px}
+.fi{width:100%;padding:7px 9px;background:#eef0f7;border:1px solid rgba(22,47,119,0.22);color:#0e1628;font-family:'DM Mono',monospace;font-size:11px;outline:none}
+.lb{width:100%;padding:10px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:not-allowed;color:#b0bbd0;background:#eef0f7}
+.lbrc{background:#1a5fad;color:white;cursor:pointer}
+.lbrs{background:#1a7a45;color:white;cursor:pointer}
+.lbsv{background:#162F77;color:white;cursor:default}
+.restbig{font-family:'Libre Baskerville',serif;font-size:64px;font-weight:700;color:#eef0f7;letter-spacing:4px;text-align:center;padding:40px 0 10px}
+.restsub{font-size:13px;color:#7a85a0;line-height:1.7;text-align:center;padding-bottom:30px}
 .phase-section{margin:8px 13px 0;background:white;border:1px solid rgba(22,47,119,0.22);padding:14px}
 .ph{margin-bottom:12px}
 .ph:last-child{margin-bottom:0}
 .ph-hdr{display:flex;justify-content:space-between;margin-bottom:5px}
 .ph-name{font-size:12px;color:#0e1628;font-weight:500}
-.ph-sub{font-family:‘DM Mono’,monospace;font-size:9px;color:#7a85a0}
+.ph-sub{font-family:'DM Mono',monospace;font-size:9px;color:#7a85a0}
 .ph-bar{height:3px;background:#eef0f7;border-radius:1px;overflow:hidden}
 .ph-fill{height:100%;border-radius:1px}
 </style>
-
 </head>
 <body>
-
-<div class="hdr">
+<div id="hdr">
   <div>
     <div class="logo">Road to <span class="logo-b">Boston</span></div>
     <div class="lsub">Indianapolis - Nov 7 - 2:57:59</div>
   </div>
   <div class="badge"><div class="bdot"></div><span class="btxt">BQ MODE</span></div>
 </div>
-
-<!-- TODAY -->
-
-<div id="tab-today" class="tab-content">
-  <div class="dbar">Tuesday, May 13 - Recovery Week</div>
-
-  <div class="hero">
-    <div class="hero-title">Chest &amp; Triceps</div>
-    <div class="hero-sub">Upper Body - Push Day</div>
-    <div class="tags">
-      <span class="tag tag-lift">lift</span>
-    </div>
-    <div class="hstats">
-      <div class="sp"><div class="spl">Type</div><div class="spv">Strength</div></div>
-      <div class="sp"><div class="spl">Phase</div><div class="spv">Recovery</div></div>
-      <div class="sp"><div class="spl">Week</div><div class="spv">May 11-17</div></div>
-    </div>
-  </div>
-
-  <div class="sec-hdr">
-    <div class="sec-title">This Week</div>
-    <div class="sec-meta">1/7 done</div>
-  </div>
-
-  <div class="wkl">
-    <div class="dr" style="border-left-color:#162F77;opacity:0.6">
-      <div class="dr-dot" style="background:#1a5fad"></div>
-      <div class="dr-info">
-        <div class="dr-label">MON - May 11</div>
-        <div class="dr-name" style="color:#7a85a0">Easy Swim + Back &amp; Biceps</div>
-      </div>
-      <span style="color:#1a7a45;font-size:13px">&#10003;</span>
-    </div>
-    <div class="dr today">
-      <div class="dr-dot" style="background:#1a7a45"></div>
-      <div class="dr-info">
-        <div class="dr-label">TUE - May 12 - TODAY</div>
-        <div class="dr-name">Chest &amp; Triceps</div>
-      </div>
-    </div>
-    <div class="dr">
-      <div class="dr-dot" style="background:#1a5fad"></div>
-      <div class="dr-info">
-        <div class="dr-label">WED - May 13</div>
-        <div class="dr-name">Aerobic Swim</div>
-      </div>
-    </div>
-    <div class="dr">
-      <div class="dr-dot" style="background:#c8380a"></div>
-      <div class="dr-info">
-        <div class="dr-label">THU - May 14</div>
-        <div class="dr-name">First Run Back + Legs</div>
-      </div>
-    </div>
-    <div class="dr">
-      <div class="dr-dot" style="background:#1a7a45"></div>
-      <div class="dr-info">
-        <div class="dr-label">FRI - May 15</div>
-        <div class="dr-name">Shoulders &amp; Arms</div>
-      </div>
-    </div>
-    <div class="dr">
-      <div class="dr-dot" style="background:#c8380a"></div>
-      <div class="dr-info">
-        <div class="dr-label">SAT - May 16</div>
-        <div class="dr-name">Easy Run #2</div>
-      </div>
-    </div>
-    <div class="dr">
-      <div class="dr-dot" style="background:#4a4090"></div>
-      <div class="dr-info">
-        <div class="dr-label">SUN - May 17</div>
-        <div class="dr-name">Full Rest</div>
-      </div>
-    </div>
-  </div>
-
-  <div style="margin:0 13px 16px;background:white;border:1px solid rgba(22,47,119,0.22);border-top:3px solid #162F77;padding:17px">
-    <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:#b0bbd0;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(22,47,119,0.1)">LUNCH - GYM</div>
-    <div style="background:#eef0f7;border-left:3px solid #162F77;padding:10px 14px;margin-bottom:14px">
-      <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#162F77;text-transform:uppercase;margin-bottom:4px;opacity:0.7">BQ Context</div>
-      <div style="font-size:12px;color:#0e1628;line-height:1.6">Pure upper body maintenance. 225 baseline protected. Legs get a full rest before Thursday's first run back.</div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:0">
-      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)"><span style="font-size:13px;color:#0e1628;font-weight:500">Flat Barbell Bench Press</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#162F77;font-weight:500">4x5-6</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)"><span style="font-size:13px;color:#7a85a0">Incline DB Press</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0">3x8-10</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)"><span style="font-size:13px;color:#7a85a0">Machine Chest Press</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0">3x10-12</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)"><span style="font-size:13px;color:#7a85a0">Cable Fly</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0">3x12-15</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)"><span style="font-size:13px;color:#7a85a0">Tricep Rope Pushdown</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0">3x12</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(22,47,119,0.07)"><span style="font-size:13px;color:#7a85a0">Tricep Extension Machine</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0">3x10-12</span></div>
-      <div style="display:flex;justify-content:space-between;padding:8px 0"><span style="font-size:13px;color:#7a85a0">Dips</span><span style="font-family:'DM Mono',monospace;font-size:11px;color:#b0bbd0">2x10</span></div>
-    </div>
-    <div style="margin-top:14px;padding:9px 12px;background:#eef0f7;border-left:2px solid rgba(22,47,119,0.22)">
-      <div style="font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;color:#7a85a0;text-transform:uppercase;margin-bottom:3px">Coach</div>
-      <div style="font-size:12px;color:#7a85a0;line-height:1.6;font-style:italic">Full chest day. Hit 225. No running today - let the legs rest completely.</div>
-    </div>
-  </div>
+<div id="scroll">
+  <div class="pg on" id="pg-today"><p style="padding:20px;color:red;font-family:monospace">JS not loaded</p></div>
+  <div class="pg" id="pg-plan"></div>
+  <div class="pg" id="pg-progress"></div>
 </div>
-
-<!-- PLAN -->
-
-<div id="tab-plan" class="tab-content">
-  <div class="plan-hdr">
-    <div class="plan-title">2-Week Plan</div>
-    <div class="plan-sub">Recovery to Base</div>
-  </div>
-
-  <div class="pw">
-    <div class="pwh"><div class="pwn">Week 1 - May 11-17</div><div class="pwb">RECOVERY</div></div>
-    <div class="pll">
-      <div class="pr"><div class="prd">MON</div><div><div class="prn">Easy Swim + Back &amp; Biceps</div><div class="prdt">1000m - 40 lengths - Upper lift</div><div class="pr-bq">Active recovery. Aerobic flush accelerates healing from Durham's 1000ft of elevation.</div></div></div>
-      <div class="pr"><div class="prd">TUE</div><div><div class="prn">Chest &amp; Triceps</div><div class="prdt">Bench baseline - Full push session</div><div class="pr-bq">Upper body only. 225 protected. Legs rest completely before Thursday's first run.</div></div></div>
-      <div class="pr"><div class="prd">WED</div><div><div class="prn">Aerobic Swim</div><div class="prdt">1100m - 44 lengths - Zone 2</div><div class="pr-bq">Zone 2 swim builds the same aerobic engine that carries you past mile 20.</div></div></div>
-      <div class="pr"><div class="prd">THU</div><div><div class="prn">First Run Back + Legs</div><div class="prdt">20-25 min - 9:30+/mi - Modified legs</div><div class="pr-bq">Check-in run only. The data from this run shapes all of next week's plan.</div></div></div>
-      <div class="pr"><div class="prd">FRI</div><div><div class="prn">Shoulders &amp; Arms</div><div class="prdt">Light upper - Face pulls</div><div class="pr-bq">Light day. Legs rest ahead of Saturday's long run. 40 min max.</div></div></div>
-      <div class="pr"><div class="prd">SAT</div><div><div class="prn">Easy Run #2</div><div class="prdt">30-35 min - 9:00-9:30/mi</div><div class="pr-bq">Aerobic base is the number one predictor of marathon performance. Every easy mile compounds.</div></div></div>
-      <div class="pr"><div class="prd">SUN</div><div><div class="prn">Full Rest</div><div class="prdt">No activity</div><div class="pr-bq">Rest is training. Your body gets faster on recovery days, not workout days.</div></div></div>
-    </div>
-  </div>
-
-  <div class="pw" style="margin-bottom:16px">
-    <div class="pwh"><div class="pwn">Week 2 - May 18-24</div><div class="pwb">BASE</div></div>
-    <div class="pll">
-      <div class="pr"><div class="prd">MON</div><div><div class="prn">Easy Run + Posterior Chain</div><div class="prdt">30-35 min easy - Full leg session</div><div class="pr-bq">First full leg day. RDLs and hip abduction are your runner's knee insurance policy.</div></div></div>
-      <div class="pr"><div class="prd">TUE</div><div><div class="prn">Easy Run + Back &amp; Biceps</div><div class="prdt">35-40 min - 8:45-9:15/mi</div><div class="pr-bq">Building aerobic volume. Consistent easy mileage is the foundation of your BQ.</div></div></div>
-      <div class="pr"><div class="prd">WED</div><div><div class="prn">Swim + Legs Heavy</div><div class="prdt">1200m - 48 lengths - Full legs</div><div class="pr-bq">Nordic hamstring curls start this week. Eccentric strength = injury prevention.</div></div></div>
-      <div class="pr"><div class="prd">THU</div><div><div class="prn">Easy Run + Chest &amp; Triceps</div><div class="prdt">35-40 min - 8:45-9:15/mi</div><div class="pr-bq">Third run of the week. Mileage building steadily toward the training block.</div></div></div>
-      <div class="pr"><div class="prd">FRI</div><div><div class="prn">Bike + Shoulders &amp; Arms</div><div class="prdt">18-22 mi - Alt: 45 min swim</div><div class="pr-bq">Cross-training aerobic capacity without run stress. First bike session of the block.</div></div></div>
-      <div class="pr"><div class="prd">SAT</div><div><div class="prn">Long Run</div><div class="prdt">60-70 min - 8:30-9:00/mi</div><div class="pr-bq">First real long run since Durham. Eat a solid dinner Friday. Start fueling practice.</div></div></div>
-      <div class="pr"><div class="prd">SUN</div><div><div class="prn">Full Rest</div><div class="prdt">No activity</div><div class="pr-bq">Non-negotiable rest. Absorb the week's training.</div></div></div>
-    </div>
-  </div>
+<div id="bnav">
+  <button class="nb on" id="nb-today" onclick="showTab('today')"><span class="nbi">&#9673;</span><span class="nbl">Today</span></button>
+  <button class="nb" id="nb-plan" onclick="showTab('plan')"><span class="nbi">&#8801;</span><span class="nbl">Plan</span></button>
+  <button class="nb" id="nb-progress" onclick="showTab('progress')"><span class="nbi">&#8593;</span><span class="nbl">Progress</span></button>
 </div>
+<div class="ov" id="wkov"><div class="sh" id="wksh"></div></div>
+<div class="ov" id="plov"><div class="sh" id="plsh"></div></div>
+<script>
 
-<!-- PROGRESS -->
+var N=”#162F77”,B=”#3A6EDB”,Y=”#FFDE00”;
+var WS=new Date(2026,4,11);
+var DAY=[“MON”,“TUE”,“WED”,“THU”,“FRI”,“SAT”,“SUN”];
+var DN2=[“Monday”,“Tuesday”,“Wednesday”,“Thursday”,“Friday”,“Saturday”,“Sunday”];
+var MN=[“Jan”,“Feb”,“Mar”,“Apr”,“May”,“Jun”,“Jul”,“Aug”,“Sep”,“Oct”,“Nov”,“Dec”];
+var DOTS={run:”#c8380a”,swim:”#1a5fad”,lift:”#1a7a45”,rest:”#4a4090”,bike:”#8a6a00”};
+var TAGCSS={
+swim:“background:rgba(26,95,173,0.1);color:#1a5fad;border:1px solid rgba(26,95,173,0.25)”,
+lift:“background:rgba(26,122,69,0.1);color:#1a7a45;border:1px solid rgba(26,122,69,0.25)”,
+run:“background:rgba(200,56,10,0.1);color:#c8380a;border:1px solid rgba(200,56,10,0.25)”,
+rest:“background:rgba(74,64,144,0.1);color:#4a4090;border:1px solid rgba(74,64,144,0.25)”,
+bike:“background:rgba(138,106,0,0.1);color:#8a6a00;border:1px solid rgba(138,106,0,0.25)”
+};
+var W=[
+{t:“Easy Swim + Back & Biceps”,s:“Easy Swim - Upper Body”,tags:[“swim”,“lift”],
+bq:“Active recovery - aerobic blood flow accelerates muscle repair from Durham. Every easy day protects the quality days ahead.”,
+parts:{
+cardio:{type:“swim”,lbl:“MORNING - PARKWEST POOL - 25M PER LENGTH”,sum:“Easy recovery swim. Low intensity, full body flush. HR under 120.”,
+sets:[{n:“Warmup”,d:“Easy, any stroke, get loose”,l:“8 lengths”,m:“200m”},
+{n:“Main Set - 6x4 lengths”,d:“30 sec rest, target 1:55-2:05 per 100m”,l:“24 lengths”,m:“600m”},
+{n:“Cooldown”,d:“Slow, long strokes”,l:“8 lengths”,m:“200m”}],
+tot:“40 lengths - 1000m - 25 min”,dl:“Distance (e.g. 1000m)”},
+strength:{type:“lift”,lbl:“LUNCH - GYM - UPPER ONLY”,sum:“Pull-focused upper body. No legs.”,
+ex:[{n:“Chest-Supported DB Row”,s:“3x8-10”},{n:“Lat Pulldown”,s:“3x8-10”},
+{n:“Seated Cable Row”,s:“3x10-12”},{n:“Machine Rear Delt Fly”,s:“3x10-12”},
+{n:“Dumbbell Curl”,s:“3x10-12”},{n:“Cable Curl”,s:“3x10-12”},{n:“21s”,s:“2 sets”}]}},
+coach:“No legs today. Keep the swim relaxed.”},
+{t:“Chest & Triceps”,s:“Upper Body - Push Day”,tags:[“lift”],
+bq:“Pure upper body maintenance. 225 baseline protected. Legs get a full rest.”,
+parts:{strength:{type:“lift”,lbl:“LUNCH - GYM”,sum:“Heavy push day. Protect your 225 bench baseline.”,
+ex:[{n:“Flat Barbell Bench Press”,s:“4x5-6”,k:true},{n:“Incline DB Press”,s:“3x8-10”},
+{n:“Machine Chest Press”,s:“3x10-12”},{n:“Cable Fly”,s:“3x12-15”},
+{n:“Tricep Rope Pushdown”,s:“3x12”},{n:“Tricep Extension Machine”,s:“3x10-12”},{n:“Dips”,s:“2x10”}]}},
+coach:“Full chest day. Hit 225. No running today.”},
+{t:“Aerobic Swim”,s:“Pool - Zone 2”,tags:[“swim”],
+bq:“Zone 2 swimming builds the same aerobic engine that carries you past mile 20.”,
+parts:{cardio:{type:“swim”,lbl:“MORNING - PARKWEST POOL - 25M PER LENGTH”,sum:“Sustained aerobic effort. Zone 2 the entire way.”,
+sets:[{n:“Warmup”,d:“Relaxed, settle into rhythm”,l:“8 lengths”,m:“200m”},
+{n:“Main Set - 4x8 lengths”,d:“45 sec rest, target 1:50-2:00 per 100m”,l:“32 lengths”,m:“800m”},
+{n:“Cooldown”,d:“Slow, wind it down”,l:“4 lengths”,m:“100m”}],
+tot:“44 lengths - 1100m - 28 min”,dl:“Distance completed”}},
+coach:“No gym today. Still aerobic - if joints flare, back off.”},
+{t:“First Run Back”,s:“Road + Modified Legs”,tags:[“run”,“lift”],
+bq:“This is a check-in run, not a training run. The data from today tells me how fast we progress next week.”,
+parts:{
+cardio:{type:“run”,lbl:“MORNING - ROAD”,sum:“First run since Durham. Flat route, no watch pressure, purely by feel.”,
+stats:[{l:“Duration”,v:“20-25 min”,h:true},{l:“Pace”,v:“9:30+ per mi”,h:true},
+{l:“HR Cap”,v:“140 bpm”},{l:“Surface”,v:“Flat only”},{l:“Walk breaks”,v:“Take freely”}],
+dl:“Distance (mi)”,pl:“Avg pace”},
+strength:{type:“lift”,lbl:“LUNCH - GYM - HALF VOLUME”,sum:“Reintroducing leg work at half volume. Hip abduction is non-negotiable.”,
+ex:[{n:“Romanian Deadlift”,s:“2x8”},{n:“Bulgarian Split Squat”,s:“2x10”},
+{n:“Hip Abduction Machine”,s:“2x15”,k:true},{n:“Seated Calf Raise”,s:“2x15”},
+{n:“Single-Leg Glute Bridge”,s:“2x12”}]}},
+coach:“Run is a check-in, not a workout. Any joint tweak - stop.”},
+{t:“Shoulders & Arms”,s:“Light Upper - Pre-Long Run”,tags:[“lift”],
+bq:“Light day by design. Legs rest ahead of Saturday. Face pulls protect shoulder health.”,
+parts:{strength:{type:“lift”,lbl:“LUNCH - GYM - LIGHT DAY”,sum:“In and out in 40 minutes. Nothing heavy.”,
+ex:[{n:“Shoulder Press Machine”,s:“3x10-12”},{n:“Machine Lateral Raise”,s:“3x12-15”},
+{n:“Face Pulls”,s:“3x15”,k:true},{n:“EZ-Bar Curl”,s:“3x10-12”},
+{n:“Cable Tricep Pushdown”,s:“3x12-15”},{n:“Cable Curl”,s:“2x12”}]}},
+coach:“In and out in 40 min. Long run tomorrow.”},
+{t:“Easy Run #2”,s:“Road - Run Only”,tags:[“run”],
+bq:“Second run back. Aerobic base is the single most important predictor of marathon performance.”,
+parts:{cardio:{type:“run”,lbl:“MORNING - ROAD - RUN ONLY”,sum:“Easy aerobic run. Conversational pace the entire way.”,
+stats:[{l:“Duration”,v:“30-35 min”,h:true},{l:“Pace”,v:“9:00-9:30 per mi”,h:true},
+{l:“HR Cap”,v:“145 bpm”},{l:“Feel”,v:“Conversational”},{l:“Gym”,v:“None today”}],
+dl:“Distance (mi)”,pl:“Avg pace”}},
+coach:“If Thursday felt good, step it up. No ego.”},
+{t:“Full Rest”,s:“Complete Recovery”,tags:[“rest”],
+bq:“Rest is training. Your body adapts and gets faster on recovery days. Non-negotiable.”,
+parts:{},coach:“No running. No gym. No swimming. Sleep well.”}
+];
+var PLAN=[
+{wk:“Week 1 - May 11-17”,b:“RECOVERY”,days:[
+{d:“MON”,n:“Easy Swim + Back & Biceps”,dt:“1000m - 40 lengths - Upper lift”,bq:“Active recovery. Aerobic flush accelerates healing from Durham.”},
+{d:“TUE”,n:“Chest & Triceps”,dt:“Bench baseline - Full push session”,bq:“Upper body only. 225 protected. Legs rest completely.”},
+{d:“WED”,n:“Aerobic Swim”,dt:“1100m - 44 lengths - Zone 2”,bq:“Zone 2 swim builds the same engine that carries you past mile 20.”},
+{d:“THU”,n:“First Run Back + Legs”,dt:“20-25 min - 9:30+/mi - Modified legs”,bq:“Check-in run only. Data from this run shapes all of next week.”},
+{d:“FRI”,n:“Shoulders & Arms”,dt:“Light upper - Face pulls”,bq:“Light day. Legs rest ahead of Saturday.”},
+{d:“SAT”,n:“Easy Run #2”,dt:“30-35 min - 9:00-9:30/mi”,bq:“Aerobic base is the number one predictor of marathon performance.”},
+{d:“SUN”,n:“Full Rest”,dt:“No activity”,bq:“Rest is training. Body adapts on recovery days.”}
+]},
+{wk:“Week 2 - May 18-24”,b:“BASE”,days:[
+{d:“MON”,n:“Easy Run + Posterior Chain”,dt:“30-35 min easy - Full leg session”,bq:“First full leg day. Hip abduction is your runners knee insurance.”},
+{d:“TUE”,n:“Easy Run + Back & Biceps”,dt:“35-40 min - 8:45-9:15/mi”,bq:“Building aerobic volume. Consistent easy mileage is the foundation.”},
+{d:“WED”,n:“Swim + Legs Heavy”,dt:“1200m - 48 lengths - Full legs”,bq:“Nordic hamstring curls start this week. Injury prevention.”},
+{d:“THU”,n:“Easy Run + Chest & Triceps”,dt:“35-40 min - 8:45-9:15/mi”,bq:“Third run of the week. Mileage building steadily.”},
+{d:“FRI”,n:“Bike + Shoulders & Arms”,dt:“18-22 mi - Alt: 45 min swim”,bq:“Cross-training aerobic capacity without run stress.”},
+{d:“SAT”,n:“Long Run”,dt:“60-70 min - 8:30-9:00/mi”,bq:“First real long run since Durham. Practice fueling today.”},
+{d:“SUN”,n:“Full Rest”,dt:“No activity”,bq:“Non-negotiable rest. Absorb the week.”}
+]}
+];
+var lg={};
+try{lg=JSON.parse(localStorage.getItem(“rtbv8”)||”{}”);}catch(e){}
+function sv(){try{localStorage.setItem(“rtbv8”,JSON.stringify(lg));}catch(e){}}
+var lc={},ef={};
+function gst(i){
+var d=lg[i];if(!d)return”none”;
+var w=W[i],hc=!!(w.parts&&w.parts.cardio),hs=!!(w.parts&&w.parts.strength);
+var c=d.c,s=d.s;
+if(hc&&hs)return(c&&s)?“full”:(c||s)?“half”:“none”;
+if(hc)return c?“full”:“none”;
+if(hs)return s?“full”:“none”;
+return”none”;
+}
+function gti(){var d=Math.floor((new Date()-WS)/86400000);return d<0?0:d>6?6:d;}
+function gds(){return Math.max(0,Math.ceil((new Date(2026,10,7)-new Date())/86400000));}
+function gts(){var n=new Date(),w=n.getDay(),i=w===0?6:w-1;return DN2[i]+”, “+MN[n.getMonth()]+” “+n.getDate();}
+function tag(t){return ‘\x3Cspan class=“tag” style=”’+TAGCSS[t]+’”>’+t+”\x3C/span>”;}
+function bqb(txt){return ‘\x3Cdiv class=“bqb”>\x3Cspan style=“font-size:14px;flex-shrink:0”>🎯\x3C/span>\x3Cdiv>\x3Cdiv class=“bqbl”>BQ Context\x3C/div>\x3Cdiv class=“bqbt”>’+txt+”\x3C/div>\x3C/div>\x3C/div>”;}
+function showTab(id){
+[“today”,“plan”,“progress”].forEach(function(t){
+document.getElementById(“pg-”+t).classList.toggle(“on”,t===id);
+document.getElementById(“nb-”+t).classList.toggle(“on”,t===id);
+});
+document.getElementById(“scroll”).scrollTop=0;
+if(id===“progress”)rProg();
+}
+function rToday(){
+var ti=gti(),w=W[ti];
+var done=[0,1,2,3,4,5,6].filter(function(i){return gst(i)===“full”;}).length;
+var ld=lg[ti]||{};
+var hlog=””;
+if(ld.c||ld.s){
+hlog=’\x3Cdiv class=“hlog”>’;
+if(ld.c)hlog+=’\x3Cdiv class=“hlc”>Cardio ‘+ld.c.e+”/10”+(ld.c.d?” - “+ld.c.d:””)+”\x3C/div>”;
+if(ld.s)hlog+=’\x3Cdiv class=“hls”>Strength ‘+ld.s.e+”/10\x3C/div>”;
+hlog+=”\x3C/div>”;
+}
+var tagsH=w.tags.map(tag).join(””);
+var rows=””;
+for(var i=0;i<7;i++){
+var st=gst(i),iT=i===ti;
+var dt2=new Date(WS.getTime()+i*86400000);
+var dot=DOTS[W[i].tags[0]]||”#b0bbd0”;
+var d2=lg[i]||{};
+var chkcls=“dc”+(st===“full”?” full”:st===“half”?” half”:””);
+var chktxt=st===“full”?”✓”:st===“half”?”◑”:””;
+var badges=””;
+if(d2.c||d2.s){
+badges=’\x3Cdiv class=“dbs”>’;
+if(d2.c)badges+=’\x3Cdiv class=“lbc”>Cardio ‘+d2.c.e+”/10”+(d2.c.d?” - “+d2.c.d:””)+”\x3C/div>”;
+if(d2.s)badges+=’\x3Cdiv class=“lbs”>Str ‘+d2.s.e+”/10\x3C/div>”;
+badges+=”\x3C/div>”;
+}
+rows+=’\x3Cdiv class=“dr’+(iT?” tod”:””)+’” onclick=“oSh(’+i+’)”>’;
+rows+=’\x3Cdiv class=“drm”>’;
+rows+=’\x3Cdiv class=”’+chkcls+’”>’+chktxt+”\x3C/div>”;
+rows+=’\x3Cdiv class=“dtd” style=“background:’+dot+’”>\x3C/div>’;
+rows+=’\x3Cdiv class=“di”>\x3Cdiv class=“dl”>’+DAY[i]+” - “+MN[dt2.getMonth()]+” “+dt2.getDate()+(iT?” - TODAY”:””)+”\x3C/div>”;
+rows+=’\x3Cdiv class=“dn’+(st===“full”?” done”:””)+’”>’+W[i].t+”\x3C/div>\x3C/div>”;
+rows+=’\x3Cdiv class=“dch”>›\x3C/div>\x3C/div>’+badges+”\x3C/div>”;
+}
+document.getElementById(“pg-today”).innerHTML=
+‘\x3Cdiv class=“dbar”>’+gts()+” - Recovery Week\x3C/div>”+
+‘\x3Cdiv style=“padding:13px 13px 0”>’+
+‘\x3Cdiv class=“hero” onclick=“oSh(’+ti+’)”>’+
+‘\x3Cdiv class=“htop”>\x3Cdiv>\x3Cdiv class=“htitle”>’+w.t+’\x3C/div>\x3Cdiv class=“hsub”>’+w.s+”\x3C/div>\x3C/div>”+
+‘\x3Cdiv class=“harr”>›\x3C/div>\x3C/div>’+
+‘\x3Cdiv class=“htags”>’+tagsH+”\x3C/div>”+
+‘\x3Cdiv class=“hstats”>’+
+‘\x3Cdiv class=“sp”>\x3Cdiv class=“spl”>Phase\x3C/div>\x3Cdiv class=“spv”>Recovery\x3C/div>\x3C/div>’+
+‘\x3Cdiv class=“sp”>\x3Cdiv class=“spl”>Week\x3C/div>\x3Cdiv class=“spv”>May 11-17\x3C/div>\x3C/div>’+
+‘\x3Cdiv class=“sp”>\x3Cdiv class=“spl”>Status\x3C/div>\x3Cdiv class=“spv”>’+(gst(ti)===“full”?“Done”:“Active”)+”\x3C/div>\x3C/div>\x3C/div>”+
+hlog+”\x3C/div>\x3C/div>”+
+‘\x3Cdiv class=“shdr”>\x3Cdiv class=“st”>This Week\x3C/div>\x3Cdiv class=“sm”>’+done+”/7 done\x3C/div>\x3C/div>”+
+‘\x3Cdiv class=“wkl”>’+rows+”\x3C/div>”;
+}
+function rPlan(){
+var h=’\x3Cdiv class=“plan-hdr”>\x3Cdiv class=“plan-title”>2-Week Plan\x3C/div>\x3Cdiv class=“plan-sub”>Recovery to Base - Tap any day\x3C/div>\x3C/div>’;
+PLAN.forEach(function(wk,wi){
+h+=’\x3Cdiv class=“pw”>\x3Cdiv class=“pwh”>\x3Cdiv class=“pwn”>’+wk.wk+’\x3C/div>\x3Cdiv class=“pwb”>’+wk.b+”\x3C/div>\x3C/div>”;
+h+=’\x3Cdiv class=“pll”>’;
+wk.days.forEach(function(day,di){
+h+=’\x3Cdiv class=“pr” onclick=“oPl(’+wi+’,’+di+’)”>\x3Cdiv class=“prd”>’+day.d+”\x3C/div>”;
+h+=’\x3Cdiv class=“prc”>\x3Cdiv class=“prn”>’+day.n+’\x3C/div>\x3Cdiv class=“prdt”>’+day.dt+”\x3C/div>\x3C/div>”;
+h+=’\x3Cdiv class=“pra”>›\x3C/div>\x3C/div>’;
+});
+h+=”\x3C/div>\x3C/div>”;
+});
+document.getElementById(“pg-plan”).innerHTML=h;
+}
+function rProg(){
+var runMi=0,swimM=0,bikeMi=0,liftN=0;
+for(var i=0;i<7;i++){
+var d=lg[i];if(!d)continue;
+var tags=W[i].tags;
+if(d.c&&d.c.d){var v=parseFloat(d.c.d);if(!isNaN(v)){if(tags.indexOf(“run”)>=0)runMi+=v;else if(tags.indexOf(“swim”)>=0)swimM+=v;else if(tags.indexOf(“bike”)>=0)bikeMi+=v;}}
+if(d.s&&d.s.e)liftN++;
+}
+var h=’\x3Cdiv class=“prog-hdr”>\x3Cdiv class=“prog-title”>Progress\x3C/div>\x3Cdiv class=“prog-sub”>Post-Durham - Road to Boston\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv class=“shdr”>\x3Cdiv class=“st”>This Week\x3C/div>\x3Cdiv class=“sm”>May 11-17\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv class=“wstats”>’;
+[{ic:”🏃”,v:runMi.toFixed(1),u:“miles”,l:“Running”,c:”#c8380a”},
+{ic:”🏊”,v:Math.round(swimM),u:“meters”,l:“Swimming”,c:”#1a5fad”},
+{ic:”🚲”,v:bikeMi.toFixed(1),u:“miles”,l:“Biking”,c:”#8a6a00”},
+{ic:”🏋”,v:liftN,u:“sessions”,l:“Strength”,c:”#1a7a45”}
+].forEach(function(s){
+h+=’\x3Cdiv class=“wsc” style=“border-top:3px solid ‘+s.c+’”>’;
+h+=’\x3Cdiv class=“wsci”>’+s.ic+”\x3C/div>”;
+h+=’\x3Cdiv class=“wscv”>’+s.v+”\x3C/div>”;
+h+=’\x3Cdiv class=“wscu”>’+s.u+”\x3C/div>”;
+h+=’\x3Cdiv class=“wscl”>’+s.l+”\x3C/div>\x3C/div>”;
+});
+h+=”\x3C/div>”;
+h+=’\x3Cdiv class=“shdr”>\x3Cdiv class=“st”>Season\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv class=“sgrid”>’;
+[{l:“Current PR”,v:“3:10:55”,c:”#7a85a0”,sz:20},
+{l:“BQ Target”,v:“2:57:59”,c:N,sz:20,note:“2:01 buffer”,bt:N},
+{l:“Days to Indy”,v:gds(),c:”#0e1628”,sz:30,u:“days”},
+{l:“VO2 Max”,v:“59”,c:”#1a7a45”,sz:30,u:“Garmin est”}
+].forEach(function(s){
+h+=’\x3Cdiv class=“sc”’+(s.bt?’ style=“border-top:3px solid ‘+s.bt+’”’:’’)+’>’;
+h+=’\x3Cdiv class=“scl”>’+s.l+’\x3C/div>’;
+h+=’\x3Cdiv class=“scv2” style=“font-size:’+s.sz+‘px;color:’+s.c+’”>’+s.v+’\x3C/div>’;
+if(s.u)h+=’\x3Cdiv class=“scu”>’+s.u+”\x3C/div>”;
+if(s.note)h+=’\x3Cdiv class=“scn”>’+s.note+”\x3C/div>”;
+h+=”\x3C/div>”;
+});
+h+=”\x3C/div>”;
+h+=’\x3Cdiv class=“ic”>\x3Cdiv class=“icl”>Race History\x3C/div>’;
+[{r:“Chicago Marathon”,t:“3:32:44”},
+{r:“Durham Marathon”,t:“3:10:55”,sub:”-21:49 PR”,sc:”#1a7a45”},
+{r:“Indianapolis Monumental”,t:“sub-2:57:59”,sub:“BQ Target - 6:46/mi”,sc:B,hi:true}
+].forEach(function(r){
+h+=’\x3Cdiv class=“rr”>\x3Cdiv>\x3Cdiv class=“rn’+(r.hi?” hi”:””)+’”>’+r.r+”\x3C/div>”;
+if(r.sub)h+=’\x3Cdiv class=“rs” style=“color:’+r.sc+’”>’+r.sub+”\x3C/div>”;
+h+=”\x3C/div>”;
+h+=’\x3Cdiv class=“rt’+(r.hi?” hi”:””)+’”>’+r.t+”\x3C/div>\x3C/div>”;
+});
+h+=”\x3C/div>”;
+h+=’\x3Cdiv class=“fn”>BQ standard M18-34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing.\x3C/div>’;
+document.getElementById(“pg-progress”).innerHTML=h;
+}
+function oSh(idx){
+if(!lc[idx])lc[idx]={};
+if(!ef[idx])ef[idx]={c:null,s:null};
+document.getElementById(“wkov”).classList.add(“on”);
+document.body.style.overflow=“hidden”;
+rSh(idx);
+}
+function cSh(){
+document.getElementById(“wkov”).classList.remove(“on”);
+document.body.style.overflow=””;
+rToday();
+}
+document.getElementById(“wkov”).addEventListener(“click”,function(e){if(e.target===this)cSh();});
+function rSh(idx){
+var w=W[idx],d=lg[idx]||{};
+var hb=w.parts.cardio&&w.parts.strength;
+var ir=Object.keys(w.parts).length===0;
+var lci=lc[idx]||{},efi=ef[idx]||{};
+var dt2=new Date(WS.getTime()+idx*86400000);
+var dts=DN2[idx]+”, “+MN[dt2.getMonth()]+” “+dt2.getDate();
+var iT=idx===gti();
+var tagsH=w.tags.map(tag).join(””);
+var h=’\x3Cdiv class=“shhnd”>\x3Cdiv class=“shbar”>\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv class=“shhdr”>\x3Cdiv>’;
+h+=’\x3Cdiv class=“shdate”>’+dts+(iT?” - Today”:””)+”\x3C/div>”;
+h+=’\x3Cdiv class=“shtitle”>’+w.t+”\x3C/div>”;
+h+=’\x3Cdiv class=“shsub”>’+w.s+”\x3C/div>”;
+h+=’\x3Cdiv style=“display:flex;gap:5px;flex-wrap:wrap”>’+tagsH+”\x3C/div>\x3C/div>”;
+h+=’\x3Cbutton class=“shclose” onclick=“cSh()”>✕\x3C/button>\x3C/div>’;
+h+=’\x3Cdiv class=“shbody”>’;
+if(w.bq)h+=bqb(w.bq);
+if(ir){h+=’\x3Cdiv class=“restbig”>OFF\x3C/div>\x3Cdiv class=“restsub”>No running. No gym. No swimming.\x3Cbr>Sleep well.\x3C/div>’;}
+if(w.parts.cardio){
+if(hb)h+=’\x3Cdiv class=“pdiv”>\x3Cdiv class=“pdivc” style=“background:#1a5fad”>\x3C/div>\x3Cdiv class=“pdivl” style=“color:#1a5fad”>Cardio\x3C/div>\x3C/div>’;
+if(w.parts.cardio.sum)h+=’\x3Cdiv class=“psum”>’+w.parts.cardio.sum+”\x3C/div>”;
+h+=’\x3Cdiv class=“wsec”>\x3Cdiv class=“slbl”>’+w.parts.cardio.lbl+”\x3C/div>”;
+if(w.parts.cardio.type===“swim”){
+w.parts.cardio.sets.forEach(function(s){
+h+=’\x3Cdiv class=“swr”>\x3Cdiv>\x3Cdiv class=“swn”>’+s.n+’\x3C/div>\x3Cdiv class=“swd”>’+s.d+’\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv style=“text-align:right;flex-shrink:0”>\x3Cdiv class=“swl”>’+s.l+’\x3C/div>\x3Cdiv class=“swm”>’+s.m+”\x3C/div>\x3C/div>\x3C/div>”;
+});
+if(w.parts.cardio.tot)h+=’\x3Cdiv class=“swt”>\x3Cspan class=“swtl”>Total\x3C/span>\x3Cspan class=“swtv”>’+w.parts.cardio.tot+”\x3C/span>\x3C/div>”;
+}
+if(w.parts.cardio.type===“run”){
+w.parts.cardio.stats.forEach(function(s){
+h+=’\x3Cdiv class=“rnrw”>\x3Cspan class=“rnl”>’+s.l+’\x3C/span>\x3Cspan class=“rnv’+(s.h?” h”:””)+’”>’+s.v+”\x3C/span>\x3C/div>”;
+});
+}
+h+=”\x3C/div>”;
+}
+if(w.parts.strength){
+if(hb)h+=’\x3Cdiv class=“pdiv”>\x3Cdiv class=“pdivc” style=“background:#1a7a45”>\x3C/div>\x3Cdiv class=“pdivl” style=“color:#1a7a45”>Strength\x3C/div>\x3C/div>’;
+if(w.parts.strength.sum)h+=’\x3Cdiv class=“psum”>’+w.parts.strength.sum+”\x3C/div>”;
+h+=’\x3Cdiv class=“wsec”>\x3Cdiv class=“slbl”>’+w.parts.strength.lbl+”\x3C/div>”;
+w.parts.strength.ex.forEach(function(e,ei){
+var chk=lci[ei]||false;
+h+=’\x3Cdiv class=“lrow”>’;
+h+=’\x3Cdiv class=“lchk’+(chk?” on”:””)+’” onclick=“tLift(’+idx+’,’+ei+’)”>’+(chk?”✓”:””)+”\x3C/div>”;
+h+=’\x3Cspan class=“lname’+(e.k?” k”:””)+(chk?” dk”:””)+’”>’+e.n+”\x3C/span>”;
+h+=’\x3Cspan class=“lsets’+(e.k?” k”:””)+’”>’+e.s+”\x3C/span>\x3C/div>”;
+});
+h+=”\x3C/div>”;
+}
+if(w.coach)h+=’\x3Cdiv class=“cn”>\x3Cdiv class=“cnl”>Coach\x3C/div>\x3Cdiv class=“cnt”>’+w.coach+”\x3C/div>\x3C/div>”;
+if(!ir){
+h+=’\x3Cdiv class=“logsec”>\x3Cdiv class=“logsl”>Log Workout\x3C/div>’;
+if(w.parts.cardio){
+var ec=d.c,curC=efi.c||(ec&&ec.e)||null;
+var isRun=w.parts.cardio.type===“run”;
+h+=’\x3Cdiv class=“plc plcc”>\x3Cdiv class=“plcl plclc”>Log Cardio\x3C/div>’;
+h+=’\x3Cdiv class=“effl”>Effort 1-10\x3C/div>\x3Cdiv class=“effr”>’;
+for(var n=1;n<=10;n++)h+=’\x3Cbutton class=“eb’+(curC===n?” ebc”:””)+’” onclick=“sEf(’+idx+’,“c”,’+n+’)”>’+n+”\x3C/button>”;
+h+=”\x3C/div>”;
+h+=’\x3Cdiv class=“fg’+(isRun?” fg2”:””)+’”>’;
+h+=’\x3Cdiv>\x3Cdiv class=“fl”>’+(w.parts.cardio.dl||“Distance”)+’\x3C/div>\x3Cinput class=“fi” id=“di’+idx+’” value=”’+(ec&&ec.d||””)+’” placeholder=”’+(isRun?“3.1 mi”:“1000m”)+’”>\x3C/div>’;
+if(isRun)h+=’\x3Cdiv>\x3Cdiv class=“fl”>Avg Pace\x3C/div>\x3Cinput class=“fi” id=“pi’+idx+’” value=”’+(ec&&ec.p||””)+’” placeholder=“9:24 /mi”>\x3C/div>’;
+h+=”\x3C/div>”;
+h+=’\x3Cbutton class=“lb’+(ec?’ lbsv’:curC?’ lbrc’:’’)+’” data-idx=”’+idx+’” data-part=“c” onclick=“hLog(this)”>’+(ec?‘Cardio Logged’:‘Log Cardio’)+’\x3C/button>\x3C/div>’;
+}
+if(w.parts.strength){
+var es=d.s,curS=efi.s||(es&&es.e)||null;
+h+=’\x3Cdiv class=“plc plcs”>\x3Cdiv class=“plcl plcls”>Log Strength\x3C/div>’;
+h+=’\x3Cdiv class=“effl”>Effort 1-10\x3C/div>\x3Cdiv class=“effr”>’;
+for(var ns=1;ns<=10;ns++)h+=’\x3Cbutton class=“eb’+(curS===ns?” ebs”:””)+’” onclick=“sEf(’+idx+’,“s”,’+ns+’)”>’+ns+”\x3C/button>”;
+h+=”\x3C/div>”;
+h+=’\x3Cbutton class=“lb’+(es?’ lbsv’:curS?’ lbrs’:’’)+’” data-idx=”’+idx+’” data-part=“s” onclick=“hLog(this)”>’+(es?‘Strength Logged’:‘Log Strength’)+’\x3C/button>\x3C/div>’;
+}
+h+=”\x3C/div>”;
+}
+h+=”\x3C/div>”;
+document.getElementById(“wksh”).innerHTML=h;
+document.getElementById(“wksh”).scrollTop=0;
+}
+function tLift(idx,ei){if(!lc[idx])lc[idx]={};lc[idx][ei]=!lc[idx][ei];rSh(idx);}
+function sEf(idx,p,n){if(!ef[idx])ef[idx]={c:null,s:null};ef[idx][p]=n;rSh(idx);}
+// lPart replaced by hLog
 
-<div id="tab-progress" class="tab-content">
-  <div class="prog-hdr">
-    <div class="prog-title">Progress</div>
-    <div class="prog-sub">Post-Durham - Road to Boston</div>
-  </div>
+// lPart replaced by hLog
+function oPl(wi,di){
+var day=PLAN[wi].days[di];
+var h=’\x3Cdiv class=“shhnd”>\x3Cdiv class=“shbar”>\x3C/div>\x3C/div>’;
+h+=’\x3Cdiv class=“shhdr”>\x3Cdiv>\x3Cdiv class=“shdate”>’+day.d+”\x3C/div>”;
+h+=’\x3Cdiv class=“shtitle” style=“font-size:19px”>’+day.n+”\x3C/div>\x3C/div>”;
+h+=’\x3Cbutton class=“shclose” onclick=“cPl()”>✕\x3C/button>\x3C/div>’;
+h+=’\x3Cdiv class=“shbody”>\x3Cdiv style=“font-size:13px;color:#7a85a0;margin-bottom:14px;line-height:1.5”>’+day.dt+”\x3C/div>”;
+h+=bqb(day.bq)+”\x3C/div>”;
+document.getElementById(“plsh”).innerHTML=h;
+document.getElementById(“plov”).classList.add(“on”);
+document.body.style.overflow=“hidden”;
+}
+function cPl(){document.getElementById(“plov”).classList.remove(“on”);document.body.style.overflow=””;}
+document.getElementById(“plov”).addEventListener(“click”,function(e){if(e.target===this)cPl();});
+function hLog(btn){
+var idx=parseInt(btn.getAttribute(‘data-idx’));
+var p=btn.getAttribute(‘data-part’);
+var efi=ef[idx]||{},d=lg[idx]||{};
+var e2=efi[p]||(d[p]&&d[p].e);
+if(!e2)return;
+var di2=document.getElementById(‘di’+idx);
+var pi2=document.getElementById(‘pi’+idx);
+if(!lg[idx])lg[idx]={};
+lg[idx][p]={e:e2,d:di2?di2.value:’’,p:pi2?pi2.value:’’};
+sv();rSh(idx);
+}
+rToday();rPlan();rProg();
 
-  <div class="sec-hdr" style="padding-top:14px">
-    <div class="sec-title">Season</div>
-  </div>
-  <div class="sgrid">
-    <div class="sc">
-      <div class="scl">Current PR</div>
-      <div class="scv" style="font-size:22px;color:#7a85a0">3:10:55</div>
-    </div>
-    <div class="sc sc-bq">
-      <div class="scl">BQ Target</div>
-      <div class="scv" style="font-size:22px;color:#162F77">2:57:59</div>
-      <div class="scn">2:01 buffer</div>
-    </div>
-    <div class="sc">
-      <div class="scl">Days to Indy</div>
-      <div class="scv" style="font-size:32px;color:#0e1628">179</div>
-      <div class="scu">days</div>
-    </div>
-    <div class="sc">
-      <div class="scl">VO2 Max</div>
-      <div class="scv" style="font-size:32px;color:#1a7a45">59</div>
-      <div class="scu">Garmin est</div>
-    </div>
-  </div>
-
-  <div class="phase-section">
-    <div class="icl">Phase Tracker</div>
-    <div class="ph">
-      <div class="ph-hdr"><span class="ph-name">Recovery</span><span class="ph-sub">Day 10 of 26</span></div>
-      <div class="ph-bar"><div class="ph-fill" style="width:38%;background:#3A6EDB"></div></div>
-    </div>
-    <div class="ph">
-      <div class="ph-hdr"><span class="ph-name">Base Phase</span><span class="ph-sub">May 18 - Jul 4</span></div>
-      <div class="ph-bar"><div class="ph-fill" style="width:0%;background:#162F77"></div></div>
-    </div>
-    <div class="ph" style="margin-bottom:0">
-      <div class="ph-hdr"><span class="ph-name">Training Block</span><span class="ph-sub">Jul 5 - Nov 7</span></div>
-      <div class="ph-bar"><div class="ph-fill" style="width:0%;background:#162F77"></div></div>
-    </div>
-  </div>
-
-  <div class="ic">
-    <div class="icl">Race History</div>
-    <div class="rr">
-      <div><div class="rn">Chicago Marathon</div></div>
-      <div class="rt">3:32:44</div>
-    </div>
-    <div class="rr">
-      <div><div class="rn">Durham Marathon</div><div class="rs" style="color:#1a7a45">-21:49 PR</div></div>
-      <div class="rt">3:10:55</div>
-    </div>
-    <div class="rr">
-      <div><div class="rn-hi">Indianapolis Monumental</div><div class="rs" style="color:#3A6EDB">BQ Target - 6:46/mi avg</div></div>
-      <div class="rt-hi">sub-2:57:59</div>
-    </div>
-  </div>
-
-  <div class="fn" style="margin-top:8px">
-    BQ standard M18-34 is 3:00:00. Target 2:57:59 gives a 2:01 buffer for field cuts and registration timing. Run 6:46/mi average on race day.
-  </div>
-</div>
-
-<!-- BOTTOM NAV -->
-
-<div class="bnav">
-  <a href="#tab-today" class="nb" style="color:#162F77">
-    <span class="nbi">&#9673;</span>
-    <span class="nbl">Today</span>
-  </a>
-  <a href="#tab-plan" class="nb">
-    <span class="nbi">&#8801;</span>
-    <span class="nbl">Plan</span>
-  </a>
-  <a href="#tab-progress" class="nb">
-    <span class="nbi">&#8593;</span>
-    <span class="nbl">Progress</span>
-  </a>
-</div>
-
+</script>
 </body>
 </html>
